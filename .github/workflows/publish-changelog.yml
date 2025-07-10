@@ -9,6 +9,7 @@ jobs:
  publish_changelog:
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       actions: read
     steps:
 
