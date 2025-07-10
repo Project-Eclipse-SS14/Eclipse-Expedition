@@ -13,13 +13,15 @@ const TARGET_LOCALE: &str = "ru-RU";
 
 const CREATE_HASH_IF_EMPTY: bool = true;
 
+const PROJECT_ROOT_PATH: &str = "../../../";
+
 fn main() {
     SimpleLogger::new()
         .with_level(log::LevelFilter::Info)
         .init()
         .unwrap();
 
-    let project = SS14Project::new("../../".into());
+    let project = SS14Project::new(PROJECT_ROOT_PATH.into());
 
     let source_storage =
         SourceFtlStorage::load(project.get_locale_path(SOURCE_LOCALE), SKIPPED_FOLDER_NAMES)

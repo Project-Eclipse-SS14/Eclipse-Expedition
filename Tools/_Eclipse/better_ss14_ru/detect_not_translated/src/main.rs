@@ -1,9 +1,10 @@
-use std::path::PathBuf;
+use std::path::Path;
 
 use common::prototypes_ftl::{FtlStorage, StringOrOtherId};
 use simple_logger::SimpleLogger;
 
-const SAVE_LOCALE_PATH: &str = "../../Resources/Locale/ru-RU/ss14-ru-better/";
+const PROJECT_ROOT_PATH: &str = "../../../";
+const SAVE_LOCALE_PATH: &str = "Resources/Locale/ru-RU/ss14-ru-better/";
 
 fn main() {
     SimpleLogger::new()
@@ -11,7 +12,7 @@ fn main() {
         .init()
         .unwrap();
 
-    let save_locale_path = &PathBuf::from(SAVE_LOCALE_PATH);
+    let save_locale_path = Path::new(PROJECT_ROOT_PATH).join(Path::new(SAVE_LOCALE_PATH));
 
     let ftl_project = FtlStorage::load(save_locale_path.clone()).unwrap();
 

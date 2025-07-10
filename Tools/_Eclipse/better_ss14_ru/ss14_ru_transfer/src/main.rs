@@ -1,12 +1,13 @@
-use std::{fs::File, path::PathBuf};
+use std::{fs::File, path::Path};
 
 use common::prototypes_ftl::{EntityPrototypeIdRef, FtlStorage, StringOrOtherId};
 use fluent::{FluentBundle, FluentResource};
 use simple_logger::SimpleLogger;
 use walkdir::WalkDir;
 
-const SAVE_LOCALE_PATH: &str = "../../Resources/Locale/ru-RU/ss14-ru-better/";
-const LOAD_LOCALE_PATH: &str = "../../Resources/Locale/ru-RU/ss14-ru/";
+const PROJECT_ROOT_PATH: &str = "../../../";
+const SAVE_LOCALE_PATH: &str = "Resources/Locale/ru-RU/ss14-ru-better/";
+const LOAD_LOCALE_PATH: &str = "Resources/Locale/ru-RU/ss14-ru/";
 
 fn main() {
     SimpleLogger::new()
@@ -14,8 +15,8 @@ fn main() {
         .init()
         .unwrap();
 
-    let save_locale_path = &PathBuf::from(SAVE_LOCALE_PATH);
-    let load_locale_path = &PathBuf::from(LOAD_LOCALE_PATH);
+    let save_locale_path = Path::new(PROJECT_ROOT_PATH).join(Path::new(SAVE_LOCALE_PATH));
+    let load_locale_path = Path::new(PROJECT_ROOT_PATH).join(Path::new(LOAD_LOCALE_PATH));
 
     let mut bundle = FluentBundle::default();
 
@@ -64,11 +65,18 @@ fn main() {
 
                 if let StringOrOtherId::Id(id) = &name {
                     // if result is Err -> leave unchanged, ss14_ru has a parent that does not exist
-                    if let Ok(is_empty) =
-                        check_if_proto_has_empty_string(&ftl_project, id.as_ref(), MatchingProperty::Name)
-                    {
+                    if let Ok(is_empty) = check_if_proto_has_empty_string(
+                        &ftl_project,
+                        id.as_ref(),
+                        MatchingProperty::Name,
+                    ) {
                         if !is_empty && prototype.borrow().name() != Some(&name) {
-                            log::info!("Prototype '{}' changed name from '{:?}' to '{}'", prototype.borrow().id, prototype.borrow().name(), id);
+                            log::info!(
+                                "Prototype '{}' changed name from '{:?}' to '{}'",
+                                prototype.borrow().id,
+                                prototype.borrow().name(),
+                                id
+                            );
                             *prototype.borrow_mut().name_mut() = Some(name);
                         }
                     }
@@ -84,7 +92,12 @@ fn main() {
                         MatchingProperty::Description,
                     ) {
                         if !is_empty && prototype.borrow().description() != Some(&description) {
-                            log::info!("Prototype '{}' changed desc from '{:?}' to '{}'", prototype.borrow().id, prototype.borrow().description(), id);
+                            log::info!(
+                                "Prototype '{}' changed desc from '{:?}' to '{}'",
+                                prototype.borrow().id,
+                                prototype.borrow().description(),
+                                id
+                            );
                             *prototype.borrow_mut().description_mut() = Some(description);
                         }
                     }
@@ -101,7 +114,12 @@ fn main() {
                             MatchingProperty::Suffix,
                         ) {
                             if !is_empty && prototype.borrow().suffix() != Some(&suffix) {
-                                log::info!("Prototype '{}' changed suffix from '{:?}' to '{}'", prototype.borrow().id, prototype.borrow().suffix(), id);
+                                log::info!(
+                                    "Prototype '{}' changed suffix from '{:?}' to '{}'",
+                                    prototype.borrow().id,
+                                    prototype.borrow().suffix(),
+                                    id
+                                );
                                 *prototype.borrow_mut().suffix_mut() = Some(suffix);
                             }
                         }
@@ -145,6 +163,8 @@ fn check_if_proto_has_empty_string(
         None => Ok(true),
         Some(StringOrOtherId::Empty) => Ok(true),
         Some(StringOrOtherId::String(s)) => Ok(s.is_empty()),
-        Some(StringOrOtherId::Id(id)) => check_if_proto_has_empty_string(ftl_project, id.as_ref(), property),
+        Some(StringOrOtherId::Id(id)) => {
+            check_if_proto_has_empty_string(ftl_project, id.as_ref(), property)
+        }
     }
 }
