@@ -10,7 +10,9 @@ namespace Content.Shared.Localizations
         [Dependency] private readonly ILocalizationManager _loc = default!;
 
         // If you want to change your codebase's language, do it here.
-        private const string Culture = "en-US";
+        private const string Culture = "ru-RU"; // Eclipse : en-US -> ru-RU
+
+        private const string FallbackCulture = "en-US"; // Eclipse : Fallback culture in case something isn't translated
 
         /// <summary>
         /// Custom format strings used for parsing and displaying minutes:seconds timespans.
@@ -40,6 +42,24 @@ namespace Content.Shared.Localizations
             _loc.AddFunction(culture, "NATURALPERCENT", FormatNaturalPercent);
             _loc.AddFunction(culture, "PLAYTIME", FormatPlaytime);
 
+            // Eclipse-Start : Fallback culture in case something isn't translated
+            var fallbackCulture = new CultureInfo(FallbackCulture);
+
+            _loc.LoadCulture(fallbackCulture);
+            _loc.AddFunction(fallbackCulture, "PRESSURE", FormatPressure);
+            _loc.AddFunction(fallbackCulture, "POWERWATTS", FormatPowerWatts);
+            _loc.AddFunction(fallbackCulture, "POWERJOULES", FormatPowerJoules);
+            // NOTE: ENERGYWATTHOURS() still takes a value in joules, but formats as watt-hours.
+            _loc.AddFunction(fallbackCulture, "ENERGYWATTHOURS", FormatEnergyWattHours);
+            _loc.AddFunction(fallbackCulture, "UNITS", FormatUnits);
+            _loc.AddFunction(fallbackCulture, "TOSTRING", args => FormatToString(fallbackCulture, args));
+            _loc.AddFunction(fallbackCulture, "LOC", FormatLoc);
+            _loc.AddFunction(fallbackCulture, "NATURALFIXED", FormatNaturalFixed);
+            _loc.AddFunction(fallbackCulture, "NATURALPERCENT", FormatNaturalPercent);
+            _loc.AddFunction(fallbackCulture, "PLAYTIME", FormatPlaytime);
+
+            _loc.SetFallbackCluture(fallbackCulture);
+            // Eclipse-End
 
             /*
              * The following language functions are specific to the english localization. When working on your own
@@ -117,8 +137,8 @@ namespace Content.Shared.Localizations
             {
                 <= 0 => string.Empty,
                 1 => list[0],
-                2 => $"{list[0]} and {list[1]}",
-                _ => $"{string.Join(", ", list.GetRange(0, list.Count - 1))}, and {list[^1]}"
+                2 => $"{list[0]} и {list[1]}", // Eclipse : List translation to ru-RU
+                _ => $"{string.Join(", ", list.GetRange(0, list.Count - 1))}, и {list[^1]}" // Eclipse : List translation to ru-RU
             };
         }
 
@@ -131,8 +151,8 @@ namespace Content.Shared.Localizations
             {
                 <= 0 => string.Empty,
                 1 => list[0],
-                2 => $"{list[0]} or {list[1]}",
-                _ => $"{string.Join(" or ", list)}"
+                2 => $"{list[0]} или {list[1]}", // Eclipse : List translation to ru-RU
+                _ => $"{string.Join(" или ", list)}" // Eclipse : List translation to ru-RU
             };
         }
 

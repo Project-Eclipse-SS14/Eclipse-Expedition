@@ -1,0 +1,45 @@
+# HASH: c12b557bfae5670ac3e2e9b6e527df524c23db9685c677e8d1153952489c4f66
+ent-CrateMaterialGlass = ящик стекла
+    .desc = 90 единиц стекла, упакованных с заботой.
+# HASH: 70a125052ff10b97ff89a427fd74d66652959231f5c347c05b90f33f86059674
+ent-CrateMaterialSteel = ящик стали
+    .desc = 90 единиц стали.
+# HASH: e6c3764b84a1b55f7cf145043ed56fa126f19a1e4d8c4a002427acc61bf83187
+ent-CrateMaterialTextiles = ящик текстиля
+    .desc = 60 единиц ткани и 30 единиц дюраткани.
+# HASH: 524025f6947bc24dbbe5439cd72b3b5a17d44639a0e2e725e17faeca5c73bfb7
+ent-CrateMaterialPlastic = ящик пластика
+    .desc = 90 единиц пластика.
+# HASH: 9226b1e80315dfb58f080e26b98b47268efdf7014946808a3da0c5f424152611
+ent-CrateMaterialWood = ящик дерева
+    .desc = Куча деревянных досок.
+# HASH: 5635248a1d2c481bf413dc2e65a75b802e9528d9a5a6036d06bf6895791da938
+ent-CrateMaterialBrass = ящик латуни
+    .desc = 90 единиц латуни.
+# HASH: 0aebe7971199d9749b418293139e42944c2f5f8d47a7145679201d05388820f2
+ent-CrateMaterialPlasteel = ящик пластали
+    .desc = 30 единиц пластали.
+# HASH: 7ac20cb37a93588b77244a66e47d10acff48f9cd57fbc6736bfd76c4240ffe43
+ent-CrateMaterialPlasma = ящик твёрдой плазмы
+    .desc = 90 единиц плазмы.
+# HASH: deb203ce4198e30b001819ab1a7c550fa0dd87867bd6244a879dda9e025b6b9d
+ent-CrateMaterialCardboard = cardboard crate
+    .desc = 90 pieces of cardboard.
+# HASH: e75af88c2c2bd4462c424a5a8ad63472e3a8db2aa0797c5dfb77f7c0e26d9450
+ent-CrateMaterialPaper = ящик бумаги
+    .desc = 90 листов бумаги.
+# HASH: 160dd9570c71ba4cfa35b0cdf122e8b7e500f23e82fc9946206742a8d2ff485e
+ent-CrateMaterialRandom = излишки материалов
+    .desc = Откуда-то взятые излишки материалов.
+# HASH: 11dd843b5aea811d9664195ab5095835b2eb4d7fc282ab6587c0e7acd74a5011
+ent-CrateMaterialSilo = ящик хранилища материалов
+    .desc = Пакет, включающий все материалы для создания хранилища для материалов.
+# HASH: befca3dec3c4380fea16b306594927c80855c7df00007052afc2baa48088502c
+ent-CrateMaterialBasicResource = ящик с базовыми листами
+    .desc = 30 листов стали, стекла и пластика.
+# HASH: f38540426602b52a9b21ca4dbde437cbf5a9d91f2e442841f4c32b6b56994805
+ent-CrateMaterialGold = gold crate
+    .desc = 30 bars of gold.
+# HASH: be8415ec13d385e9e8cd8956b0b60e8247fe17260963106f2fe8b9eed6f7f457
+ent-CrateMaterialSilver = silver crate
+    .desc = 30 bars of silver.

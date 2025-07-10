@@ -1,0 +1,30 @@
+# HASH: 738e1facdf608401970de3654db95394b366d0336a5458f116d88a316ecaee28
+ent-BaseWeaponRevolver = BaseWeaponRevolver
+    .desc = Дерзай — налетай, целься и стреляй.
+# HASH: ca027b1e9464be59c3f77c9099a62e7dd71860ef4ba9e4a77d774b7114fb8092
+ent-WeaponRevolverDeckard = Декард
+    .desc = Прекрасно обработанный, сделанный на заказ револьвер. Используется, когда нет времени на тест Войта-Кампфа. Заряжается 5 патронами .45 магнум.
+# HASH: 1a340d4c57e2c72536ed1a452fd635fbbcf792ca5c2336efdb5acb7f94ddf802
+ent-WeaponRevolverInspector = Инспектор
+    .desc = Револьвер одинарного действия, выпускаемый различными компаниями. Он легко доступен на гражданском рынке, что делает его популярным выбором среди частных детективов. Вы чувствуете себя счастливым, просто держа его в руках. Заряжает 6 патронов калибра .45 магнум.
+# HASH: 32bac58fdf44c9287f80c2455b4928bd77a6aec7b5bf6689614219413437e504
+ent-WeaponRevolverMateba = Матеба
+    .desc = Современный револьвер, используемый элитным, почти мифическим отрядом «Эскадрон смерти» Нанотрасена. Уникальный ударно-спусковой механизм и расположение ствола обеспечивают высокую скорострельность при минимальном отклонении дула. Многие заглядывали в этот ствол, но мало кто дожил до наших дней. Заряжает 6 патронов калибра .45 магнум.
+# HASH: 483b16a34dc8b2d4dc1da76a6764ed9376a922dee0309a4fb063a52ca3f7515d
+ent-WeaponRevolverMatebaAP = { ent-WeaponRevolverMateba }
+    .desc = { ent-WeaponRevolverMateba.desc }
+    .suffix = Бронебойные
+# HASH: 52fd403c7d6ee4db8261d39bffab7a07be5a002d3e3bb817873fb0d26909b440
+ent-WeaponRevolverPython = Питон
+    .desc = Мощный револьвер двойного действия производства Синдиката. Громкий и броский, идеально подходит для любого агента, желающего заявить о себе. Заряжает 6 патронов калибра .45 магнум.
+# HASH: 33dcbc01c5b7b1f04080082f2aac1c997f6c5d1de6fc5781b160cd9a94a85c7b
+ent-WeaponRevolverPythonAP = { ent-WeaponRevolverPython }
+    .desc = { ent-WeaponRevolverPython.desc }
+    .suffix = Бронебойный
+# HASH: 877a069cf6d04e2c2bffbf8283dffe82ed1b35befd316fe8d8bf490bc145ee62
+ent-WeaponRevolverPirate = пиратский револьвер
+    .desc = Грубый однозарядный револьвер, сделанный вручную космическим пиратом. Старый и покрытый ржавчиной, он каким-то образом все еще работает. Заряжается 5 патронами 45-го калибра.
+# HASH: 62745d806e010497c111aead6a4b3ae1373a2907f7c2bc9e8a433d2d8a37b5f4
+ent-WeaponRevolverPirateEmpty = { ent-WeaponRevolverPirate }
+    .desc = { ent-WeaponRevolverPirate.desc }
+    .suffix = Пустой

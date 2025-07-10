@@ -1,0 +1,16 @@
+# HASH: fcd216a21945ce2e134a53e8013e269606ec96836d078586372bb5b88009026c
+names-revenant-type-dataset-1 = сущность
+# HASH: 2f564f603151ebcd5ddc39e53379781efd7484b8668bcf8c597c1ec0a8008512
+names-revenant-type-dataset-2 = привидение
+# HASH: a11e071c479ab4bfcccb6e69c76a75bcca8cb042b0516046502bf3ac936be833
+names-revenant-type-dataset-3 = фантом
+# HASH: 1e165864cc4ce84dea1adc6f0968b2bcd88e74b60f16a7ea239123baebb11e2c
+names-revenant-type-dataset-4 = полтергейст
+# HASH: 04dda04decd30a2e9f9d6132b2c3331541fc9c33c185f8dff801183484e3559b
+names-revenant-type-dataset-5 = ревенант
+# HASH: a44d7e5a452d4ae193fb9090d22ca320cec89a040b8cc12c563e2d383dafae56
+names-revenant-type-dataset-6 = душа
+# HASH: f68d931b697e7cbc024d85adceb55e4d7bd0698d99be3849d869000b2bf3e987
+names-revenant-type-dataset-7 = тень
+# HASH: 09dff2cb2dbe6cf7f4e73d50c149e7957308f5a60ea37e310555ed4d77f64b91
+names-revenant-type-dataset-8 = дух

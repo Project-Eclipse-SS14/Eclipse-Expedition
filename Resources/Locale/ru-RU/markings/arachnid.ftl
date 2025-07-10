@@ -1,0 +1,132 @@
+# HASH: 0d6c3491d81d5f915e0b0bf20bea93b6326edf93971bfe7ecccbd402cd79db4f
+marking-ArachnidCheliceraeDownwards = Хелицеры (Вниз)
+# HASH: dfe906f8d5c4e9b44ee79540b0767dda5f181c457fd46f03c10af2fbf979f8da
+marking-ArachnidCheliceraeDownwards-downwards = Хелицеры
+# HASH: e2306c9c36d251bf122b680fdc9c6dd926aa5f92741511fac8b66c49aab2b2ef
+marking-ArachnidCheliceraeInwards = Хелицеры (Внутрь)
+# HASH: dfe906f8d5c4e9b44ee79540b0767dda5f181c457fd46f03c10af2fbf979f8da
+marking-ArachnidCheliceraeInwards-inwards = Хелицеры
+# HASH: ecfbf50c871a80051feecf0724ce14329abc0f43ec42acc2806d4e8d6eff3d44
+marking-ArachnidAppendagesDefault = Придатки (Длинные)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesDefault-long_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesDefault-long_secondary = Полосы
+# HASH: d6d023a8879ec63cd62a7d07c452575faa1a48ebd2e698982013b6c3549bf967
+marking-ArachnidAppendagesSharp = Придатки (Острые)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesSharp-sharp_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesSharp-sharp_secondary = Полосы
+# HASH: a297e1439482eec3dd442b998d0a1a881f7a8d39eb8a6a450a3012fa1b38b86d
+marking-ArachnidAppendagesZigZag = Придатки (ЗигЗаг)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesZigZag-zigzag_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesZigZag-zigzag_secondary = Полосы
+# HASH: 524ce0b7c6690fb233a04f911a45d6f3154fbce6bb4efc56749a1bd25cd3e0ff
+marking-ArachnidAppendagesCurled = Придатки (Завитки)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesCurled-curled_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesCurled-curled_secondary = Полосы
+# HASH: 3143304e3a7154fb56e1e4fb6ae58c496ac1140df6f7f8a4d5c0e3e92dfc399b
+marking-ArachnidAppendagesStingers = Придатки (Жала)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesStingers-stingers_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesStingers-stingers_secondary = Полосы
+# HASH: b20bf2e2089216103b4fe5ebfa63de29eb44b0e76cdcc734c1aaf0f0840bae6b
+marking-ArachnidAppendagesChipped = Придатки (Сколотые)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesChipped-chipped_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesChipped-chipped_secondary = Полосы
+# HASH: b98ee1e2f60ea02aa6c718130e416b70e7910883347ed57bbe72f5f96bf0c03b
+marking-ArachnidAppendagesHarvest = Придатки (Урожай)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesHarvest-harvest_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesHarvest-harvest_secondary = Полосы
+# HASH: 3bd1f215acab1a5315c5349025ee3567804679d99558a1e6c5825b9fa49b8772
+marking-ArachnidAppendagesShort = Придатки (Короткие)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesShort-short_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesShort-short_secondary = Полосы
+# HASH: 165dd91a096cc5ed0192b745a9fab4703be52c139d93544cf9c5d1cc50d266e4
+marking-ArachnidAppendagesFreaky = Придатки (Причудливо длинные)
+# HASH: 5f5a572992c5c01d703e8b33233c4c7e5b3c18027f200b19bb7e221a49b97b20
+marking-ArachnidAppendagesFreaky-freaky_primary = Придаток
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidAppendagesFreaky-freaky_secondary = Полосы
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidTorsoStripes = Полосы
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoStripes-stripes = Дизайн
+# HASH: 5211532546fdce98cd30377025ad32e1e22173e9c754a379a8e4dc36e547534e
+marking-ArachnidTorsoSlashes = Косые срезы
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoSlashes-slashes = Дизайн
+# HASH: 9d5770e286a5fc683b6c27f988efc95796e1a082f840298428cd7248a544ed2b
+marking-ArachnidTorsoCross = Крест
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoCross-cross = Дизайн
+# HASH: 0dbbb68857d7bb97a48cc72c3ab873916e4a52d0ddb6b61b5221519427e7354c
+marking-ArachnidTorsoX = X
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoX-x = Дизайн
+# HASH: 66a428710c1eda6aca16a8dfcc12682883def26ee42c78a8cedd5a126772b339
+marking-ArachnidTorsoHeart = Сердце
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoHeart-heart = Дизайн
+# HASH: 3fa1edd3fb8cc258e78faaed2d4f580d36d4dd83ab69ee4f9607d7179807e068
+marking-ArachnidTorsoHourglass = Песочные часы
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoHourglass-hourglass = Дизайн
+# HASH: 5f561e99369ee41d4ad7b6649ee50bf38e19736f79b9cab5b594d00b701f20c6
+marking-ArachnidTorsoNailAndHammer = Гвоздь и молот
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoNailAndHammer-nail-and-hammer = Дизайн
+# HASH: 939928588d0cb8b46fddea8aa5ad2bf1be0d072e885bd8b9e4fbc6c1d61a1767
+marking-ArachnidTorsoStar = Звезда
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoStar-star = Дизайн
+# HASH: 72a4d3cddf6bd193d2f472fd6cff0add0c65501b3e54030b894ad937f29d9a25
+marking-ArachnidTorsoArrows = Стрелы
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoArrows-arrows = Дизайн
+# HASH: 28d9aecc0bd64887d932ddf11b485dd45fdbecff32b84b2a522dda2ed4475f9c
+marking-ArachnidTorsoCore = Ядро
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoCore-core = Дизайн
+# HASH: 3869f57eb4ea621d9cbc4c11e5b5083a9a5e616832fcd710e0d524604b140bb0
+marking-ArachnidTorsoFiddleback = Полосатый клён
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoFiddleback-fiddleback = Дизайн
+# HASH: 99787d5853f1ce983c30469e96ec481f2bb57f48ff304702c100ff8e64a78d5b
+marking-ArachnidTorsoSkull = Череп
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoSkull-skull = Дизайн
+# HASH: 1ea3e75a362970213b905f463a98e0b01f4d32bb3db211bcba802221821dd8f8
+marking-ArachnidTorsoTarget = Мишень
+# HASH: f2a735e8dc4d80e808da8d59e5cedd6032020b0a6d4c4b421f9ae609d63cc50b
+marking-ArachnidTorsoTarget-target = Дизайн
+# HASH: 32b4b99c7015d0f2adebf0c7dd3f9e30aadc7808a7329dded04518ad236527eb
+marking-ArachnidRArmStripes = Арахнид Полосы (Справа)
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidRArmStripes-stripes_right = Полосы
+# HASH: 683053f4bf6bdd36efb601e6db6563ebac2ed7612af40e9d47269c3a80f6411d
+marking-ArachnidLArmStripes = Арахнид Полосы (Слева)
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidLArmStripes-stripes_left = Полосы
+# HASH: 32b4b99c7015d0f2adebf0c7dd3f9e30aadc7808a7329dded04518ad236527eb
+marking-ArachnidRLegStripes = Арахнид Полосы (Справа)
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidRLegStripes-stripes_right = Полосы
+# HASH: 683053f4bf6bdd36efb601e6db6563ebac2ed7612af40e9d47269c3a80f6411d
+marking-ArachnidLLegStripes = Арахнид Полосы (Слева)
+# HASH: de87d8225cff3e5ce3f99e5aaed838930079595c543083debab92fa3ab22fbee
+marking-ArachnidLLegStripes-stripes_left = Полосы
+# HASH: 205810b2c4f73c8484922cfb74eecd4637e28a6e97fa32f2d1e9d3079c620cbc
+marking-ArachnidOverlayFuzzy = Пушистые

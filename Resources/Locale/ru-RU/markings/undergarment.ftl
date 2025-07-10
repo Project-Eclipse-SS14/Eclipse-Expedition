@@ -1,0 +1,34 @@
+# HASH: 05bc05b57e5ae254a7444fd21ba194030c5a32c571b2def2ecf9040f92fdf072
+marking-UndergarmentTopTanktop = Майка
+# HASH: ee0870e0d6412c13c826dca431258505e54edcdf872ddbfcbd2d3ffcf5c3c9eb
+marking-UndergarmentTopBinder = Корсет
+# HASH: d5361d43e5c1531d54c172f3b96722c005fd209fa1ffd0fe8b51f6e1e2a7a626
+marking-UndergarmentTopBra = Классическое бра
+# HASH: cdea4b2cf3ad54516008e359c82708cdda303aea754317de7ea5daf165f86c52
+marking-UndergarmentTopSportsbra = Спортивное бра
+# HASH: e1f30b6075036525a21ac69af34c2b510c5199a0f702d5419136c9fa6384c968
+marking-UndergarmentBottomBoxers = Боксеры
+# HASH: 8485a3cf2ffb78afa15aa5838ad6c1dcd7134716ddfc7338a10a8e0b858162d8
+marking-UndergarmentBottomBriefs = Брифы
+# HASH: 88ef9d9ad21b0d8568d40c038f49ec2bbd152972d38cb3416bf31049b4974894
+marking-UndergarmentBottomSatin = Атласные
+# HASH: 05bc05b57e5ae254a7444fd21ba194030c5a32c571b2def2ecf9040f92fdf072
+marking-UndergarmentTopTanktopVox = Майка
+# HASH: ee0870e0d6412c13c826dca431258505e54edcdf872ddbfcbd2d3ffcf5c3c9eb
+marking-UndergarmentTopBinderVox = Корсет
+# HASH: d5361d43e5c1531d54c172f3b96722c005fd209fa1ffd0fe8b51f6e1e2a7a626
+marking-UndergarmentTopBraVox = Классическое бра
+# HASH: cdea4b2cf3ad54516008e359c82708cdda303aea754317de7ea5daf165f86c52
+marking-UndergarmentTopSportsbraVox = Спортивное бра
+# HASH: e1f30b6075036525a21ac69af34c2b510c5199a0f702d5419136c9fa6384c968
+marking-UndergarmentBottomBoxersVox = Боксеры
+# HASH: 8485a3cf2ffb78afa15aa5838ad6c1dcd7134716ddfc7338a10a8e0b858162d8
+marking-UndergarmentBottomBriefsVox = Брифы
+# HASH: 88ef9d9ad21b0d8568d40c038f49ec2bbd152972d38cb3416bf31049b4974894
+marking-UndergarmentBottomSatinVox = Атласные
+# HASH: e1f30b6075036525a21ac69af34c2b510c5199a0f702d5419136c9fa6384c968
+marking-UndergarmentBottomBoxersReptilian = Боксеры
+# HASH: 8485a3cf2ffb78afa15aa5838ad6c1dcd7134716ddfc7338a10a8e0b858162d8
+marking-UndergarmentBottomBriefsReptilian = Брифы
+# HASH: 88ef9d9ad21b0d8568d40c038f49ec2bbd152972d38cb3416bf31049b4974894
+marking-UndergarmentBottomSatinReptilian = Атласные

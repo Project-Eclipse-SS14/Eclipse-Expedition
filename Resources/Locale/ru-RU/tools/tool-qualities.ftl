@@ -1,0 +1,52 @@
+# HASH: edf3b7132313d0ee923199b1883f4e4652f3c3c4874c7407a20bdbfa8065a2c8
+tool-quality-anchoring-name = Закрепление
+# HASH: 54061438b3566684cfeec997b629660323328479578b4b32eace3b1339010101
+tool-quality-anchoring-tool-name = Гаечный ключ
+# HASH: ddcdd9914813311aaeda743af6591d7860b1472cc9b508aad5ab74249d6d04c1
+tool-quality-prying-name = Монтирование
+# HASH: 0fd6cb9bb58d52e907c22621935150704dfe56917143809d6518dcded35e2176
+tool-quality-prying-tool-name = Монтировка
+# HASH: 76eea18b41b7e4e1e92f0b8e5443573e215ad99142fd5339461db89865c0db8b
+tool-quality-screwing-name = Свинчивание
+# HASH: 9b9c258cb4fae4fbb565c5c8587c162c697597b1807957c886f5978a6117c9ce
+tool-quality-screwing-tool-name = Отвёртка
+# HASH: 19e0e09f64c064826bd410bdf9057b77cfca495f7b3c8447006bd86e6e5506e3
+tool-quality-cutting-name = Резка
+# HASH: 00a1926017f47f5ab7007cf0c222630a2de8e2f799bb195b952eea8e0dd0bc26
+tool-quality-cutting-tool-name = Кусачки
+# HASH: 173ec7ebde9fb7764597bd44e03373bbf872aa5ced74b9de50036c2cdb3f5c13
+tool-quality-welding-name = Варка
+# HASH: a31fce13542261a32ef9b60d5a6ed16472e04ab08c13e40a97fb7e029adcb886
+tool-quality-welding-tool-name = Сварка
+# HASH: c8f5d380edb94778c627d08cdcb2d4a17d63e5ece429c9d6e01a5dcc4e5f815e
+tool-quality-pulsing-name = Пульсирование
+# HASH: 09066ef043767d296fc71bb851a7b74565cbb7eb7833e425de04cd178a11c381
+tool-quality-pulsing-tool-name = Мультитул
+# HASH: c049315d329af8b896aa4bdb7c297652b8b2a2e94e1de3b721fea9cb3318e779
+tool-quality-slicing-name = Нарезка
+# HASH: 835d7b3324d369bf3ec82088e3bcca220af0d65bfe37404dc64f03d43703f512
+tool-quality-slicing-tool-name = Нож
+# HASH: 347eec40b4a49465e1aca9d951891b84eb2b5fdc9a3c7d7d09c4511d13f46e77
+tool-quality-sawing-name = Отпиливание
+# HASH: 1605c055026cc59011451e44628536fa459361d76be5307d60ae7716fac0795f
+tool-quality-sawing-tool-name = Пила
+# HASH: b124d09ef133bc573a09b36e18698534f98e37863aa3f0bf248ad65f61be02bf
+tool-quality-honking-name = Хонканье
+# HASH: 6d43a58f4024b4120aed599244f619719ef63bfaeb7c5045306c66cc48bd422f
+tool-quality-honking-tool-name = Велосипедный клаксон
+# HASH: 60c889a8d198f580c4ecbe862e55d6605d79a4052f58211b57c8fb15e12c4383
+tool-quality-woodcutting-name = Рубка дерева
+# HASH: 086d1ad42d59bacc5de617c605f739d64a32938fed4cd9bf328c7111d89f662b
+tool-quality-woodcutting-tool-name = Топор
+# HASH: 729d108ad05d1ebd1ac529ffafdad6f93504e9d76fbe32b4d5fdebc20192ae12
+tool-quality-rolling-name = Раскатывание
+# HASH: 5652c3210cba469621a1bc939384ef19bfd72fd19de0ecdab41eda33dae6c45f
+tool-quality-rolling-tool-name = Скалка
+# HASH: b0937340283673cbae9dbb95dcb2294ca4e2d2d66b10051160864e5717f6a725
+tool-quality-digging-name = Копание
+# HASH: 449fca6bf61cac4f249c0b86773a7b97d94b64c98c767c6c405ee1087458198f
+tool-quality-digging-tool-name = Лопата
+# HASH: ebd063f1ba7365946d9df549263512ca41a0c3e6ad3a2c1c92cab0c390cebb4a
+tool-quality-brushing-name = Brushing
+# HASH: 5c7dc06b09b2ff03eff06c6ec91be77405e12d8ed6693ee0b84cea117be020e7
+tool-quality-brushing-tool-name = Wire Brush

@@ -1,0 +1,16 @@
+# HASH: 234527b76b156b4834b80f6f3c9277f20979570987c11b5ae12e71a136f3e0ba
+accent-parrot-squawk-1 = СКВАК!
+# HASH: ae599afa4a6ddb8ea0a239e0bb5d4b7cd26a4905b2fe775c968a4610eb158356
+accent-parrot-squawk-2 = СКВАААК!
+# HASH: d8ea65323dd0fa6501e4229f48b5096bc3d4e7de7e8c1226b771f7a7ce5b4e42
+accent-parrot-squawk-3 = АВВК!
+# HASH: dc5c70b526bd553098bcaddcb6a27496456e88f36931e6a8344000b611f8e745
+accent-parrot-squawk-4 = ААВК!
+# HASH: 43c2f551538490caa7c79511d3ab2ad5d6e28554d60085f0079c6fc3f510a864
+accent-parrot-squawk-5 = РАВВК!
+# HASH: dabc7fa0cd6cc433d821ecd8a60e4655f41d254281326e9b4151cbd9126c267d
+accent-parrot-squawk-6 = РАААВК!
+# HASH: 2574cb62950a2fd94d85b6e59b118bd3ae6c4b573acd9883a26dd879f1926a56
+accent-parrot-squawk-7 = БРААВК!
+# HASH: efc181df78a4795814461eb5fa74ef9f354f55c8b84b565c846970a870f61cfa
+accent-parrot-squawk-8 = БРАВВК!

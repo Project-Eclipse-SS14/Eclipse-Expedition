@@ -1,0 +1,6 @@
+# HASH: 743febcc1ba6da393d65fb66e8511e3c5b9e14225c8c8a75bfe1f408c0edd6a1
+anchorable-anchored = Закреплено
+# HASH: ba0a26346776afea343661bce888ef87fe8b837706bea336b3e4dcc39e8690a0
+anchorable-unanchored = Не закреплено
+# HASH: e1232a574661ca6fb5ac8930fcda67dc4f9015d6dada1a7e9783ac658c9eff6c
+anchorable-occupied = Плитка уже занята

@@ -1,0 +1,2 @@
+# HASH: e116d3dc0ffbb0527c79a5bdaa0e8076db14f7626b888f885715f749adb33799
+door-electronics-configuration-title = Настроить доступы

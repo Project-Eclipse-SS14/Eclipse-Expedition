@@ -1,0 +1,16 @@
+# HASH: 3627b44d26ab2538d93aed5ad4c413e7661d62d8f958599e4b3a02b32b53f03f
+zzzz-fmt-direction-North = Север
+# HASH: c6a8311b35465f3edcf68b8f8dc3a459666b332752915c157d0e0432a3d2485e
+zzzz-fmt-direction-South = Юг
+# HASH: 30ed582f30a095a8b00cbf3aab702ebab88b613c117e48cae34db3905bc3dce8
+zzzz-fmt-direction-East = Восток
+# HASH: d19ea4b2229a1160c7c98f48d78926fbe183fcd945ffd29e2c43f9757ac57064
+zzzz-fmt-direction-West = Запад
+# HASH: a221028ff88fe6f47439f8e1de389afdcbb847f9b3713b062cbe77f743e170f1
+zzzz-fmt-direction-NorthEast = Северо-восток
+# HASH: 8da6390c0aa0bde502a797133bdc6bba452a25bfdf7b20579da6c7b8514f7635
+zzzz-fmt-direction-SouthEast = Юго-восток
+# HASH: 420f5c85f31e8501239e736911d36fa19822ad471705e0f84cc199884cb5f28a
+zzzz-fmt-direction-NorthWest = Северо-запад
+# HASH: 50b8fff213f32ed62a0a94092db15f5b858c7b29e40c4837ef41aed0d559fad2
+zzzz-fmt-direction-SouthWest = Юго-запад
