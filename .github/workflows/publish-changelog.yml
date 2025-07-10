@@ -8,6 +8,8 @@ on:
 jobs:
  publish_changelog:
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
     steps:
 
     - name: checkout
