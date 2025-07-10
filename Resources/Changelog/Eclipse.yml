@@ -1,2 +1,9 @@
 ---
-Entries: []
+Entries:
+  - author: FoLZer
+    changes:
+      - message: Русская локализация.
+        type: Add
+    id: 0
+    time: "2025-07-10T18:04:20.000000+00:00"
+    url: "https://api.github.com/repos/Project-Eclipse-SS14/space-station-14/pulls/2"
