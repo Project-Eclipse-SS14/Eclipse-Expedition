@@ -1,0 +1,144 @@
+# HASH: 81e54d0362830b5b2ce4cf49a56a15f6e5a8622e89881a797a77456b9ed398ad
+ent-LockerBooze = шкафчик со спиртным
+    .desc = Здесь бармен хранит алкоголь.
+# HASH: 25a31a201c1988a6587149e96213cfc49d3fc77a038549ecb83bd9150b1ffdbe
+ent-LockerSteel = защищённый шкаф
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 04e4e10d4aee78f58bf12ea4344f7ad973d61fb318e42408f7beddfbaa77b60c
+ent-LockerQuarterMaster = шкаф квартирмейстера
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: e9e74ac3ac3a2d3077a380271b09af7aaaa962a8fdcb01fe5e4ede4d3fd69871
+ent-LockerSalvageSpecialist = снаряжение специалиста по утилизации
+    .desc = Не обращайте внимания на кирку.
+# HASH: 0c52f9a765fdde3147572d979c2f170eb4d340b3de53ccc1a41efbd39d3d8540
+ent-LockerCaptain = шкаф капитана
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 0063040f6cfe31bad06998a001e4ecb471390b039adf0633a5ffbff5592d15be
+ent-LockerHeadOfPersonnel = шкаф главы персонала
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 3c359311ae3cd5e8678767c8a0f504eeb531c9c4539f54caa2392ea6ac20b899
+ent-LockerChiefEngineer = шкаф старшего инженера
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 5a80c53c2156f6e5584750573b6af445c12f9b96f60c44435ca8a552141f7b14
+ent-LockerElectricalSupplies = шкаф электромонтажного оборудования
+    .desc = { ent-LockerBase.desc }
+# HASH: 0258043ca5db9455ed6c439079978376de0583b3b330da384933c6540d1f936c
+ent-LockerWeldingSupplies = шкаф сварочного оборудования
+    .desc = { ent-LockerBase.desc }
+# HASH: daaf1da6bc3812fd4a1f951e0bf545f2ef615fe124acab017346fb2c4441693b
+ent-LockerAtmospherics = шкаф атмосферного техника
+    .desc = { ent-LockerBase.desc }
+# HASH: fda40c49be82ea4621d630dcae445115eb3f505558e144df764e1a1bf8f93b67
+ent-LockerEngineer = шкаф инженера
+    .desc = { ent-LockerBase.desc }
+# HASH: cb17ee6a099d9ea27b135fa53b61235ba78cb96711ec9e81f6034afdf0a31b9a
+ent-LockerFreezerBase = холодильник
+    .desc = { ent-LockerBase.desc }
+    .suffix = Без доступа
+# HASH: 490d8c5cacb6c5a597c9839b95d36204247aaf37e4b50178fa392873f9f9013b
+ent-LockerFreezer = холодильник
+    .desc = { ent-LockerFreezerBase.desc }
+    .suffix = Кухня, Закрыт
+# HASH: 5264c901eeda728a12e55c4b835c9f565eb14426444c1152f8115aa32f098b18
+ent-LockerBotanist = шкаф ботаника
+    .desc = { ent-LockerBase.desc }
+# HASH: ad9fe60b98e8550de890460f7790ca00c2a15709630751278fa8592838e2751f
+ent-LockerMedicine = шкаф для медикаментов
+    .desc = Битком набит медицинскими штуками.
+# HASH: 7ad5dc11bbefbbed92269ec008f26d1c36f540a2bc7afc55deb3bdf8cb8b7efc
+ent-LockerMedical = шкаф медика
+    .desc = { ent-LockerBase.desc }
+# HASH: 225a5ac8503b60d1962a1d6fa4d9f2da468f5b77c7a9ef6df05c0464396b953c
+ent-LockerParamedic = шкаф парамедика
+    .desc = { ent-LockerBase.desc }
+# HASH: 74d6e39a05ea6c3805477c4789f4a4c4d6f352935457bf67cae830a083af0322
+ent-LockerChemistry = шкаф химика
+    .desc = { ent-LockerBase.desc }
+# HASH: 195e062c53bdb3a7ce9e8255784bf3311c2353bbe88bb91d9598ce68c803edbd
+ent-LockerChiefMedicalOfficer = шкаф главного врача
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: db7ad970779592bcedb4474867a102bea3eee33f8c07bdb0fccab75c1e5934c6
+ent-LockerResearchDirector = шкаф научного руководителя
+    .desc = { ent-LockerBase.desc }
+# HASH: 820129e2b19aeeec949c5aa2f0a2655a5cfea43ff8400aafac7f07a087f354a6
+ent-LockerScientist = шкаф учёного
+    .desc = { ent-LockerBase.desc }
+# HASH: 72d5bf8b7490fb44dbc9a05ac13c4ad812cbb166e604458e61b0ad38be45ab85
+ent-LockerHeadOfSecurity = head of security's locker
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 74d7737e1867d263dbc7cf00def42e8cf078bbc863adad29f76d6b461c8afa1a
+ent-LockerWarden = warden's locker
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: e3255da98bd9c4d6272612f0571ee7bcde809405a25d8572658e9ada18d797e7
+ent-LockerBrigmedic = brigmedic locker
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 5b47340874f8a317771d459341bbf03b1eb72db260b139bf47c0801d3a1e901c
+ent-LockerSecurity = шкаф офицера службы безопасности
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 203847174283e34e4241ce6b0737023c689d75c9548c34abc42e200f354bbd3a
+ent-GunSafe = оружейный сейф
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: cd2d9129c6c58c79927b73007ad90fe055dce52cce4e297215f7cf65236d8005
+ent-GunSafeBaseSecure = { ent-GunSafe }
+    .desc = { ent-GunSafe.desc }
+    .suffix = Оружейный, Закрыт
+# HASH: 87affd46e4330a537e4d0eeb6767b28f6cea7b3d51f6f2db27b00fac54488091
+ent-LockerDetective = шкаф детектива
+    .desc = Обычно пустой и холодный... как твоё сердце.
+# HASH: 97e03499d564f4ab03c36fc34e4cfa1cc3bb090282ed51a992cc21195b794067
+ent-LockerEvidence = шкаф для улик
+    .desc = Для хранения пакетиков с гильзами и вещей задержанных.
+# HASH: 15ebf846485bf3bd4f629b69d01075382dcf2cb6113a4dd6b5acad351b8bd061
+ent-LockerSyndicatePersonal = оружейный шкаф
+    .desc = Это персональное хранилище для оперативного снаряжения.
+# HASH: ff98e2ae3e9e0e937d3144060c00f7ef6e78c67dca5dfdbf56e1c4a4feb6a520
+ent-LockerBluespaceStation = блюспейс шкаф
+    .desc = Передовая технология шкафчикостроения.
+    .suffix = Один на станцию
+# HASH: ee27b047312f2a70f65845b3e8f683d908b670ffc9ba5c40de1f7b470e184b19
+ent-LockerClown = шкаф клоуна
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 3535a4c7fde0c60885a5a38f502ac35ddb89a5052b689b896e72433d8ebc41b2
+ent-LockerMime = шкаф мима
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 0c8955104476c0d13bc030f7c8a0718abe32d0797d276224d314bc1f8f07f187
+ent-LockerRepresentative = шкаф представителя Nanotrasen
+    .desc = { ent-LockerBaseSecure.desc }
+# HASH: 12825ffe3b4c5e24c5e2d1b0b88f7370ce9637c969561b8b5190a80191e1448d
+ent-LockerPrisoner = шкаф заключенного
+    .desc = Это надежный шкафчик для хранения личных вещей заключенных во время их пребывания в тюрьме.
+    .suffix = 1
+# HASH: c8f9a619ab690410d5806ac2f6f6ff9ff2c9b9f41eec964ce5e8343740840301
+ent-LockerPrisoner2 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 2
+# HASH: 34d46397040fae65791f390971c8bccfffb58d051cfa0a347a57bdef230d45c3
+ent-LockerPrisoner3 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 3
+# HASH: 3127adaef6015d318da7c719c2ca0d28723e4915fa32ff1e140519bd650036c9
+ent-LockerPrisoner4 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 4
+# HASH: 6e1a601d823e6555e0fd3ac3887be29c8f97d75cac46b442a730d7558c9ad274
+ent-LockerPrisoner5 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 5
+# HASH: c1ee91b12c95207c8e2fa2a683bd5caecb5bafb601b8a29e762961e2eb207a17
+ent-LockerPrisoner6 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 6
+# HASH: 0433c6a127804c9be1c971ff3df005e360d2ad53f7e0f91b991af40914ff71b5
+ent-LockerPrisoner7 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 7
+# HASH: 6e81b6987fc1040872ec88d66bc7317772f54235331cb06f3915f994d529d4f1
+ent-LockerPrisoner8 = { ent-LockerPrisoner }
+    .desc = { ent-LockerPrisoner.desc }
+    .suffix = 8
+# HASH: 1ce3cff80c148d22efbbafa549f244b161d12387f8ebe77637062467642708a9
+ent-LockerEvacRepair = emergency shuttle emergency locker
+    .desc = It's emergencies all the way down.
+# HASH: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+ent-GenpopBase = { "" }
+    .desc = { "" }
