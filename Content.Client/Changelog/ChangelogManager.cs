@@ -19,7 +19,7 @@ namespace Content.Client.Changelog
         [Dependency] private readonly IConfigurationManager _configManager = default!;
 
         private const string SawmillName = "changelog";
-        public const string MainChangelogName = "Changelog";
+        public const string MainChangelogName = "Eclipse"; // Eclipse : Changelog -> Eclipse
 
         private ISawmill _sawmill = default!;
 
