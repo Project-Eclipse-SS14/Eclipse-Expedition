@@ -97,8 +97,12 @@ def get_last_changelog() -> str:
     session.headers["X-GitHub-Api-Version"] = "2022-11-28"
 
     most_recent = get_most_recent_workflow(session, github_repository, github_run)
-    last_sha = most_recent["head_commit"]["id"]
-    print(f"Last successful publish job was {most_recent['id']}: {last_sha}")
+    if most_recent is None:
+        last_sha = None
+        print(f"Last successful publish job was not found, publishing the whole changelog")
+    else:
+        last_sha = most_recent["head_commit"]["id"]
+        print(f"Last successful publish job was {most_recent['id']}: {last_sha}")
     last_changelog_stream = get_last_changelog_by_sha(
         session, last_sha, github_repository
     )
@@ -107,7 +111,7 @@ def get_last_changelog() -> str:
 
 
 def get_last_changelog_by_sha(
-    sess: requests.Session, sha: str, github_repository: str
+    sess: requests.Session, sha: str | None, github_repository: str
 ) -> str:
     """
     Use GitHub API to get the previous version of the changelog YAML (Actions builds are fetched with a shallow clone)
