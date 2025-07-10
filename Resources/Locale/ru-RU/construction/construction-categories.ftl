@@ -1,0 +1,30 @@
+# HASH: 733565aeb33f5f4ecb38402cc31bbf9d2586d336913a8f542bec1d7209f9d571
+construction-category-all = Всё
+# HASH: ace61b03224a3231d1043c47ff4284e0b8815255788d25fed067ea2e6011fd05
+construction-category-furniture = Мебель
+# HASH: 29e5bee1edc3c7d7ed5c49eaa95753b3af943981b0d06fcc2a39c7664904c949
+construction-category-storage = Хранилища
+# HASH: af90b85b2112dee9c7490db9e217339a29175771f8f2fb33f76d176d8f2f56bc
+construction-category-tools = Инструменты
+# HASH: 712f0ac2e11261884d61ef9ce2b795536968740371a837ac1a876e8c3e38065d
+construction-category-materials = Материалы
+# HASH: 01e5cdc91d9581058b2933ce081c0670c78f06ce8880b2f81fdf3bb4f3b56913
+construction-category-structures = Структуры
+# HASH: a1c4d981612a50536cf0bd00d02990b5447be240c32bb76a245f9eb8526efd1c
+construction-category-machines = Оборудование
+# HASH: 8bccca2a062642f5a900a41b8669abf128b1eef5015da6a4fbba28784c20dad6
+construction-category-weapons = Оружие
+# HASH: e9eaa85d5be1250399167310c5466193e8bd19f39a95c8aeec8ba97c8dbd12aa
+construction-category-tiles = Плитки
+# HASH: 04720125442b488d1975fef71efc6f5d27bfa4ba2089a637c153e4be7cf90862
+construction-category-utilities = Утилиты
+# HASH: fe75d604387590ff88594b30fd1cf82e1fe7d88bb29222ce9b55fdefbc7b5dbc
+construction-category-misc = Разное
+# HASH: 605bb62f9b75ecf4b0a7c0d960409f1709005ca74791782adbce4e474ac9004d
+construction-category-clothing = Одежда
+# HASH: d7b8d3a516cfc4ce1da093a98e5315a717d1cfb2d5149837168ea8b439647add
+construction-category-favorites = Избранное
+# HASH: b7ec93f9eaca81aa618a23879db914a3936ad5fb8311a8c60fc3edf8efd6495a
+construction-add-favorite-button = Добавить в избранное
+# HASH: 46ff08b3f143c9ec9566e417bdc101b76c0aa1bb4df2e1a266246e7ef1a76219
+construction-remove-from-favorite-button = Удалить из избранного

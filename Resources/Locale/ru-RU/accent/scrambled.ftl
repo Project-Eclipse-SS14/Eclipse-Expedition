@@ -1,0 +1,14 @@
+# HASH: 7aae78302ebc1715ef62d3819ee0183a1a5b4fd338e7ff0bacdbe8adba275076
+accent-scrambled-words-1 = Кто?..
+# HASH: f392816f50a90f28fcb5caacdb39cf93d975521fd72c7a29b6399c0692c233fc
+accent-scrambled-words-2 = Что?..
+# HASH: 2c1cdfd86722b61289a7d79a42473ab265d99d3f18d8a65579f20aded4c77c6c
+accent-scrambled-words-3 = Когда?..
+# HASH: 947bb296ccccd5bcdc7d10b09673eedb332be92458cdaf541169d98021603d47
+accent-scrambled-words-4 = Где?..
+# HASH: 2b8af8211795c39cc8e42d6eedebb9485ae33a627c13471e9afc6f6e6cf93dcf
+accent-scrambled-words-5 = Почему!..
+# HASH: 11c7544cd8fcabeac66c0834cea70f5ef33b81c71311ec7b2f281a8fc59977e9
+accent-scrambled-words-6 = Как?..
+# HASH: 2b98fa253d7b72599b5b3b973aa789287d70f2a4e8caefc1b53c82688104b416
+accent-scrambled-words-7 = Я!..

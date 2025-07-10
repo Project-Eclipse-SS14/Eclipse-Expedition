@@ -1,0 +1,12 @@
+# HASH: eda0c6b5ba69cd62c7ee222cf84ad229fbf352fc1ea0bc42fdd64a40be62b7fc
+info-link-discord = Discord
+# HASH: 728927e1b8e5637218c9cc15a61a4040595daa9b4a2f0838cf3f17115200cd23
+info-link-forum = Форум
+# HASH: 669f53bfd178cf4c9151988780cee036219186d44691a78d2b6ddd1de7c16a06
+info-link-github = GitHub
+# HASH: 60bd2f1c12d7b734000a487d27f094ca9ffb507511cc44d872d877e4a35dcaa3
+info-link-website = Сайт
+# HASH: e6f402f8fce58a7ff93d215311f5f5defde38ff1f589df4ce404e4ceab955529
+info-link-wiki = Вики
+# HASH: 0f6cd39860803e06e5440394587fbb16916e5d2201a1fc9c1179f7962dd0ffbb
+info-link-telegram = Telegram

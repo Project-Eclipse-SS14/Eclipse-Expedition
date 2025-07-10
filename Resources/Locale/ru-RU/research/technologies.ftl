@@ -1,0 +1,150 @@
+# HASH: ec44dfdd9f145853b7e25fd9b2953933f141e2dd9f3303caa683735e409a5ef9
+research-discipline-none = Отсутствует
+# HASH: a41f4f65d75b5c9d99cb0171e25d48b31856593722ccf66989e2ce3ec1ac83cd
+research-discipline-industrial = Промышленность
+# HASH: 4387c1cdeb474db613f6669faefbc380ba692398ec6d3b45143498204e3352af
+research-discipline-arsenal = Арсенал
+# HASH: 0ff52099a42d55507f2f0a1cecf9761007b46d215bc2a3ee7e9518e54f735038
+research-discipline-experimental = Экспериментальное
+# HASH: 7b1579acb5fff1efd8674f7eca5232aadaabd62a342562499be24de568d7cab2
+research-discipline-civilian-services = Обслуживание персонала
+# HASH: 0fd75aa4a86e1431a4787963645a95fb2ee1cc049a49a9c3bbb1a4782ad54b18
+research-technology-fulton = Фултоны
+# HASH: a92527987eec5763ecadeffcf77771f43ae14da41b6214e741aaefc9a1fecb08
+research-technology-salvage-equipment = Снаряжение для утилизации
+# HASH: 81f7c2186a1dff7ce8259e56b7f4a10e1e7b817994b2987fa4d4d0fca76cfe50
+research-technology-advanced-powercells = Продвинутые батареи
+# HASH: 3d660b3ea8fadc741abce1689c9e8823ae87f62465f9a7b87ce6e0f6528cdaa2
+research-technology-mechanical-compression = Механическое уплотнение
+# HASH: d2ebf188be3d91d0ed604e796df69c7b548c4db09cdba82dea0e6a927e0aad40
+research-technology-compact-power = Компактная энергогенерация
+# HASH: 99a67988b8ae7c5ec1066a1debaafb0a0743cf5beff5967aa1b1e33894136874
+research-technology-industrial-engineering = Промышленная инженерия
+# HASH: 2bc2d68ad14c8db61dcde03f14be5f8eae56d48cbf8fe4a13a2dda1fe60fc810
+research-technology-power-generation = Генерация электроэнергии
+# HASH: da4d6844f7c7a712e73ab11a487d807f803011371183d68f817805703367c7c1
+research-technology-atmospheric-tech = Атмосферные технологии
+# HASH: 3a2f875eace00dc2a245a913d8669ad3cd7ef39400614f93359bce08989ba5df
+research-technology-shuttlecraft = Шаттлостроение
+# HASH: 5cf2bceba75bf8a34163e61fe5b81431425080c4b1017c104a8f066f0f67a103
+research-technology-ripley-aplu = Рипли АВП
+# HASH: 3982390c378b2e1d147cee33c0dce90b55ed76a5c569098372227f867a2ca771
+research-technology-advanced-atmospherics = Продвинутые атмос-технологии
+# HASH: 78ed646b0f3b5e5505cf0bb7f9a04163c5e7486f5c56b67f3ca8efabb860a351
+research-technology-advanced-tools = Продвинутые инструменты
+# HASH: 06d9f2e91dcaf4742660a1c32a18b74c749213cd7ff2cf8162cae136d908c7f9
+research-technology-super-powercells = Супербатареи
+# HASH: e050006ad3a4d0b644a26d018dd3f1910e4cdecb7de5aad69fe24af96020f971
+research-technology-bluespace-storage = Блюспейс-хранилище
+# HASH: d2476b29c012f194de703747c620f22392a72d49009e7e9cce1374da10a97f7e
+research-technology-space-scanning = Сканирование космоса
+# HASH: 8a874934f510fe2f2a9fe2b686cba0d5d25dd27cabfa3a972a8c2f6da379e8a7
+research-technology-excavation = Массовые раскопки
+# HASH: 50865b570bc2fbad3352faf0c922c09073967e724fdf3cc6f6a9b5f64f857a96
+research-technology-biochemical-stasis = Биохимический стазис
+# HASH: 85d273dfcec07429cfd1beffe084419f6b079ff38c5ce109880dad8a61832cae
+research-technology-mechanized-treatment = Механизированная подготовка
+# HASH: b24c4e33d16756ef29cb3f2af691bc72a05a537ab01a300875f18003b48daf88
+research-technology-bluespace-chemistry = Блюспейс-химия
+# HASH: c56bc55a912e2bff9ce3cd271917a1f9650de0d389850e9c884d872244162ee9
+research-technology-salvage-weapons = Утилизаторское оружие
+# HASH: e19a3a36caa2fe0e57bcf2f38b33f71ea1be6c002a99baa477283289e6109e3f
+research-technology-special-means = Специальные средства
+# HASH: 2aaaf6ff628cb552ef417efcd7d5ad99afc4fbb5fe1afa91464aa8e9168f38c6
+research-technology-draconic-munitions = Драконьи боеприпасы
+# HASH: 2e523234cae6de993c1b991d5960fbde59c9e98f774e99fb599d66ede853d668
+research-technology-uranium-munitions = Урановые боеприпасы
+# HASH: 9ab702657b8454a0bc0d243436dbd50e8954c181d289e8d50217d86ad62ffc2c
+research-technology-explosive-technology = Взрывчатые вещества
+# HASH: 5963d236df19bd3719748e12ad0cf078b72a528fa8dc517e66a66c08e12de7e1
+research-technology-weaponized-laser-manipulation = Манипулирование лазерным оружием
+# HASH: 1c8c77291cea9d4702cdbc8e91dfe3b351598bde5aa4d83e4682e89c53981ae0
+research-technology-nonlethal-ammunition = Нелетальные боеприпасы
+# HASH: 32e780caae064593d72cae1f613e8b0bbeb7ba212d71483ed8c7add4f7a1708b
+research-technology-practice-ammunition = Учебные боеприпасы
+# HASH: 4989284c7e37a474fa791195d0f1f501881b03fa61fb4fccb4e8126c63275a5e
+research-technology-concentrated-laser-weaponry = Концентрированное лазерное оружие
+# HASH: 85778e66c7e140edd32881e5cbf8b921670b5c8fc239b456055b8fd612732560
+research-technology-wave-particle-harnessing = Применение волновых частиц
+# HASH: f8c3c6546f9a6828f8882640c27d3c0925a2931175bbdff85c6e27a048fc880c
+research-technology-advanced-riot-control = Продвинутое противодействие беспорядкам
+# HASH: 8f3eb8662b40b950c178522bea7c90aae76bc8843a303c489a50dac0e2d2c23f
+research-technology-portable-microfusion-weaponry = Оруженый портативный микросинтез
+# HASH: a89aea656e03967943ea3cdb5fb5885915eef685379b27c7493421db28b2a529
+research-technology-experimental-battery-ammo = Экспериментальные батарейные боеприпасы
+# HASH: 1f726f10d996572ad100e2b817ba5bb662694054743da4adcab9c1c239c53186
+research-technology-basic-shuttle-armament = Базовое корабельное вооружение
+# HASH: 81f74cd2df62710737afb4d0c53328e8c28f62657f9f84d7eb1cef0f73143ea2
+research-technology-advanced-shuttle-weapon = Продвинутое корабельное оружие
+# HASH: 81bf979e9f47d014b721213f7e78bb1761c3e39e3bee363c5dad63b4d4175882
+research-technology-basic-robotics = Основы робототехники
+# HASH: 43e9fbaa4659598e61ff6a43f461e0838f782577ed106a4e3a119684a6314635
+research-technology-basic-anomalous-research = Основы исследования аномалий
+# HASH: 5ad0eca216384e2073ee6579526dc2a2d6de61a83f986b05c2a63c0f12dfc683
+research-technology-basic-xenoarcheology = Основы ксеноархеологии
+# HASH: b077711dd6bbdb96220805d80e990e397f23e73a46d595c8876d075528791a1d
+research-technology-alternative-research = Альтернативные исследования
+# HASH: bd9c69f7e792e581f123fcfcbb8b86c4893caa4c08d9c0def864230191bbadf7
+research-technology-magnets-tech = Локализованный магнетизм
+# HASH: d4063f8240946762326c166a4aee6e99b30131e4393b538d94322882630a0d4b
+research-technology-advanced-parts = Продвинутые компоненты
+# HASH: a7cc5f201bce881e574fe9fb32e3fb9ad68299eb4eb91caacc741c40d6a4a59a
+research-technology-anomaly-harnessing = Применение ядер аномалий
+# HASH: a25ae720802f3561891847c49764ac4b2d23779cf23c596855b92eb2842ed301
+research-technology-abnormal-artifact-manipulation = Переработка артефактов
+# HASH: 646e2f1c9e173dc8d4442e11af0ed2720b53df86aeffcba92d6266597bfc46a2
+research-technology-gravity-manipulation = Манипулирование гравитацией
+# HASH: 9f3fed789f5afe529d31640f484bb363802c1ad01be17f007ce8f4ba223e3ef8
+research-technology-quantum-leaping = Квантовые скачки
+# HASH: 28932a9d9fa73e35b46d0a6c90f465b30a4eaccf1b895d4542bf49a901c3de32
+research-technology-advanced-anomaly-research = Продвинутое изучение аномалий
+# HASH: 58ce5fdab4206e3c35d440ca21acbaef97d278df47e988ab35f61c30d254c359
+research-technology-rped = Быстрая замена компонентов
+# HASH: 8071c7676377fb001a9ef1bc0c3128e04fb6bb6b4f38412da85c9ab114701098
+research-technology-super-parts = Суперкомпоненты
+# HASH: 10aff08f9cd2bda3592abb89431de02efa5aa23c1ccc93e06572113e2dc661fc
+research-technology-deterrence = Технология сдерживания
+# HASH: cfa82d1e69d6d9f9e1a1ae964bf456e93ea0c65aa83b6061b0e1a56e7603c3d0
+research-technology-janitorial-equipment = Уборочное оборудование
+# HASH: 1a09db93e374df1df843ff79448ee40b12296f530961550c169ec51e6b32b1ee
+research-technology-laundry-tech = Прачечная технология
+# HASH: e93b89e0f09a6a9fb819f61262c6a77471103fb0e857db7b6e82005fb7286413
+research-technology-critter-mechs = Мехи для животных
+# HASH: 7c17ca7938d07ca02698e281eee2b3667036542f948e690fc92e89793a9732f6
+research-technology-basic-hydroponics = Основы гидропоники
+# HASH: 09c9f165a04c8dccb14cf02df3a9019e5d2cb9606baa8e82e6c3b1de1f5f472f
+research-technology-food-service = Организация питания
+# HASH: 152710466ad9d64a58773c9f356fafbcf894eaecb3b63ad2eb00a3b7dd59d667
+research-technology-advanced-entertainment = Продвинутые развлечения
+# HASH: b667011b3f801e4d232b33cc7c996984b78a9d97d07115b32f65d5eb9aa485a6
+research-technology-robotic-cleanliness = Роботизированная уборка
+# HASH: 357a7a2b1879061ebbefda841ebb2cae39c939d8c542f54e8f3b48b61028e4d5
+research-technology-faux-astro-tiles = Искусственная астроплитка
+# HASH: 332ac4b8f1a8f8e420d620a431eb339daaa0bf0b335522959671f3ca5d05d3e6
+research-technology-audio-visual-communication = А/В коммуникация
+# HASH: 2773060c0ab6c442adc3d45ee1211f5cb52a9c78ce7099db90c19e8e55a39f97
+research-technology-advanced-cleaning = Продвинутая уборка
+# HASH: dacf68b0dcc0f95ecd49b4d42ce6daae5d1a9a3f705978aa3bcac19419a6f753
+research-technology-meat-manipulation = Манипулирование мясом
+# HASH: 0b2e55fb8136cff17c76ab0b5c26098c946e5cb8115c875f7fa02fd9f9ec6b06
+research-technology-honk-mech = Мех Х.О.Н.К.
+# HASH: fc2bd719ae04e5b6633d731b76842945a6c773229c01e2cf16d38062224b3e22
+research-technology-advanced-spray = Продвинутые спреи
+# HASH: 7ea46fdf9f771abe6ee0a37926bf8548d25906a1e63c530a30c93755f10a814b
+research-technology-quantum-fiber-weaving = Плетение квантового волокна
+# HASH: f38ab7f09692630097a60e19d89470963011f9890644e5c5f7d1a2abd2e87c5c
+research-technology-bluespace-cargo-transport = Блюспейс-транспортировка грузов
+# HASH: b1012471b2a9a8d7974c0575f4ee4c1dbd69de2c257ea019618fc30872fe389c
+research-technology-optimized-microgalvanism = Optimized Microgalvanism
+# HASH: 824f0659d35da8d5797eadcc16d6a84d33c42476c4a5f6cdef53882ee80ba113
+research-technology-kinetic-modifications = Kinetic Modifications
+# HASH: a7c864758478e35df4d44c2b72e2979f28f6d9a7ab82c4d5d18020210027ff2f
+research-technology-thermal-weaponry = Thermal Weaponry
+# HASH: eb45659d7c28d88ee9c592387d7a15e4557a09ea9ca540a1942e685eafd248f6
+research-technology-dual-wielding-technology = Dual Wielding Technology
+# HASH: 5ae2f07c03faec64e2be2c41ea55c5de5869e3e762ab061ebe7df06f24bd1f8a
+research-technology-bluespace-time-manipulation = Bluespace Time Manipulation
+# HASH: 796eb641308499038de18fc2741cff5fb7ed628f16baf0395d4382de970ae519
+research-technology-launcher-syringe = Syringe Gun
+# HASH: 7912397c2675b21cf88b87a7d924e9e86e2cc68b227239fb45063448fd6c891d
+research-technology-clowning-utilities = Clowning Utilities

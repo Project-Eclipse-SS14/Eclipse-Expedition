@@ -1,0 +1,19 @@
+# HASH: 1a5f21c81d9334da6e903ca13a5d25919c2b4a3927424d02ed82a9c514d21eea
+mop-bucket-slot-component-slot-name-item = Предмет
+# HASH: 0318925c6735b51037e34b3bca54a5c48994b7a54221242f40bfb0fa9fcc174b
+mop-bucket-slot-component-eject-verb = Достать
+# HASH: 1e2a8254bd96e0efd98c7e464a5825383ef4e9ff8bae01d78e3ba037f470ad4a
+# janitorial trolley
+janitorial-trolley-slot-component-slot-name-plunger = Вантуз
+# HASH: 2198767ca2bbda9a5e9ff3e7748cee22e64d4bc0b6a008751104461d9601eb93
+janitorial-trolley-slot-component-slot-name-sign = Табличка
+# HASH: d20f5a0a9ca8020ca420ecace0656e64801e2d2fea0f0b8e0748f371b8657d00
+janitorial-trolley-slot-component-slot-name-lightreplacer = Лампозаменитель
+# HASH: 571d189a06e7d1e07314a54bc712445674b45423fc7b412c77885bdb4b3eed2a
+janitorial-trolley-slot-component-slot-name-spray = Распылитель
+# HASH: ca00bad6c7da587f8d89868de8961b255f95ae8385ef78fe1ba7e6fdbdb7099b
+janitorial-trolley-slot-component-slot-name-bucket = Ведро
+# HASH: ee6c95c9964893798da8fd9aeb2baebb0ed9615ed2f85ddbd464f03cc29c426e
+janitorial-trolley-slot-component-slot-name-trashbag = Мусорный пакет
+# HASH: 7e16d52f15b3bfc6b74cd8d729f8b301e78a39dc456da2eddd5e716a272a763b
+janitorial-trolley-slot-component-slot-name-mop = Швабра

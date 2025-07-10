@@ -1,0 +1,30 @@
+# HASH: 4f5f164b62fb6555d6939ed2b92b89911819b2763e8b304fcebbed50f69f3ef1
+damage-force-say-message-wrap = { $message }-{ $suffix }
+# HASH: 48403842fcd151b7647ec3a0600a3d26e9d129d8f25228749c922fa7b85aab6a
+damage-force-say-message-wrap-no-suffix = { $message }-
+# HASH: e9f2a0985456d002afe769cf08f43598d31f6b559f05e64ea2df8edc95bc225d
+damage-force-say-1 = ГЭК!
+# HASH: e5ade1632c877d7e23bca614df8be3747bc36c5b106031d57a39e5c6c75c5b40
+damage-force-say-2 = ГЛУРФ!
+# HASH: aec829cd60bf8b7951541c184e52d5a3b2f116be8b61bbb675a5395995067b64
+damage-force-say-3 = УФ!
+# HASH: c2e16d004f7d4e7f25eeab3af05258764288e15c577e9d4d979d0fdb9247fc6b
+damage-force-say-4 = АУЧ!
+# HASH: daed77468a346bf535c386f766a9b641410575a10b64473f66e1bcded5555cfb
+damage-force-say-5 = АУ!
+# HASH: ee4749932ccdbccc45d96b77f5d7ef5b6902b111401b99b630974f182696a347
+damage-force-say-6 = УГХ!
+# HASH: 667d090fc89c54651e1832b3d2b2e8d17ddc4553a1d4b8629aff7f1b9160d5ec
+damage-force-say-7 = ХРК!
+# HASH: 443672091e881a732196a588d4c3bf31b2d531dd71a9714d000a2bb90430860a
+damage-force-say-sleep-1 = хррр...
+# HASH: 9bbf09a9a738a2c30af044d267b2d4bd053d876b411a2d5634f98e3de2dd95ed
+damage-force-say-numb-1 = ох-
+# HASH: bdd4a928372dc2b4a124c792b98d656eff040a1f25bd0a5ece1f44dbb6c30890
+damage-force-say-numb-2 = оу-
+# HASH: a22dfc2a835c2e6dc5e8e7a1ade3bce6e8bb8de17fb53027c55e982430126118
+damage-force-say-numb-3 = уф-
+# HASH: 2fdb811b8d76a6e5b9a9e973f32f21b2f8aa959edb5550cb27b66c71a20483fe
+damage-force-say-numb-4 = ах-
+# HASH: 4cc4c8169cd21d69a32a5f255bf26d2b877a417c35637d083e9691f1ce006e07
+damage-force-say-numb-5 = угх-

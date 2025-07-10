@@ -1,0 +1,4 @@
+# HASH: 318d0b170fdf58ae84f474d5078d3a309c11b684988b5bb95c0f88e5692ff810
+screens-text = текст
+# HASH: 65879a645b117b69fdb0dbdcb41747e8f38b32a2250c2f55041422fc593a2009
+screens-color = цвет

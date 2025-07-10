@@ -1,0 +1,32 @@
+# HASH: c241c9a05334aa86349ddb51189d1f796fd33d68fa167be2027610034d89c3e6
+gas-pressure-regulator-ui-set-threshold = Set
+# HASH: 174c9f84297143615adb0f6d5b2762d8546997496e9a5af76c76d7448cceb2ee
+gas-pressure-regulator-ui-zero-threshold = Zero
+# HASH: e9fcd15cfc0f3d463fc20fe00cf2917375aa68943cd94ac2c060a2ed3823afee
+gas-pressure-regulator-ui-set-to-current-pressure = Set to Inlet Pressure
+# HASH: 6cb313501785ecc96599a169253fe0ff2c71889e425c2d5942de5f36ea43cab1
+gas-pressure-regulator-ui-add-10 = +10
+# HASH: 1f3525708564b67c9eba7aca61189bf4c70f668a0e9b1a1448066b6860e71b59
+gas-pressure-regulator-ui-add-100 = +100
+# HASH: a0123744cd6ee088bf0ace13dab6296edc5b0f012de8930a97d0b145cb4d43d5
+gas-pressure-regulator-ui-add-1000 = +1000
+# HASH: 07e2c12fc8a4b620766239349fbd3e3bc662f6cc2a8d9df9ca8fc46ecc72d59b
+gas-pressure-regulator-ui-subtract-10 = -10
+# HASH: 7382399a231537188f951fbd4cbcff86a1c5defe72821026931a700b8267c6e0
+gas-pressure-regulator-ui-subtract-100 = -100
+# HASH: 4d296be09db5fc63d75bd9fa696abf7da75bbb6774aad8bbca084db535195a92
+gas-pressure-regulator-ui-subtract-1000 = -1000
+# HASH: b99359c1675d31fe1e4ba45f593940690fbe8abb13d495abc7ad926404ed9c58
+gas-pressure-regulator-ui-title = Inlet Pressure Regulator
+# HASH: 84a154dc52b2368303a85962d1300c8e0b57f7c649ab8d6c3ef858639be495e6
+gas-pressure-regulator-ui-target = Setpoint
+# HASH: 7b70dbe94500978cce6e403380a46fc337bfc2bcbd4b04a539a3bb129dbb5713
+gas-pressure-regulator-ui-flow = Flow
+# HASH: 68b0d7bd5a5121e32925b41107013aea66bf5f13d1a0be121c60ce601ad2a09d
+gas-pressure-regulator-ui-outlet = Outlet
+# HASH: a3495a27fd4fcd13c19ef3323df6de1d84ad962a1439f73792d473036b790126
+gas-pressure-regulator-ui-inlet = Inlet
+# HASH: b86bf9398fb3762029dd9f6b6126a677be8af6ac1e094fe4021b27542ac0fc88
+gas-pressure-regulator-ui-flow-rate-unit = L/s
+# HASH: 2a9ee39843359ddbc7704d0831e81d9d9ed22a8345f5b81061a49e6f5e60f43d
+gas-pressure-regulator-ui-pressure-unit = kPa

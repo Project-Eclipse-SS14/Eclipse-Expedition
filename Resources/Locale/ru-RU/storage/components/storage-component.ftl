@@ -1,0 +1,2 @@
+# HASH: 483a28ad829ccd104fef09acbf9c4c68c3470057c92f5f619751f18677851261
+storage-component-transfer-verb = Переместить содержимое

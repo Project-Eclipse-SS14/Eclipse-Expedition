@@ -1,0 +1,22 @@
+# HASH: a0847ea7a5449df40dee254267c5b0b7a2433e8dce73c9cd0bca43ef6b029b8b
+generic-not-available-shorthand = Н/Д
+# HASH: d04e46dba762316a3a5fc619f0dbfcefd0f2d3bfa67525b227b157b06f682d87
+generic-article-a = это
+# HASH: 5f14e4741a891301aa775efd945909d6cc54fb97992679ed23d1f7b385fbead4
+generic-article-an = это
+# HASH: a3d135a02dd38f57ecfe7a105d368376b5ee6d277193ea681f838b7014ce3a63
+generic-unknown = неизвестно
+# HASH: 3561c5cbba509594e470179c2d863356c039d8ab3d47e8513c96599034e3441e
+generic-unknown-title = Неизвестно
+# HASH: 00567d7adc276016a568340ebbb012ef280af414ba97e05d7c1b41f9db381f7d
+generic-error = ошибка
+# HASH: f643ad0b86eebf1ed590afc23832013354b16dbb4994d54c7114c25d3457740b
+generic-invalid = недействительно
+# HASH: d2008e40a81d628c739dee02fc2d22b0f3eada326ade9c553d92f5bd067b44b8
+generic-hours = часов
+# HASH: 0c4bb19ac2b1a43355847f8f0ebd8b340156e80e307ebc59b8aea1bc5b468e53
+generic-minutes = минут
+# HASH: c11bce16b8e365cf045d859618ef8109a0dffe9530435edbe9cd841529c6c237
+generic-playtime-title = Игровое время
+# HASH: 044f5c5d245d6f8e5c386c4b639ecfa6f3556062c0dc7e6084e74c8c828bc175
+generic-confirm = Подтвердить
