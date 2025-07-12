@@ -1,19 +1,5 @@
 ﻿Order: 1
 ﻿Entries:
-- author: metalgearsloth
-  changes:
-  - message: Fix disarm swing sound even if a disarm isn't possible on the target.
-    type: Fix
-  id: 8251
-  time: '2025-04-19T01:38:22.0000000+00:00'
-  url: https://github.com/space-wizards/space-station-14/pull/36546
-- author: metalgearsloth
-  changes:
-  - message: Predict gas volume pumps.
-    type: Tweak
-  id: 8252
-  time: '2025-04-19T01:48:41.0000000+00:00'
-  url: https://github.com/space-wizards/space-station-14/pull/33835
 - author: SharkSnake98
   changes:
   - message: Added 12 new, varied drinks for the bartender to mix during shifts.
@@ -3891,3 +3877,18 @@
   id: 8763
   time: '2025-07-11T00:36:58.0000000+00:00'
   url: https://github.com/space-wizards/space-station-14/pull/37341
+- author: Princess-Cheeseballs
+  changes:
+  - message: Added Stamina and Stun animations
+    type: Add
+  id: 8764
+  time: '2025-07-11T12:13:11.0000000+00:00'
+  url: https://github.com/space-wizards/space-station-14/pull/37196
+- author: Centronias
+  changes:
+  - message: Muzzles now prevent wearers from screaming and suppress sounds on audio
+      emotes.
+    type: Tweak
+  id: 8765
+  time: '2025-07-11T17:18:15.0000000+00:00'
+  url: https://github.com/space-wizards/space-station-14/pull/32588
