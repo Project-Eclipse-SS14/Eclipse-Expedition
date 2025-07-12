@@ -112,7 +112,7 @@ async fn main() {
         author: author.to_owned(),
         time,
         changes,
-        url: pr.url,
+        url: pr.html_url.map(|v|  v.into()),
     });
 
     let yaml = changelog.to_yaml();

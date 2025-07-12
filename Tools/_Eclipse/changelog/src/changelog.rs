@@ -97,7 +97,7 @@ pub struct ChangelogEntry {
     pub author: String,
     pub time: DateTime<Utc>,
     pub changes: Vec<ChangelogChange>,
-    pub url: String,
+    pub url: Option<String>,
 }
 
 impl ChangelogEntry {
@@ -140,14 +140,11 @@ impl ChangelogEntry {
                     .collect::<Vec<_>>()
             })
             .unwrap_or_default();
-        let url = map
-            .get(&Yaml::String(String::from("url")))
-            .map(|v| {
-                v.as_str()
-                    .expect("Changelog entry: url is not a string")
-                    .to_owned()
-            })
-            .expect("Changelog entry: url isn't set");
+        let url = map.get(&Yaml::String(String::from("url"))).map(|v| {
+            v.as_str()
+                .expect("Changelog entry: url is not a string")
+                .to_owned()
+        });
         Self {
             id,
             author,
@@ -179,10 +176,9 @@ impl ChangelogEntry {
                     .to_rfc3339_opts(chrono::SecondsFormat::Micros, false),
             ),
         );
-        map.insert(
-            Yaml::String(String::from("url")),
-            Yaml::String(self.url.clone()),
-        );
+        if let Some(url) = &self.url {
+            map.insert(Yaml::String(String::from("url")), Yaml::String(url.clone()));
+        }
 
         Yaml::Hash(map)
     }
