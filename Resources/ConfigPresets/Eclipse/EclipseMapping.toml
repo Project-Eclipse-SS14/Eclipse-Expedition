@@ -1,0 +1,37 @@
+[net]
+max_connections = 1024
+pvs_range = 20.0
+pvs_priority_range = 30.0
+tickrate = 60
+
+[game]
+maxplayers = 150
+soft_max_players = 100
+hostname = "🌒 Project Eclipse - Expedition! [Маппинг] 🌒"
+desc = "Сервер для маппинга"
+lobbyenabled = false
+
+[server]
+rules_file = "StandardRuleset"
+
+[rules]
+time = 60
+
+[infolinks]
+bug_report = "https://github.com/Project-Eclipse-SS14/Eclipse-Expedition/issues/new/choose"
+discord = "https://discord.gg/5J9Q8WuJFd"
+#forum = ""
+github = "https://github.com/Project-Eclipse-SS14/Eclipse-New-Frontier"
+patreon = ""
+website = "https://boosty.to/project_eclipse"
+#wiki = ""
+#appeal = ""
+
+[discord]
+rich_main_icon_id = "https://shorturl.at/nHmHm"
+
+[movement]
+mob_pushing = false
+
+[vote]
+restart_required_ratio = 0.7
