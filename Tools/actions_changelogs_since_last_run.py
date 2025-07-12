@@ -44,12 +44,16 @@ def main():
         # it will get the old changelog from the GitHub API
         last_changelog_stream = get_last_changelog()
 
-    last_changelog = yaml.safe_load(last_changelog_stream)
     with open(CHANGELOG_FILE, "r") as f:
         cur_changelog = yaml.safe_load(f)
 
-    diff = diff_changelog(last_changelog, cur_changelog)
-    message_lines = changelog_entries_to_message_lines(diff)
+    if last_changelog_stream is None:
+        changelog_entries = cur_changelog["Entries"]
+    else:
+        last_changelog = yaml.safe_load(last_changelog_stream)
+        changelog_entries = diff_changelog(last_changelog, cur_changelog)
+    
+    message_lines = changelog_entries_to_message_lines(changelog_entries)
     send_message_lines(message_lines)
 
 
@@ -86,7 +90,7 @@ def get_past_runs(sess: requests.Session, current_run: Any) -> Any:
     return resp.json()
 
 
-def get_last_changelog() -> str:
+def get_last_changelog() -> str | None:
     github_repository = os.environ["GITHUB_REPOSITORY"]
     github_run = os.environ["GITHUB_RUN_ID"]
     github_token = os.environ["GITHUB_TOKEN"]
@@ -100,6 +104,7 @@ def get_last_changelog() -> str:
     if most_recent is None:
         last_sha = None
         print(f"Last successful publish job was not found, publishing the whole changelog")
+        return None
     else:
         last_sha = most_recent["head_commit"]["id"]
         print(f"Last successful publish job was {most_recent['id']}: {last_sha}")

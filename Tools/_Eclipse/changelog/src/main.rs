@@ -108,7 +108,7 @@ async fn main() {
     let time = pr.merged_at.expect("PR merged_at is not set");
 
     changelog.entries.push(ChangelogEntry {
-        id: changelog.entries.iter().map(|v| v.id).max().unwrap_or(0),
+        id: changelog.entries.iter().map(|v| v.id).max().unwrap_or(0) + 1,
         author: author.to_owned(),
         time,
         changes,

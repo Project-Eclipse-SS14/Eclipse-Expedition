@@ -4,13 +4,13 @@ Entries:
     changes:
       - message: Русская локализация.
         type: Add
-    id: 0
+    id: 1
     time: "2025-07-10T18:04:20.000000+00:00"
     url: "https://api.github.com/repos/Project-Eclipse-SS14/space-station-14/pulls/2"
   - author: FoLZer
     changes:
       - message: Добавлено отображение русского текста на экранах
         type: Add
-    id: 0
+    id: 2
     time: "2025-07-12T00:35:22.000000+00:00"
     url: "https://api.github.com/repos/Project-Eclipse-SS14/space-station-14/pulls/3"
