@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Store.Systems;
+using Content.Shared.Maps;
 using Content.Shared.PDA;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Store.Components;
@@ -20,6 +21,7 @@ public sealed class RingerSystem : SharedRingerSystem
         base.Initialize();
 
         SubscribeLocalEvent<RingerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RingerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<RingerComponent, CurrencyInsertAttemptEvent>(OnCurrencyInsert);
 
         SubscribeLocalEvent<RingerUplinkComponent, GenerateUplinkCodeEvent>(OnGenerateUplinkCode);
@@ -30,8 +32,26 @@ public sealed class RingerSystem : SharedRingerSystem
     /// </summary>
     private void OnMapInit(Entity<RingerComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    /// <summary>
+    /// Randomizes a ringtone for <see cref="RingerComponent"/> on <see cref="PostMapInitEvent"/>.
+    /// </summary>
+    private void OnPostMapInit(Entity<RingerComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    /// <summary>
+    /// Randomizes a ringtone for <see cref="RingerComponent"/>.
+    /// </summary>
+    private void Init(Entity<RingerComponent> ent)
+    {
         UpdateRingerRingtone(ent, GenerateRingtone());
     }
+    // Eclipse-End
 
     /// <summary>
     /// Handles the <see cref="CurrencyInsertAttemptEvent"/> for <see cref="RingerUplinkComponent"/>.

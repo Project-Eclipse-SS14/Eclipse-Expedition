@@ -8,6 +8,7 @@ using Content.Shared.Administration;
 using Content.Shared.Chat;
 using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
@@ -40,6 +41,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         base.Initialize();
 
         SubscribeLocalEvent<SiliconLawBoundComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SiliconLawBoundComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<SiliconLawBoundComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<SiliconLawBoundComponent, ToggleLawsScreenEvent>(OnToggleLawsScreen);
         SubscribeLocalEvent<SiliconLawBoundComponent, BoundUIOpenedEvent>(OnBoundUIOpened);
@@ -54,8 +56,20 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnMapInit(EntityUid uid, SiliconLawBoundComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, SiliconLawBoundComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, SiliconLawBoundComponent component)
+    {
         GetLaws(uid, component);
     }
+    // Eclipse-End
 
     private void OnMindAdded(EntityUid uid, SiliconLawBoundComponent component, MindAddedMessage args)
     {

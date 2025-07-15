@@ -1,4 +1,5 @@
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -22,6 +23,7 @@ public sealed class RechargeBasicEntityAmmoSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RechargeBasicEntityAmmoComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<RechargeBasicEntityAmmoComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<RechargeBasicEntityAmmoComponent, ExaminedEvent>(OnExamined);
     }
 
@@ -60,9 +62,21 @@ public sealed class RechargeBasicEntityAmmoSystem : EntitySystem
 
     private void OnInit(EntityUid uid, RechargeBasicEntityAmmoComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, RechargeBasicEntityAmmoComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, RechargeBasicEntityAmmoComponent component)
+    {
         component.NextCharge = _timing.CurTime;
         Dirty(uid, component);
     }
+    // Eclipse-End
 
     private void OnExamined(EntityUid uid, RechargeBasicEntityAmmoComponent component, ExaminedEvent args)
     {

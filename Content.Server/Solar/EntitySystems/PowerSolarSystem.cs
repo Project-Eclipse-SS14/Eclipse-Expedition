@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Power.Components;
 using Content.Server.Solar.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.Maps;
 using Content.Shared.Physics;
 using JetBrains.Annotations;
 using Robust.Shared.Physics;
@@ -67,6 +68,7 @@ namespace Content.Server.Solar.EntitySystems
         public override void Initialize()
         {
             SubscribeLocalEvent<SolarPanelComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<SolarPanelComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<RoundRestartCleanupEvent>(Reset);
             RandomizeSun();
         }
@@ -88,8 +90,20 @@ namespace Content.Server.Solar.EntitySystems
 
         private void OnMapInit(EntityUid uid, SolarPanelComponent component, MapInitEvent args)
         {
+            Init(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, SolarPanelComponent component, PostMapInitEvent args)
+        {
+            Init(uid, component);
+        }
+
+        private void Init(EntityUid uid, SolarPanelComponent component)
+        {
             UpdateSupply(uid, component);
         }
+        // Eclipse-End
 
         public override void Update(float frameTime)
         {

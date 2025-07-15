@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Maps;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Chemistry.EntitySystems;
@@ -15,13 +16,26 @@ public sealed class SolutionPurgeSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SolutionPurgeComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SolutionPurgeComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<SolutionPurgeComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<SolutionPurgeComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<SolutionPurgeComponent> ent)
+    {
         ent.Comp.NextPurgeTime = _timing.CurTime + ent.Comp.Duration;
         Dirty(ent);
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

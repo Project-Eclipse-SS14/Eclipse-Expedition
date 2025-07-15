@@ -1,4 +1,5 @@
 using Content.Shared.IconSmoothing;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 
 namespace Content.Server.IconSmoothing;
@@ -13,9 +14,21 @@ public sealed partial class RandomIconSmoothSystem : SharedRandomIconSmoothSyste
         base.Initialize();
 
         SubscribeLocalEvent<RandomIconSmoothComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RandomIconSmoothComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<RandomIconSmoothComponent> ent, ref MapInitEvent args)
+    {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<RandomIconSmoothComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<RandomIconSmoothComponent> ent)
     {
         if (ent.Comp.RandomStates.Count == 0)
             return;
@@ -23,4 +36,5 @@ public sealed partial class RandomIconSmoothSystem : SharedRandomIconSmoothSyste
         var state = _random.Pick(ent.Comp.RandomStates);
         _appearance.SetData(ent, RandomIconSmoothState.State, state);
     }
+    // Eclipse-End
 }

@@ -1,4 +1,5 @@
 using Content.Shared.Gravity;
+using Content.Shared.Maps;
 using JetBrains.Annotations;
 using Robust.Shared.Map.Components;
 
@@ -11,6 +12,7 @@ namespace Content.Server.Gravity
         {
             base.Initialize();
             SubscribeLocalEvent<GravityComponent, ComponentInit>(OnGravityInit);
+            SubscribeLocalEvent<GravityComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         }
 
         /// <summary>
@@ -53,6 +55,13 @@ namespace Content.Server.Gravity
         {
             RefreshGravity(uid);
         }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, GravityComponent component, PostMapInitEvent args)
+        {
+            RefreshGravity(uid);
+        }
+        // Eclipse-End
 
         /// <summary>
         /// Enables gravity. Note that this is a fast-path for GravityGeneratorSystem.

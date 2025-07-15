@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Research.Components;
 
 namespace Content.Server.Research.Systems;
@@ -10,6 +11,7 @@ public sealed partial class ResearchSystem
     private void InitializeClient()
     {
         SubscribeLocalEvent<ResearchClientComponent, MapInitEvent>(OnClientMapInit);
+        SubscribeLocalEvent<ResearchClientComponent, PostMapInitEvent>(OnClientPostMapInit); // Eclipse
         SubscribeLocalEvent<ResearchClientComponent, ComponentShutdown>(OnClientShutdown);
         SubscribeLocalEvent<ResearchClientComponent, BoundUIOpenedEvent>(OnClientUIOpen);
         SubscribeLocalEvent<ResearchClientComponent, ConsoleServerSelectionMessage>(OnConsoleSelect);
@@ -62,11 +64,23 @@ public sealed partial class ResearchSystem
 
     private void OnClientMapInit(EntityUid uid, ResearchClientComponent component, MapInitEvent args)
     {
+        ClientInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnClientPostMapInit(EntityUid uid, ResearchClientComponent component, PostMapInitEvent args)
+    {
+        ClientInit(uid, component);
+    }
+
+    private void ClientInit(EntityUid uid, ResearchClientComponent component)
+    {
         var allServers = GetServers(uid).ToList();
 
         if (allServers.Count > 0)
             RegisterClient(uid, allServers[0], component, allServers[0]);
     }
+    // Eclipse-End
 
     private void OnClientShutdown(EntityUid uid, ResearchClientComponent component, ComponentShutdown args)
     {

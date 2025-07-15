@@ -8,6 +8,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 
 namespace Content.Server.DeviceNetwork.Systems
 {
@@ -42,6 +43,7 @@ namespace Content.Server.DeviceNetwork.Systems
         public override void Initialize()
         {
             SubscribeLocalEvent<DeviceNetworkComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<DeviceNetworkComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<DeviceNetworkComponent, ComponentShutdown>(OnNetworkShutdown);
             SubscribeLocalEvent<DeviceNetworkComponent, ExaminedEvent>(OnExamine);
 
@@ -105,6 +107,17 @@ namespace Content.Server.DeviceNetwork.Systems
         /// </summary>
         private void OnMapInit(EntityUid uid, DeviceNetworkComponent device, MapInitEvent args)
         {
+            Init(uid, device); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, DeviceNetworkComponent device, PostMapInitEvent args)
+        {
+            Init(uid, device);
+        }
+
+        private void Init(EntityUid uid, DeviceNetworkComponent device)
+        {
             if (device.ReceiveFrequency == null
                 && device.ReceiveFrequencyId != null
                 && _protoMan.TryIndex<DeviceFrequencyPrototype>(device.ReceiveFrequencyId, out var receive))
@@ -122,6 +135,7 @@ namespace Content.Server.DeviceNetwork.Systems
             if (device.AutoConnect)
                 ConnectDevice(uid, device);
         }
+        // Eclipse-End
 
         private DeviceNet GetNetwork(int netId)
         {

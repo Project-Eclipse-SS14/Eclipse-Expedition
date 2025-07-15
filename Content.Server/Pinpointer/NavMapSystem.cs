@@ -60,9 +60,11 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
         // Beacon events
         SubscribeLocalEvent<NavMapBeaconComponent, MapInitEvent>(OnNavMapBeaconMapInit);
+        SubscribeLocalEvent<NavMapBeaconComponent, PostMapInitEvent>(OnNavMapBeaconPostMapInit); // Eclipse
         SubscribeLocalEvent<NavMapBeaconComponent, AnchorStateChangedEvent>(OnNavMapBeaconAnchor);
         SubscribeLocalEvent<ConfigurableNavMapBeaconComponent, NavMapBeaconConfigureBuiMessage>(OnConfigureMessage);
         SubscribeLocalEvent<ConfigurableNavMapBeaconComponent, MapInitEvent>(OnConfigurableMapInit);
+        SubscribeLocalEvent<ConfigurableNavMapBeaconComponent, PostMapInitEvent>(OnConfigurablePostMapInit); // Eclipse
         SubscribeLocalEvent<ConfigurableNavMapBeaconComponent, ExaminedEvent>(OnConfigurableExamined);
     }
 
@@ -170,6 +172,17 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
     private void OnNavMapBeaconMapInit(EntityUid uid, NavMapBeaconComponent component, MapInitEvent args)
     {
+        NavMapBeaconInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnNavMapBeaconPostMapInit(EntityUid uid, NavMapBeaconComponent component, PostMapInitEvent args)
+    {
+        NavMapBeaconInit(uid, component);
+    }
+
+    private void NavMapBeaconInit(EntityUid uid, NavMapBeaconComponent component)
+    {
         if (component.DefaultText == null || component.Text != null)
             return;
 
@@ -178,6 +191,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
         UpdateNavMapBeaconData(uid, component);
     }
+    // Eclipse-End
 
     private void OnNavMapBeaconAnchor(EntityUid uid, NavMapBeaconComponent component, ref AnchorStateChangedEvent args)
     {
@@ -214,6 +228,17 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
     private void OnConfigurableMapInit(Entity<ConfigurableNavMapBeaconComponent> ent, ref MapInitEvent args)
     {
+        ConfigurableInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnConfigurablePostMapInit(Entity<ConfigurableNavMapBeaconComponent> ent, ref PostMapInitEvent args)
+    {
+        ConfigurableInit(ent);
+    }
+
+    private void ConfigurableInit(Entity<ConfigurableNavMapBeaconComponent> ent)
+    {
         if (!TryComp<NavMapBeaconComponent>(ent, out var navMap))
             return;
 
@@ -223,6 +248,7 @@ public sealed partial class NavMapSystem : SharedNavMapSystem
 
         UpdateBeaconEnabledVisuals((ent, navMap));
     }
+    // Eclipse-End
 
     private void OnConfigurableExamined(Entity<ConfigurableNavMapBeaconComponent> ent, ref ExaminedEvent args)
     {

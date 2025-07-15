@@ -4,6 +4,7 @@ using Content.Server.Singularity.Events;
 using Content.Server.Station.Components;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Maps;
 using Content.Shared.Mind.Components;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Singularity.EntitySystems;
@@ -51,6 +52,7 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
         SubscribeLocalEvent<MapGridComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<StationDataComponent, EventHorizonAttemptConsumeEntityEvent>(PreventConsume);
         SubscribeLocalEvent<EventHorizonComponent, MapInitEvent>(OnHorizonMapInit);
+        SubscribeLocalEvent<EventHorizonComponent, PostMapInitEvent>(OnHorizonPostMapInit); // Eclipse
         SubscribeLocalEvent<EventHorizonComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<EventHorizonComponent, EntGotInsertedIntoContainerMessage>(OnEventHorizonContained);
         SubscribeLocalEvent<EventHorizonContainedEvent>(OnEventHorizonContained);
@@ -64,8 +66,20 @@ public sealed class EventHorizonSystem : SharedEventHorizonSystem
 
     private void OnHorizonMapInit(EntityUid uid, EventHorizonComponent component, MapInitEvent args)
     {
+        HorizonInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnHorizonPostMapInit(EntityUid uid, EventHorizonComponent component, PostMapInitEvent args)
+    {
+        HorizonInit(uid, component);
+    }
+
+    private void HorizonInit(EntityUid uid, EventHorizonComponent component)
+    {
         component.NextConsumeWaveTime = _timing.CurTime;
     }
+    // Eclipse-End
 
     public override void Shutdown()
     {

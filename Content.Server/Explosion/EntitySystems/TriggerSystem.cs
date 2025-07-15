@@ -34,6 +34,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Server.Explosion.EntitySystems
 {
@@ -105,6 +106,7 @@ namespace Content.Server.Explosion.EntitySystems
             SubscribeLocalEvent<TriggerOnSlipComponent, SlipEvent>(OnSlipTriggered);
             SubscribeLocalEvent<TriggerWhenEmptyComponent, OnEmptyGunShotEvent>(OnEmptyTriggered);
             SubscribeLocalEvent<RepeatingTriggerComponent, MapInitEvent>(OnRepeatInit);
+            SubscribeLocalEvent<RepeatingTriggerComponent, PostMapInitEvent>(OnRepeatPostInit); // Eclipse
 
             SubscribeLocalEvent<SpawnOnTriggerComponent, TriggerEvent>(OnSpawnTrigger);
             SubscribeLocalEvent<DeleteOnTriggerComponent, TriggerEvent>(HandleDeleteTrigger);
@@ -299,8 +301,20 @@ namespace Content.Server.Explosion.EntitySystems
 
         private void OnRepeatInit(Entity<RepeatingTriggerComponent> ent, ref MapInitEvent args)
         {
+            RepeatInit(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnRepeatPostInit(Entity<RepeatingTriggerComponent> ent, ref PostMapInitEvent args)
+        {
+            RepeatInit(ent);
+        }
+
+        private void RepeatInit(Entity<RepeatingTriggerComponent> ent)
+        {
             ent.Comp.NextTrigger = _timing.CurTime + ent.Comp.Delay;
         }
+        // Eclipse-End
 
         public bool Trigger(EntityUid trigger, EntityUid? user = null)
         {

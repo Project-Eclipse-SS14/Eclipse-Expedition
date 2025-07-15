@@ -1,5 +1,6 @@
 using Content.Server.Lightning;
 using Content.Server.Tesla.Components;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -18,12 +19,25 @@ public sealed class LightningArcShooterSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<LightningArcShooterComponent, MapInitEvent>(OnShooterMapInit);
+        SubscribeLocalEvent<LightningArcShooterComponent, PostMapInitEvent>(OnShooterPostMapInit); // Eclipse
     }
 
     private void OnShooterMapInit(EntityUid uid, LightningArcShooterComponent component, ref MapInitEvent args)
     {
+        ShooterInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnShooterPostMapInit(EntityUid uid, LightningArcShooterComponent component, ref PostMapInitEvent args)
+    {
+        ShooterInit(uid, component);
+    }
+
+    private void ShooterInit(EntityUid uid, LightningArcShooterComponent component)
+    {
         component.NextShootTime = _gameTiming.CurTime + TimeSpan.FromSeconds(component.ShootMaxInterval);
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

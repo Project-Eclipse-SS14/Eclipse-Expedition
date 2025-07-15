@@ -7,6 +7,7 @@ using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Atmos.Piping;
 using Content.Shared.Atmos.Piping.Binary.Components;
 using Content.Shared.Audio;
+using Content.Shared.Maps;
 using JetBrains.Annotations;
 using Robust.Shared.Timing;
 
@@ -33,12 +34,25 @@ public sealed class GasPressureRegulatorSystem : SharedGasPressureRegulatorSyste
         SubscribeLocalEvent<GasPressureRegulatorComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<GasPressureRegulatorComponent, AtmosDeviceUpdateEvent>(OnPressureRegulatorUpdated);
         SubscribeLocalEvent<GasPressureRegulatorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GasPressureRegulatorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<GasPressureRegulatorComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<GasPressureRegulatorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<GasPressureRegulatorComponent> ent)
+    {
         ent.Comp.NextUiUpdate = _timing.CurTime + ent.Comp.UpdateInterval;
     }
+    // Eclipse-End
 
     /// <summary>
     /// Dirties the regulator every second or so, so that the UI can update.

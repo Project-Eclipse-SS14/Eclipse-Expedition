@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
 using Content.Shared.CCVar;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -60,9 +61,21 @@ namespace Content.Server.NPC.Systems
 
         public void OnNPCMapInit(EntityUid uid, HTNComponent component, MapInitEvent args)
         {
+            NPCInit(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        public void OnNPCPostMapInit(EntityUid uid, HTNComponent component, PostMapInitEvent args)
+        {
+            NPCInit(uid, component);
+        }
+
+        public void NPCInit(EntityUid uid, HTNComponent component)
+        {
             component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
             WakeNPC(uid, component);
         }
+        // Eclipse-End
 
         public void OnNPCShutdown(EntityUid uid, HTNComponent component, ComponentShutdown args)
         {

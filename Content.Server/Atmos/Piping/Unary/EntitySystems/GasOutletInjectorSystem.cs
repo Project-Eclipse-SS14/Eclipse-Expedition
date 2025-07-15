@@ -6,6 +6,7 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos.Piping;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using JetBrains.Annotations;
 
 namespace Content.Server.Atmos.Piping.Unary.EntitySystems
@@ -24,12 +25,25 @@ namespace Content.Server.Atmos.Piping.Unary.EntitySystems
             SubscribeLocalEvent<GasOutletInjectorComponent, AtmosDeviceUpdateEvent>(OnOutletInjectorUpdated);
             SubscribeLocalEvent<GasOutletInjectorComponent, ActivateInWorldEvent>(OnActivate);
             SubscribeLocalEvent<GasOutletInjectorComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<GasOutletInjectorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         }
 
         private void OnMapInit(EntityUid uid, GasOutletInjectorComponent component, MapInitEvent args)
         {
+            Init(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, GasOutletInjectorComponent component, PostMapInitEvent args)
+        {
+            Init(uid, component);
+        }
+
+        private void Init(EntityUid uid, GasOutletInjectorComponent component)
+        {
             UpdateAppearance(uid, component);
         }
+        // Eclipse-End
 
         private void OnActivate(EntityUid uid, GasOutletInjectorComponent component, ActivateInWorldEvent args)
         {

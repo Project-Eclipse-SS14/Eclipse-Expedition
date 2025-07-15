@@ -18,6 +18,7 @@ using Content.Shared.Fax.Systems;
 using Content.Shared.Interaction;
 using Content.Shared.Labels.Components;
 using Content.Shared.Labels.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Paper;
@@ -63,6 +64,7 @@ public sealed class FaxSystem : EntitySystem
         // Hooks
         SubscribeLocalEvent<FaxMachineComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<FaxMachineComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<FaxMachineComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<FaxMachineComponent, ComponentRemove>(OnComponentRemove);
 
         SubscribeLocalEvent<FaxMachineComponent, EntInsertedIntoContainerMessage>(OnItemSlotChanged);
@@ -163,9 +165,21 @@ public sealed class FaxSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, FaxMachineComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, FaxMachineComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, FaxMachineComponent component)
+    {
         // Load all faxes on map in cache each other to prevent taking same name by user created fax
         Refresh(uid, component);
     }
+    // Eclipse-End
 
     private void OnItemSlotChanged(EntityUid uid, FaxMachineComponent component, ContainerModifiedMessage args)
     {

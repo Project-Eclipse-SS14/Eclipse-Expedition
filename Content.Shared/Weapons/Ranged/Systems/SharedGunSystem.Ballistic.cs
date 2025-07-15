@@ -2,6 +2,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Maps;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -21,6 +22,7 @@ public abstract partial class SharedGunSystem
     {
         SubscribeLocalEvent<BallisticAmmoProviderComponent, ComponentInit>(OnBallisticInit);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, MapInitEvent>(OnBallisticMapInit);
+        SubscribeLocalEvent<BallisticAmmoProviderComponent, PostMapInitEvent>(OnBallisticPostMapInit); // Eclipse
         SubscribeLocalEvent<BallisticAmmoProviderComponent, TakeAmmoEvent>(OnBallisticTakeAmmo);
         SubscribeLocalEvent<BallisticAmmoProviderComponent, GetAmmoCountEvent>(OnBallisticAmmoCount);
 
@@ -222,6 +224,17 @@ public abstract partial class SharedGunSystem
 
     private void OnBallisticMapInit(EntityUid uid, BallisticAmmoProviderComponent component, MapInitEvent args)
     {
+        BallisticMapInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnBallisticPostMapInit(EntityUid uid, BallisticAmmoProviderComponent component, PostMapInitEvent args)
+    {
+        BallisticMapInit(uid, component);
+    }
+
+    private void BallisticMapInit(EntityUid uid, BallisticAmmoProviderComponent component)
+    {
         // TODO this should be part of the prototype, not set on map init.
         // Alternatively, just track spawned count, instead of unspawned count.
         if (component.Proto != null)
@@ -231,6 +244,7 @@ public abstract partial class SharedGunSystem
             DirtyField(uid, component, nameof(BallisticAmmoProviderComponent.UnspawnedCount));
         }
     }
+    // Eclipse-End
 
     protected int GetBallisticShots(BallisticAmmoProviderComponent component)
     {

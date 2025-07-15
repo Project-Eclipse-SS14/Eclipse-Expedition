@@ -1,4 +1,5 @@
-﻿using Content.Shared.Weapons.Ranged.Components;
+﻿using Content.Shared.Maps;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.GameStates;
 
@@ -9,11 +10,23 @@ public abstract partial class SharedGunSystem
     protected virtual void InitializeBasicEntity()
     {
         SubscribeLocalEvent<BasicEntityAmmoProviderComponent, MapInitEvent>(OnBasicEntityMapInit);
+        SubscribeLocalEvent<BasicEntityAmmoProviderComponent, PostMapInitEvent>(OnBasicEntityPostMapInit); // Eclipse
         SubscribeLocalEvent<BasicEntityAmmoProviderComponent, TakeAmmoEvent>(OnBasicEntityTakeAmmo);
         SubscribeLocalEvent<BasicEntityAmmoProviderComponent, GetAmmoCountEvent>(OnBasicEntityAmmoCount);
     }
 
     private void OnBasicEntityMapInit(EntityUid uid, BasicEntityAmmoProviderComponent component, MapInitEvent args)
+    {
+        BasicEntityMapInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnBasicEntityPostMapInit(EntityUid uid, BasicEntityAmmoProviderComponent component, PostMapInitEvent args)
+    {
+        BasicEntityMapInit(uid, component);
+    }
+
+    private void BasicEntityMapInit(EntityUid uid, BasicEntityAmmoProviderComponent component)
     {
         if (component.Count is null)
         {
@@ -23,6 +36,7 @@ public abstract partial class SharedGunSystem
 
         UpdateBasicEntityAppearance(uid, component);
     }
+    // Eclipse-End
 
     private void OnBasicEntityTakeAmmo(EntityUid uid, BasicEntityAmmoProviderComponent component, TakeAmmoEvent args)
     {

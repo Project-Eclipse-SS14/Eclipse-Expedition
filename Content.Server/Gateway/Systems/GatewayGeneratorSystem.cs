@@ -61,6 +61,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<GatewayGeneratorComponent, MapInitEvent>(OnGeneratorMapInit);
+        SubscribeLocalEvent<GatewayGeneratorComponent, PostMapInitEvent>(OnGeneratorPostMapInit); // Eclipse
         SubscribeLocalEvent<GatewayGeneratorComponent, ComponentShutdown>(OnGeneratorShutdown);
         SubscribeLocalEvent<GatewayGeneratorDestinationComponent, AttemptGatewayOpenEvent>(OnGeneratorAttemptOpen);
         SubscribeLocalEvent<GatewayGeneratorDestinationComponent, GatewayOpenEvent>(OnGeneratorOpen);
@@ -79,6 +80,17 @@ public sealed class GatewayGeneratorSystem : EntitySystem
 
     private void OnGeneratorMapInit(EntityUid uid, GatewayGeneratorComponent generator, MapInitEvent args)
     {
+        GeneratorInit(uid, generator); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnGeneratorPostMapInit(EntityUid uid, GatewayGeneratorComponent generator, PostMapInitEvent args)
+    {
+        GeneratorInit(uid, generator);
+    }
+
+    private void GeneratorInit(EntityUid uid, GatewayGeneratorComponent generator)
+    {
         if (!_cfgManager.GetCVar(CCVars.GatewayGeneratorEnabled))
             return;
 
@@ -89,6 +101,7 @@ public sealed class GatewayGeneratorSystem : EntitySystem
             GenerateDestination(uid, generator);
         }
     }
+    // Eclipse-End
 
     private void GenerateDestination(EntityUid uid, GatewayGeneratorComponent? generator = null)
     {

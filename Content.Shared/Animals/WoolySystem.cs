@@ -1,4 +1,5 @@
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.Components;
@@ -25,13 +26,26 @@ public sealed class WoolySystem : EntitySystem
 
         SubscribeLocalEvent<WoolyComponent, BeforeFullyEatenEvent>(OnBeforeFullyEaten);
         SubscribeLocalEvent<WoolyComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<WoolyComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<WoolyComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
     }
 
     private void OnMapInit(EntityUid uid, WoolyComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, WoolyComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, WoolyComponent component)
+    {
         component.NextGrowth = _timing.CurTime + component.GrowthDelay;
     }
+    // Eclipse-End
 
     private void OnEntRemoved(Entity<WoolyComponent> entity, ref EntRemovedFromContainerMessage args)
     {

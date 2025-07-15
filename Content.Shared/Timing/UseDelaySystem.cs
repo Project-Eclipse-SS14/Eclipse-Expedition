@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared.Maps;
 using Robust.Shared.GameStates;
 using Robust.Shared.Timing;
 
@@ -16,6 +17,7 @@ public sealed class UseDelaySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<UseDelayComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<UseDelayComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<UseDelayComponent, EntityUnpausedEvent>(OnUnpaused);
         SubscribeLocalEvent<UseDelayComponent, ComponentGetState>(OnDelayGetState);
         SubscribeLocalEvent<UseDelayComponent, ComponentHandleState>(OnDelayHandleState);
@@ -45,10 +47,22 @@ public sealed class UseDelaySystem : EntitySystem
 
     private void OnMapInit(Entity<UseDelayComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<UseDelayComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<UseDelayComponent> ent)
+    {
         // Set default delay length from the prototype
         // This makes it easier for simple use cases that only need a single delay
         SetLength((ent, ent.Comp), ent.Comp.Delay, DefaultId);
     }
+    // Eclipse-End
 
     private void OnUnpaused(Entity<UseDelayComponent> ent, ref EntityUnpausedEvent args)
     {

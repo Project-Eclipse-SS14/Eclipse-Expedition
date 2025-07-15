@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.ProximityDetection.Components;
 using Robust.Shared.Timing;
 
@@ -20,6 +21,7 @@ public sealed class ProximityDetectionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ProximityDetectorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ProximityDetectorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ProximityDetectorComponent, ItemToggledEvent>(OnToggled);
 
         _xformQuery = GetEntityQuery<TransformComponent>();
@@ -27,11 +29,23 @@ public sealed class ProximityDetectionSystem : EntitySystem
 
     private void OnMapInit(Entity<ProximityDetectorComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ProximityDetectorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<ProximityDetectorComponent> ent)
+    {
         var component = ent.Comp;
 
         component.NextUpdate = _timing.CurTime + component.UpdateCooldown;
         DirtyField(ent, component, nameof(ProximityDetectorComponent.NextUpdate));
     }
+    // Eclipse-End
 
     private void OnToggled(Entity<ProximityDetectorComponent> ent, ref ItemToggledEvent args)
     {

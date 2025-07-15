@@ -5,6 +5,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Singularity.Components;
 using Content.Shared.Tag;
@@ -38,6 +39,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, ComponentRemove>(OnComponentRemoved);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, EventHorizonAttemptConsumeEntityEvent>(PreventBreach);
         SubscribeLocalEvent<ContainmentFieldGeneratorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ContainmentFieldGeneratorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     public override void Update(float frameTime)
@@ -64,9 +66,21 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
 
     private void OnMapInit(Entity<ContainmentFieldGeneratorComponent> generator, ref MapInitEvent args)
     {
+        Init(generator); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ContainmentFieldGeneratorComponent> generator, ref PostMapInitEvent args)
+    {
+        Init(generator);
+    }
+
+    private void Init(Entity<ContainmentFieldGeneratorComponent> generator)
+    {
         if (generator.Comp.Enabled)
             ChangeFieldVisualizer(generator);
     }
+    // Eclipse-End
 
     /// <summary>
     /// A generator receives power from a source colliding with it.

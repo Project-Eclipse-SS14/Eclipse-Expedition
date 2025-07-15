@@ -29,6 +29,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -95,6 +96,7 @@ public abstract partial class SharedStationAiSystem : EntitySystem
         SubscribeLocalEvent<StationAiHolderComponent, ComponentRemove>(OnHolderRemove);
         SubscribeLocalEvent<StationAiHolderComponent, AfterInteractEvent>(OnHolderInteract);
         SubscribeLocalEvent<StationAiHolderComponent, MapInitEvent>(OnHolderMapInit);
+        SubscribeLocalEvent<StationAiHolderComponent, PostMapInitEvent>(OnHolderPostMapInit); // Eclipse
         SubscribeLocalEvent<StationAiHolderComponent, EntInsertedIntoContainerMessage>(OnHolderConInsert);
         SubscribeLocalEvent<StationAiHolderComponent, EntRemovedFromContainerMessage>(OnHolderConRemove);
         SubscribeLocalEvent<StationAiHolderComponent, IntellicardDoAfterEvent>(OnIntellicardDoAfter);
@@ -327,8 +329,20 @@ public abstract partial class SharedStationAiSystem : EntitySystem
 
     private void OnHolderMapInit(Entity<StationAiHolderComponent> ent, ref MapInitEvent args)
     {
+        HolderInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnHolderPostMapInit(Entity<StationAiHolderComponent> ent, ref PostMapInitEvent args)
+    {
+        HolderInit(ent);
+    }
+
+    private void HolderInit(Entity<StationAiHolderComponent> ent)
+    {
         UpdateAppearance(ent.Owner);
     }
+    // Eclipse-End
 
     private void OnAiShutdown(Entity<StationAiCoreComponent> ent, ref ComponentShutdown args)
     {

@@ -1,6 +1,7 @@
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -16,15 +17,28 @@ public sealed class SolutionRegenerationSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SolutionRegenerationComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SolutionRegenerationComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<SolutionRegenerationComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
     }
 
     private void OnMapInit(Entity<SolutionRegenerationComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<SolutionRegenerationComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<SolutionRegenerationComponent> ent)
+    {
         ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.Duration;
 
         Dirty(ent);
     }
+    // Eclipse-End
 
     // Workaround for https://github.com/space-wizards/space-station-14/pull/35314
     private void OnEntRemoved(Entity<SolutionRegenerationComponent> ent, ref EntRemovedFromContainerMessage args)

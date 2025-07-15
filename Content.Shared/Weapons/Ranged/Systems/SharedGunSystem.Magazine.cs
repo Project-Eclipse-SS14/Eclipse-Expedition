@@ -1,5 +1,6 @@
 using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Maps;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Containers;
@@ -13,6 +14,7 @@ public abstract partial class SharedGunSystem
     protected virtual void InitializeMagazine()
     {
         SubscribeLocalEvent<MagazineAmmoProviderComponent, MapInitEvent>(OnMagazineMapInit);
+        SubscribeLocalEvent<MagazineAmmoProviderComponent, PostMapInitEvent>(OnMagazinePostMapInit); // Eclipse
         SubscribeLocalEvent<MagazineAmmoProviderComponent, TakeAmmoEvent>(OnMagazineTakeAmmo);
         SubscribeLocalEvent<MagazineAmmoProviderComponent, GetAmmoCountEvent>(OnMagazineAmmoCount);
         SubscribeLocalEvent<MagazineAmmoProviderComponent, GetVerbsEvent<AlternativeVerb>>(OnMagazineVerb);
@@ -24,8 +26,20 @@ public abstract partial class SharedGunSystem
 
     private void OnMagazineMapInit(Entity<MagazineAmmoProviderComponent> ent, ref MapInitEvent args)
     {
+        MagazineMapInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnMagazinePostMapInit(Entity<MagazineAmmoProviderComponent> ent, ref PostMapInitEvent args)
+    {
+        MagazineMapInit(ent);
+    }
+
+    private void MagazineMapInit(Entity<MagazineAmmoProviderComponent> ent)
+    {
         MagazineSlotChanged(ent);
     }
+    // Eclipse-End
 
     private void OnMagazineExamine(EntityUid uid, MagazineAmmoProviderComponent component, ExaminedEvent args)
     {

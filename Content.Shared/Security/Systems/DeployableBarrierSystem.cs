@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Lock;
+using Content.Shared.Maps;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Security.Components;
@@ -17,16 +18,29 @@ public sealed class DeployableBarrierSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<DeployableBarrierComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DeployableBarrierComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<DeployableBarrierComponent, LockToggledEvent>(OnLockToggled);
     }
 
     private void OnMapInit(EntityUid uid, DeployableBarrierComponent component, MapInitEvent args)
+    {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, DeployableBarrierComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, DeployableBarrierComponent component)
     {
         if (!TryComp(uid, out LockComponent? lockComponent))
             return;
 
         ToggleBarrierDeploy(uid, lockComponent.Locked, component);
     }
+    // Eclipse-End
 
     private void OnLockToggled(EntityUid uid, DeployableBarrierComponent component, ref LockToggledEvent args)
     {

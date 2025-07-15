@@ -2,6 +2,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
@@ -30,6 +31,7 @@ public sealed class UdderSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<UdderComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<UdderComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<UdderComponent, GetVerbsEvent<AlternativeVerb>>(AddMilkVerb);
         SubscribeLocalEvent<UdderComponent, MilkingDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<UdderComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
@@ -37,8 +39,20 @@ public sealed class UdderSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, UdderComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, UdderComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, UdderComponent component)
+    {
         component.NextGrowth = _timing.CurTime + component.GrowthDelay;
     }
+    // Eclipse-End
 
     private void OnEntRemoved(Entity<UdderComponent> entity, ref EntRemovedFromContainerMessage args)
     {

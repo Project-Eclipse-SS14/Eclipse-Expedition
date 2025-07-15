@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Lathe;
+using Content.Shared.Maps;
 using Content.Shared.Research.Components;
 using Content.Shared.Research.Prototypes;
 using JetBrains.Annotations;
@@ -20,12 +21,25 @@ public abstract class SharedResearchSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<TechnologyDatabaseComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TechnologyDatabaseComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(EntityUid uid, TechnologyDatabaseComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, TechnologyDatabaseComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, TechnologyDatabaseComponent component)
+    {
         UpdateTechnologyCards(uid, component);
     }
+    // Eclipse-End
 
     public void UpdateTechnologyCards(EntityUid uid, TechnologyDatabaseComponent? component = null)
     {
@@ -132,7 +146,7 @@ public abstract class SharedResearchSystem : EntitySystem
             if (allTierTech.Count == 0)
                 break;
 
-            var percent = (float) unlockedTierTech.Count / allTierTech.Count;
+            var percent = (float)unlockedTierTech.Count / allTierTech.Count;
             if (percent < techDiscipline.TierPrerequisites[tier])
                 break;
 

@@ -1,3 +1,4 @@
+using Content.Shared.Maps;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
@@ -20,6 +21,7 @@ public abstract partial class SharedStationSystem : EntitySystem
         _stationMemberQuery = GetEntityQuery<StationMemberComponent>();
 
         SubscribeLocalEvent<StationTrackerComponent, MapInitEvent>(OnTrackerMapInit);
+        SubscribeLocalEvent<StationTrackerComponent, PostMapInitEvent>(OnTrackerPostMapInit); // Eclipse
         SubscribeLocalEvent<StationTrackerComponent, ComponentRemove>(OnTrackerRemove);
         SubscribeLocalEvent<StationTrackerComponent, GridUidChangedEvent>(OnTrackerGridChanged);
         SubscribeLocalEvent<StationTrackerComponent, MetaFlagRemoveAttemptEvent>(OnMetaFlagRemoveAttempt);
@@ -27,9 +29,21 @@ public abstract partial class SharedStationSystem : EntitySystem
 
     private void OnTrackerMapInit(Entity<StationTrackerComponent> ent, ref MapInitEvent args)
     {
+        TrackerInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnTrackerPostMapInit(Entity<StationTrackerComponent> ent, ref PostMapInitEvent args)
+    {
+        TrackerInit(ent);
+    }
+
+    private void TrackerInit(Entity<StationTrackerComponent> ent)
+    {
         _meta.AddFlag(ent, MetaDataFlags.ExtraTransformEvents);
         UpdateStationTracker(ent.AsNullable());
     }
+    // Eclipse-End
 
     private void OnTrackerRemove(Entity<StationTrackerComponent> ent, ref ComponentRemove args)
     {

@@ -4,6 +4,7 @@ using Content.Shared.Body.Organ;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Maps;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -20,6 +21,7 @@ namespace Content.Shared.Body.Systems
         public override void Initialize()
         {
             SubscribeLocalEvent<StomachComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<StomachComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<StomachComponent, EntityUnpausedEvent>(OnUnpaused);
             SubscribeLocalEvent<StomachComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
             SubscribeLocalEvent<StomachComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
@@ -27,8 +29,20 @@ namespace Content.Shared.Body.Systems
 
         private void OnMapInit(Entity<StomachComponent> ent, ref MapInitEvent args)
         {
+            Init(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(Entity<StomachComponent> ent, ref PostMapInitEvent args)
+        {
+            Init(ent);
+        }
+
+        private void Init(Entity<StomachComponent> ent)
+        {
             ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.AdjustedUpdateInterval;
         }
+        // Eclipse-End
 
         private void OnUnpaused(Entity<StomachComponent> ent, ref EntityUnpausedEvent args)
         {

@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Server.Singularity.Components;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Ghost;
+using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Singularity.EntitySystems;
 using Robust.Shared.Map;
@@ -49,6 +50,7 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
         _gridQuery = GetEntityQuery<MapGridComponent>();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<GravityWellComponent, MapInitEvent>(OnGravityWellMapInit);
+        SubscribeLocalEvent<GravityWellComponent, PostMapInitEvent>(OnGravityWellPostMapInit); // Eclipse
 
         var vvHandle = _vvManager.GetTypeHandler<GravityWellComponent>();
         vvHandle.AddPath(nameof(GravityWellComponent.TargetPulsePeriod), (_, comp) => comp.TargetPulsePeriod, SetPulsePeriod);
@@ -56,8 +58,20 @@ public sealed class GravityWellSystem : SharedGravityWellSystem
 
     private void OnGravityWellMapInit(Entity<GravityWellComponent> ent, ref MapInitEvent args)
     {
+        GravityWellInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnGravityWellPostMapInit(Entity<GravityWellComponent> ent, ref PostMapInitEvent args)
+    {
+        GravityWellInit(ent);
+    }
+
+    private void GravityWellInit(Entity<GravityWellComponent> ent)
+    {
         ent.Comp.NextPulseTime = _timing.CurTime + ent.Comp.TargetPulsePeriod;
     }
+    // Eclipse-End
 
     public override void Shutdown()
     {

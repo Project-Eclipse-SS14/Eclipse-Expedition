@@ -22,6 +22,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Power;
+using Content.Shared.Maps;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -50,6 +51,7 @@ namespace Content.Server.Light.EntitySystems
             base.Initialize();
             SubscribeLocalEvent<PoweredLightComponent, ComponentInit>(OnInit);
             SubscribeLocalEvent<PoweredLightComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<PoweredLightComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<PoweredLightComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<PoweredLightComponent, InteractHandEvent>(OnInteractHand);
 
@@ -79,9 +81,22 @@ namespace Content.Server.Light.EntitySystems
                 var entity = Spawn(light.HasLampOnSpawn, Comp<TransformComponent>(uid).Coordinates);
                 _containerSystem.Insert(entity, light.LightBulbContainer);
             }
+
+            Init(uid, light); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, PoweredLightComponent light, PostMapInitEvent args)
+        {
+            Init(uid, light);
+        }
+
+        private void Init(EntityUid uid, PoweredLightComponent light)
+        {
             // need this to update visualizers
             UpdateLight(uid, light);
         }
+        // Eclipse-End
 
         private void OnInteractUsing(EntityUid uid, PoweredLightComponent component, InteractUsingEvent args)
         {
@@ -103,7 +118,7 @@ namespace Content.Server.Light.EntitySystems
 
             var userUid = args.User;
             //removing a broken/burned bulb, so allow instant removal
-            if(TryComp<LightBulbComponent>(bulbUid.Value, out var bulb) && bulb.State != LightBulbState.Normal)
+            if (TryComp<LightBulbComponent>(bulbUid.Value, out var bulb) && bulb.State != LightBulbState.Normal)
             {
                 args.Handled = EjectBulb(uid, userUid, light) != null;
                 return;
@@ -391,11 +406,11 @@ namespace Content.Server.Light.EntitySystems
                 if (color != null)
                     _pointLight.SetColor(uid, color.Value, pointLight);
                 if (radius != null)
-                    _pointLight.SetRadius(uid, (float) radius, pointLight);
+                    _pointLight.SetRadius(uid, (float)radius, pointLight);
                 if (energy != null)
-                    _pointLight.SetEnergy(uid, (float) energy, pointLight);
+                    _pointLight.SetEnergy(uid, (float)energy, pointLight);
                 if (softness != null)
-                    _pointLight.SetSoftness(uid, (float) softness, pointLight);
+                    _pointLight.SetSoftness(uid, (float)softness, pointLight);
             }
 
             // light bulbs burn your hands!

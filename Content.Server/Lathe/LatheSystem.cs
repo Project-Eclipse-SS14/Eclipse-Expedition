@@ -33,6 +33,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Server.Lathe
 {
@@ -67,6 +68,7 @@ namespace Content.Server.Lathe
             base.Initialize();
             SubscribeLocalEvent<LatheComponent, GetMaterialWhitelistEvent>(OnGetWhitelist);
             SubscribeLocalEvent<LatheComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<LatheComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<LatheComponent, PowerChangedEvent>(OnPowerChanged);
             SubscribeLocalEvent<LatheComponent, TechnologyDatabaseModifiedEvent>(OnDatabaseModified);
             SubscribeLocalEvent<LatheAnnouncingComponent, TechnologyDatabaseModifiedEvent>(OnTechnologyDatabaseModified);
@@ -330,11 +332,27 @@ namespace Content.Server.Lathe
         /// </summary>
         private void OnMapInit(EntityUid uid, LatheComponent component, MapInitEvent args)
         {
+            Init(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, LatheComponent component, PostMapInitEvent args)
+        {
+            Init(uid, component);
+        }
+
+        /// <summary>
+        /// Initialize the UI and appearance.
+        /// Appearance requires initialization or the layers break
+        /// </summary>
+        private void Init(EntityUid uid, LatheComponent component)
+        {
             _appearance.SetData(uid, LatheVisuals.IsInserting, false);
             _appearance.SetData(uid, LatheVisuals.IsRunning, false);
 
             _materialStorage.UpdateMaterialWhitelist(uid);
         }
+        // Eclipse-End
 
         /// <summary>
         /// Sets the machine sprite to either play the running animation

@@ -2,6 +2,7 @@ using Content.Server.Chemistry.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Content.Shared.Vapor;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
@@ -18,13 +19,26 @@ public sealed partial class GunSystem
         base.InitializeSolution();
 
         SubscribeLocalEvent<SolutionAmmoProviderComponent, MapInitEvent>(OnSolutionMapInit);
+        SubscribeLocalEvent<SolutionAmmoProviderComponent, PostMapInitEvent>(OnSolutionPostMapInit); // Eclipse
         SubscribeLocalEvent<SolutionAmmoProviderComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
     }
 
     private void OnSolutionMapInit(Entity<SolutionAmmoProviderComponent> entity, ref MapInitEvent args)
     {
+        SolutionInit(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnSolutionPostMapInit(Entity<SolutionAmmoProviderComponent> entity, ref PostMapInitEvent args)
+    {
+        SolutionInit(entity);
+    }
+
+    private void SolutionInit(Entity<SolutionAmmoProviderComponent> entity)
+    {
         UpdateSolutionShots(entity.Owner, entity.Comp);
     }
+    // Eclipse-End
 
     private void OnSolutionChanged(Entity<SolutionAmmoProviderComponent> entity, ref SolutionContainerChangedEvent args)
     {

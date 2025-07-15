@@ -11,6 +11,7 @@ using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Emp;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Throwing;
@@ -52,6 +53,8 @@ namespace Content.Server.VendingMachines
             SubscribeLocalEvent<VendingMachineComponent, RestockDoAfterEvent>(OnDoAfter);
 
             SubscribeLocalEvent<VendingMachineRestockComponent, PriceCalculationEvent>(OnPriceCalculation);
+
+            SubscribeLocalEvent<VendingMachineComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         }
 
         private void OnVendingPrice(EntityUid uid, VendingMachineComponent component, ref PriceCalculationEvent args)
@@ -81,6 +84,16 @@ namespace Content.Server.VendingMachines
                 TryUpdateVisualState((uid, component));
             }
         }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, VendingMachineComponent component, PostMapInitEvent args)
+        {
+            if (HasComp<ApcPowerReceiverComponent>(uid))
+            {
+                TryUpdateVisualState((uid, component));
+            }
+        }
+        // Eclipse-End
 
         private void OnActivatableUIOpenAttempt(EntityUid uid, VendingMachineComponent component, ActivatableUIOpenAttemptEvent args)
         {

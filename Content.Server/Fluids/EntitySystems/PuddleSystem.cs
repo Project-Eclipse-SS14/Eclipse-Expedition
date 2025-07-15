@@ -83,6 +83,7 @@ public sealed partial class PuddleSystem : SharedPuddleSystem
         SubscribeLocalEvent<PuddleComponent, SlipEvent>(OnPuddleSlip);
 
         SubscribeLocalEvent<EvaporationComponent, MapInitEvent>(OnEvaporationMapInit);
+        SubscribeLocalEvent<EvaporationComponent, PostMapInitEvent>(OnEvaporationPostMapInit); // Eclipse
 
         InitializeTransfers();
     }

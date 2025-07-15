@@ -15,6 +15,7 @@ using Content.Shared.Singularity.Components;
 using Content.Shared.Timing;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Server.Singularity.EntitySystems;
 
@@ -36,6 +37,7 @@ public sealed class RadiationCollectorSystem : EntitySystem
         SubscribeLocalEvent<RadiationCollectorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RadiationCollectorComponent, GasAnalyzerScanEvent>(OnAnalyzed);
         SubscribeLocalEvent<RadiationCollectorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RadiationCollectorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<RadiationCollectorComponent, EntInsertedIntoContainerMessage>(OnTankChanged);
         SubscribeLocalEvent<RadiationCollectorComponent, EntRemovedFromContainerMessage>(OnTankChanged);
         SubscribeLocalEvent<NetworkBatteryPostSync>(PostSync);
@@ -56,9 +58,21 @@ public sealed class RadiationCollectorSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, RadiationCollectorComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, RadiationCollectorComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, RadiationCollectorComponent component)
+    {
         TryGetLoadedGasTank(uid, out var gasTank);
         UpdateTankAppearance(uid, component, gasTank);
     }
+    // Eclipse-End
 
     private void OnTankChanged(EntityUid uid, RadiationCollectorComponent component, ContainerModifiedMessage args)
     {

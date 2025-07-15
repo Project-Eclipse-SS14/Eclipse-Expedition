@@ -4,6 +4,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Server.Explosion.EntitySystems;
 
@@ -17,6 +18,7 @@ public sealed partial class TriggerSystem
         SubscribeLocalEvent<TriggerOnProximityComponent, StartCollideEvent>(OnProximityStartCollide);
         SubscribeLocalEvent<TriggerOnProximityComponent, EndCollideEvent>(OnProximityEndCollide);
         SubscribeLocalEvent<TriggerOnProximityComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TriggerOnProximityComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<TriggerOnProximityComponent, ComponentShutdown>(OnProximityShutdown);
         // Shouldn't need re-anchoring.
         SubscribeLocalEvent<TriggerOnProximityComponent, AnchorStateChangedEvent>(OnProximityAnchor);
@@ -47,10 +49,7 @@ public sealed partial class TriggerSystem
 
     private void OnMapInit(EntityUid uid, TriggerOnProximityComponent component, MapInitEvent args)
     {
-        component.Enabled = !component.RequiresAnchored ||
-                            Transform(uid).Anchored;
-
-        SetProximityAppearance(uid, component);
+        SharedInit(uid, component); // Eclipse
 
         if (!TryComp<PhysicsComponent>(uid, out var body))
             return;
@@ -63,6 +62,21 @@ public sealed partial class TriggerSystem
             body: body,
             collisionLayer: component.Layer);
     }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, TriggerOnProximityComponent component, PostMapInitEvent args)
+    {
+        SharedInit(uid, component);
+    }
+
+    private void SharedInit(EntityUid uid, TriggerOnProximityComponent component)
+    {
+        component.Enabled = !component.RequiresAnchored ||
+                            Transform(uid).Anchored;
+
+        SetProximityAppearance(uid, component);
+    }
+    // Eclipse-End
 
     private void OnProximityStartCollide(EntityUid uid, TriggerOnProximityComponent component, ref StartCollideEvent args)
     {

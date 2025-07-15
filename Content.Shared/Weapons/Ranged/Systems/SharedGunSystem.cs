@@ -11,6 +11,7 @@ using Content.Shared.Examine;
 using Content.Shared.Gravity;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
@@ -99,6 +100,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GunComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
@@ -110,8 +112,20 @@ public abstract partial class SharedGunSystem : EntitySystem
         DebugTools.Assert((gun.Comp.AvailableModes & gun.Comp.SelectedMode) != 0x0);
 #endif
 
+        Init(gun); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<GunComponent> gun, ref PostMapInitEvent args)
+    {
+        Init(gun);
+    }
+
+    private void Init(Entity<GunComponent> gun)
+    {
         RefreshModifiers((gun, gun));
     }
+    // Eclipse-End
 
     private void OnGunMelee(EntityUid uid, GunComponent component, MeleeHitEvent args)
     {

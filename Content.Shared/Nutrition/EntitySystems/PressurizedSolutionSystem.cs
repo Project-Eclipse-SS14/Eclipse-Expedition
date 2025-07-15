@@ -11,6 +11,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
 using Content.Shared.Fluids;
 using Content.Shared.Popups;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Nutrition.EntitySystems;
 
@@ -31,6 +32,7 @@ public sealed partial class PressurizedSolutionSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PressurizedSolutionComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PressurizedSolutionComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<PressurizedSolutionComponent, ShakeEvent>(OnShake);
         SubscribeLocalEvent<PressurizedSolutionComponent, OpenableOpenedEvent>(OnOpened);
         SubscribeLocalEvent<PressurizedSolutionComponent, LandEvent>(OnLand);
@@ -244,8 +246,20 @@ public sealed partial class PressurizedSolutionSystem : EntitySystem
     #region Event Handlers
     private void OnMapInit(Entity<PressurizedSolutionComponent> entity, ref MapInitEvent args)
     {
+        Init(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<PressurizedSolutionComponent> entity, ref PostMapInitEvent args)
+    {
+        Init(entity);
+    }
+
+    private void Init(Entity<PressurizedSolutionComponent> entity)
+    {
         RollSprayThreshold(entity);
     }
+    // Eclipse-End
 
     private void OnOpened(Entity<PressurizedSolutionComponent> entity, ref OpenableOpenedEvent args)
     {

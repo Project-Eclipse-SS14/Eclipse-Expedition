@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Maps;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -22,6 +23,7 @@ public abstract class SharedRottingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PerishableComponent, MapInitEvent>(OnPerishableMapInit);
+        SubscribeLocalEvent<PerishableComponent, PostMapInitEvent>(OnPerishablePostMapInit); // Eclipse
         SubscribeLocalEvent<PerishableComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<PerishableComponent, ExaminedEvent>(OnPerishableExamined);
 
@@ -33,8 +35,20 @@ public abstract class SharedRottingSystem : EntitySystem
 
     private void OnPerishableMapInit(EntityUid uid, PerishableComponent component, MapInitEvent args)
     {
+        PerishableInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPerishablePostMapInit(EntityUid uid, PerishableComponent component, PostMapInitEvent args)
+    {
+        PerishableInit(uid, component);
+    }
+
+    private void PerishableInit(EntityUid uid, PerishableComponent component)
+    {
         component.RotNextUpdate = _timing.CurTime + component.PerishUpdateRate;
     }
+    // Eclipse-End
 
     private void OnMobStateChanged(EntityUid uid, PerishableComponent component, MobStateChangedEvent args)
     {

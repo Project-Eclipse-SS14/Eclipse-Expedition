@@ -6,6 +6,7 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Emp;
 using Content.Shared.IdentityManagement.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -22,6 +23,7 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
     {
         base.Initialize();
         SubscribeLocalEvent<ChameleonClothingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ChameleonClothingComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ChameleonClothingComponent, ChameleonPrototypeSelectedMessage>(OnSelected);
 
         SubscribeLocalEvent<ChameleonClothingComponent, EmpPulseEvent>(OnEmpPulse);
@@ -29,8 +31,20 @@ public sealed class ChameleonClothingSystem : SharedChameleonClothingSystem
 
     private void OnMapInit(EntityUid uid, ChameleonClothingComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, ChameleonClothingComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, ChameleonClothingComponent component)
+    {
         SetSelectedPrototype(uid, component.Default, true, component);
     }
+    // Eclipse-End
 
     private void OnSelected(EntityUid uid, ChameleonClothingComponent component, ChameleonPrototypeSelectedMessage args)
     {

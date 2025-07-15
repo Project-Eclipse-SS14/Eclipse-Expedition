@@ -16,6 +16,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -38,6 +39,7 @@ public sealed class DrainSystem : SharedDrainSystem
     {
         base.Initialize();
         SubscribeLocalEvent<DrainComponent, MapInitEvent>(OnDrainMapInit);
+        SubscribeLocalEvent<DrainComponent, PostMapInitEvent>(OnDrainPostMapInit); // Eclipse
         SubscribeLocalEvent<DrainComponent, GetVerbsEvent<Verb>>(AddEmptyVerb);
         SubscribeLocalEvent<DrainComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<DrainComponent, AfterInteractUsingEvent>(OnInteract);
@@ -46,9 +48,21 @@ public sealed class DrainSystem : SharedDrainSystem
 
     private void OnDrainMapInit(Entity<DrainComponent> ent, ref MapInitEvent args)
     {
+        DrainInit(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnDrainPostMapInit(Entity<DrainComponent> ent, ref PostMapInitEvent args)
+    {
+        DrainInit(ent);
+    }
+
+    private void DrainInit(Entity<DrainComponent> ent)
+    {
         // Randomise puddle drains so roundstart ones don't all dump at the same time.
         ent.Comp.Accumulator = _random.NextFloat(ent.Comp.DrainFrequency);
     }
+    // Eclipse-End
 
     private void AddEmptyVerb(Entity<DrainComponent> entity, ref GetVerbsEvent<Verb> args)
     {

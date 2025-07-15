@@ -1,5 +1,6 @@
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.PowerCell.Components;
 
 namespace Content.Shared.PowerCell;
@@ -17,6 +18,7 @@ public sealed class ToggleCellDrawSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ToggleCellDrawComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ToggleCellDrawComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ToggleCellDrawComponent, ItemToggleActivateAttemptEvent>(OnActivateAttempt);
         SubscribeLocalEvent<ToggleCellDrawComponent, ItemToggledEvent>(OnToggled);
         SubscribeLocalEvent<ToggleCellDrawComponent, PowerCellSlotEmptyEvent>(OnEmpty);
@@ -24,8 +26,20 @@ public sealed class ToggleCellDrawSystem : EntitySystem
 
     private void OnMapInit(Entity<ToggleCellDrawComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ToggleCellDrawComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<ToggleCellDrawComponent> ent)
+    {
         _cell.SetDrawEnabled(ent.Owner, _toggle.IsActivated(ent.Owner));
     }
+    // Eclipse-End
 
     private void OnActivateAttempt(Entity<ToggleCellDrawComponent> ent, ref ItemToggleActivateAttemptEvent args)
     {

@@ -1,6 +1,7 @@
 using Content.Shared.Interaction;
 using Content.Shared.Light;
 using Content.Shared.Light.Components;
+using Content.Shared.Maps;
 using Content.Shared.Toggleable;
 using Content.Shared.Tools.Systems;
 using Robust.Shared.Random;
@@ -19,10 +20,23 @@ public sealed class EnergySwordSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<EnergySwordComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<EnergySwordComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<EnergySwordComponent, InteractUsingEvent>(OnInteractUsing);
     }
     // Used to pick a random color for the blade on map init.
     private void OnMapInit(Entity<EnergySwordComponent> entity, ref MapInitEvent args)
+    {
+        Init(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<EnergySwordComponent> entity, ref PostMapInitEvent args)
+    {
+        Init(entity);
+    }
+
+    // Used to pick a random color for the blade on map init.
+    private void Init(Entity<EnergySwordComponent> entity)
     {
         if (entity.Comp.ColorOptions.Count != 0)
         {
@@ -35,6 +49,7 @@ public sealed class EnergySwordSystem : EntitySystem
 
         _appearance.SetData(entity, ToggleableVisuals.Color, entity.Comp.ActivatedColor, appearanceComponent);
     }
+    // Eclipse-End
 
     // Used to make the blade multicolored when using a multitool on it.
     private void OnInteractUsing(Entity<EnergySwordComponent> entity, ref InteractUsingEvent args)

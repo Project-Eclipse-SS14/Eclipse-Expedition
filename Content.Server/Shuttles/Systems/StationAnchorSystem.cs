@@ -2,6 +2,7 @@
 using Content.Server.Power.EntitySystems;
 using Content.Server.Shuttles.Components;
 using Content.Shared.Construction.Components;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 
 namespace Content.Server.Shuttles.Systems;
@@ -21,15 +22,28 @@ public sealed class StationAnchorSystem : EntitySystem
         SubscribeLocalEvent<StationAnchorComponent, ChargedMachineDeactivatedEvent>(OnDeactivated);
 
         SubscribeLocalEvent<StationAnchorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StationAnchorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<StationAnchorComponent> ent, ref MapInitEvent args)
+    {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<StationAnchorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<StationAnchorComponent> ent)
     {
         if (!ent.Comp.SwitchedOn)
             return;
 
         SetStatus(ent, true);
     }
+    // Eclipse-End
 
     private void OnActivated(Entity<StationAnchorComponent> ent, ref ChargedMachineActivatedEvent args)
     {

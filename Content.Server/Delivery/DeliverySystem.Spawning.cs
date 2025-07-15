@@ -4,6 +4,7 @@ using Content.Server.StationRecords;
 using Content.Shared.EntityTable;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Server.Delivery;
 
@@ -21,12 +22,25 @@ public sealed partial class DeliverySystem
     private void InitializeSpawning()
     {
         SubscribeLocalEvent<CargoDeliveryDataComponent, MapInitEvent>(OnDataMapInit);
+        SubscribeLocalEvent<CargoDeliveryDataComponent, PostMapInitEvent>(OnDataPostMapInit); // Eclipse
     }
 
     private void OnDataMapInit(Entity<CargoDeliveryDataComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnDataPostMapInit(Entity<CargoDeliveryDataComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<CargoDeliveryDataComponent> ent)
+    {
         ent.Comp.NextDelivery = _timing.CurTime + ent.Comp.MinDeliveryCooldown; // We want an early wave of mail so cargo doesn't have to wait
     }
+    // Eclipse-End
 
     protected override void SpawnDeliveries(Entity<DeliverySpawnerComponent?> ent)
     {

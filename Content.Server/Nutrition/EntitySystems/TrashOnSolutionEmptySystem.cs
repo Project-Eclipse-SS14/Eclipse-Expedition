@@ -2,6 +2,7 @@ using Content.Server.Nutrition.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
 
@@ -18,13 +19,26 @@ namespace Content.Server.Nutrition.EntitySystems
         {
             base.Initialize();
             SubscribeLocalEvent<TrashOnSolutionEmptyComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<TrashOnSolutionEmptyComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<TrashOnSolutionEmptyComponent, SolutionContainerChangedEvent>(OnSolutionChange);
         }
 
         public void OnMapInit(Entity<TrashOnSolutionEmptyComponent> entity, ref MapInitEvent args)
         {
+            Init(entity); // Eclipse
+        }
+
+        // Eclipse-Start
+        public void OnPostMapInit(Entity<TrashOnSolutionEmptyComponent> entity, ref PostMapInitEvent args)
+        {
+            Init(entity);
+        }
+
+        public void Init(Entity<TrashOnSolutionEmptyComponent> entity)
+        {
             CheckSolutions(entity);
         }
+        // Eclipse-End
 
         public void OnSolutionChange(Entity<TrashOnSolutionEmptyComponent> entity, ref SolutionContainerChangedEvent args)
         {

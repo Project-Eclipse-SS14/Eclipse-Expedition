@@ -1,6 +1,7 @@
 using Content.Server.Physics.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Singularity.Components;
+using Content.Shared.Maps;
 using Content.Shared.Singularity.Components;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
@@ -27,6 +28,7 @@ public sealed class SingularityAttractorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SingularityAttractorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SingularityAttractorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     /// <summary>
@@ -96,6 +98,29 @@ public sealed class SingularityAttractorSystem : EntitySystem
     /// <param name="args">The startup prompt arguments.</param>
     private void OnMapInit(Entity<SingularityAttractorComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    /// <summary>
+    /// Resets the pulse timings of the attractor when the component starts up.
+    /// </summary>
+    /// <param name="uid">The uid of the attractor to start up.</param>
+    /// <param name="comp">The state of the attractor to start up.</param>
+    /// <param name="args">The startup prompt arguments.</param>
+    private void OnPostMapInit(Entity<SingularityAttractorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    /// <summary>
+    /// Resets the pulse timings of the attractor when the component starts up.
+    /// </summary>
+    /// <param name="uid">The uid of the attractor to start up.</param>
+    /// <param name="comp">The state of the attractor to start up.</param>
+    private void Init(Entity<SingularityAttractorComponent> ent)
+    {
         ent.Comp.LastPulseTime = _timing.CurTime;
     }
+    // Eclipse-End
 }
