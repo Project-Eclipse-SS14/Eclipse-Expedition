@@ -1,9 +1,11 @@
 ﻿[game]
 # Straight in-game baby
 lobbyenabled = false
-# Dev map for faster loading & convenience
-map = "Dev"
 role_timers = false
+# Dev map for faster loading & convenience
+#map = "Dev"
+defaultpreset = "Expedition"
+map_pool = "ExpeditionShipMapPool"
 
 [events]
 enabled = false

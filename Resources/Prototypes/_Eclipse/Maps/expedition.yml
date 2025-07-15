@@ -2,7 +2,7 @@
   id: ExpeditionShip
   isGrid: true
   mapName: 'Expedition Ship' # TODO : name
-  mapPath: /Maps/packed.yml # Initial map path (fallback)
+  mapPath: /Maps/_Eclipse/expedition_ship.yml # Initial map path (fallback)
   dynamicMapPath: true
   dynamicMapPathGenerator:
     !type:RoundIdMapPathGenerator
@@ -10,7 +10,7 @@
     template: '/Maps/Saved/ExpeditionShip-{0}.yml'
   minPlayers: 0
   stations:
-    Packed:
+    ExpeditionShip:
       stationProto: StandardExpeditionShipStation
       components:
         - type: StationNameSetup
@@ -21,7 +21,7 @@
         - type: StationJobs
           availableJobs:
             Expeditioner: [ -1, -1 ]
-        - type: RoundEndSaveTargetComponent
+        - type: RoundEndSaveTarget
           dynamicMapPathGenerator:
             !type:RoundIdMapPathGenerator
             template: '/Maps/Saved/ExpeditionShip-{0}.yml'

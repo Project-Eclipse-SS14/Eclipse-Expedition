@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
 using Robust.Server;
@@ -21,7 +22,7 @@ public sealed class DiscordAlertSystem : EntitySystem
         _cfg.OnValueChanged(EclipseCCVars.DiscordAlertWebhook, (url) => _webhookUrl = url, true);
     }
 
-    public async void SendDiscordSaveFailedAlert()
+    public async Task SendDiscordSaveFailedAlert()
     {
         if (string.IsNullOrWhiteSpace(_webhookUrl))
             return;
