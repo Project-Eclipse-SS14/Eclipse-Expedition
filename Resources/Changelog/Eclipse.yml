@@ -14,3 +14,14 @@ Entries:
     id: 2
     time: "2025-07-12T00:35:22.000000+00:00"
     url: "https://github.com/Project-Eclipse-SS14/space-station-14/pull/3"
+  - author: FoLZer
+    changes:
+      - message: Добавлена кастомная работа для персонала.
+        type: Add
+      - message: Добавлено сохранение основного шаттла в конце раунда и его загрузка в начале следующего раунда.
+        type: Add
+      - message: Основная точка возраждения изменена на криокамеры.
+        type: Tweak
+    id: 3
+    time: "2025-07-15T08:25:33.000000+00:00"
+    url: "https://github.com/Project-Eclipse-SS14/Eclipse-Expedition/pull/4"
