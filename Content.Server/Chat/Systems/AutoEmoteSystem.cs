@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Maps;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -19,6 +20,7 @@ public sealed class AutoEmoteSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<AutoEmoteComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AutoEmoteComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<AutoEmoteComponent, EntityUnpausedEvent>(OnUnpaused);
     }
 
@@ -58,12 +60,24 @@ public sealed class AutoEmoteSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, AutoEmoteComponent autoEmote, MapInitEvent args)
     {
+        Init(uid, autoEmote); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, AutoEmoteComponent autoEmote, PostMapInitEvent args)
+    {
+        Init(uid, autoEmote);
+    }
+
+    private void Init(EntityUid uid, AutoEmoteComponent autoEmote)
+    {
         // Start timers
         foreach (var autoEmotePrototypeId in autoEmote.Emotes)
         {
             ResetTimer(uid, autoEmotePrototypeId, autoEmote);
         }
     }
+    // Eclipse-End
 
     private void OnUnpaused(EntityUid uid, AutoEmoteComponent autoEmote, ref EntityUnpausedEvent args)
     {

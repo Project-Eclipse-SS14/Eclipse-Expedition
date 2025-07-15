@@ -1,4 +1,5 @@
 using Content.Shared.Damage.Components;
+using Content.Shared.Maps;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -14,6 +15,7 @@ public sealed class DamageOnHoldingSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<DamageOnHoldingComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DamageOnHoldingComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     public void SetEnabled(EntityUid uid, bool enabled, DamageOnHoldingComponent? component = null)
@@ -27,8 +29,20 @@ public sealed class DamageOnHoldingSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, DamageOnHoldingComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, DamageOnHoldingComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, DamageOnHoldingComponent component)
+    {
         component.NextDamage = _timing.CurTime;
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

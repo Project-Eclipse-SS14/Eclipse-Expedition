@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.PDA;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
@@ -35,6 +36,7 @@ public abstract class SharedIdCardSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<IdCardComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<IdCardComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<TryGetIdentityShortInfoEvent>(OnTryGetIdentityShortInfo);
         SubscribeLocalEvent<EntityRenamedEvent>(OnRename);
 
@@ -57,8 +59,20 @@ public abstract class SharedIdCardSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, IdCardComponent id, MapInitEvent args)
     {
+        Init(uid, id); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, IdCardComponent id, PostMapInitEvent args)
+    {
+        Init(uid, id);
+    }
+
+    private void Init(EntityUid uid, IdCardComponent id)
+    {
         UpdateEntityName(uid, id);
     }
+    // Eclipse-End
 
     private void OnTryGetIdentityShortInfo(TryGetIdentityShortInfoEvent ev)
     {

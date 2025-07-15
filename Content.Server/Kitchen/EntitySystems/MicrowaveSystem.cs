@@ -42,6 +42,7 @@ using Content.Server.Construction.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Server.Kitchen.EntitySystems
 {
@@ -81,6 +82,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
             SubscribeLocalEvent<MicrowaveComponent, ComponentInit>(OnInit);
             SubscribeLocalEvent<MicrowaveComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<MicrowaveComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<MicrowaveComponent, SolutionContainerChangedEvent>(OnSolutionChange);
             SubscribeLocalEvent<MicrowaveComponent, EntInsertedIntoContainerMessage>(OnContentUpdate);
             SubscribeLocalEvent<MicrowaveComponent, EntRemovedFromContainerMessage>(OnContentUpdate);
@@ -286,8 +288,20 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private void OnMapInit(Entity<MicrowaveComponent> ent, ref MapInitEvent args)
         {
+            Init(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(Entity<MicrowaveComponent> ent, ref PostMapInitEvent args)
+        {
+            Init(ent);
+        }
+
+        private void Init(Entity<MicrowaveComponent> ent)
+        {
             _deviceLink.EnsureSinkPorts(ent, ent.Comp.OnPort);
         }
+        // Eclipse-End
 
         /// <summary>
         /// Kills the user by microwaving their head
@@ -674,7 +688,7 @@ namespace Content.Server.Kitchen.EntitySystems
             }
 
             //cook only as many of those portions as time allows
-            return (recipe, (int) Math.Min(portions, component.CurrentCookTimerTime / recipe.CookTime));
+            return (recipe, (int)Math.Min(portions, component.CurrentCookTimerTime / recipe.CookTime));
         }
 
         public override void Update(float frameTime)

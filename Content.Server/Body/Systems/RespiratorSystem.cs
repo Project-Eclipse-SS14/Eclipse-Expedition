@@ -16,6 +16,7 @@ using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.EntityEffects.EffectConditions;
 using Content.Shared.EntityEffects.Effects;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using JetBrains.Annotations;
 using Robust.Shared.Prototypes;
@@ -48,6 +49,7 @@ public sealed class RespiratorSystem : EntitySystem
         // We want to process lung reagents before we inhale new reagents.
         UpdatesAfter.Add(typeof(MetabolizerSystem));
         SubscribeLocalEvent<RespiratorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RespiratorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<RespiratorComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         SubscribeLocalEvent<BodyComponent, InhaledGasEvent>(OnGasInhaled);
         SubscribeLocalEvent<BodyComponent, ExhaledGasEvent>(OnGasExhaled);
@@ -55,8 +57,20 @@ public sealed class RespiratorSystem : EntitySystem
 
     private void OnMapInit(Entity<RespiratorComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<RespiratorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<RespiratorComponent> ent)
+    {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.AdjustedUpdateInterval;
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

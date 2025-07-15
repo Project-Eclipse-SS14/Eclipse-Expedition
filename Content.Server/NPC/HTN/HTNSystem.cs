@@ -13,6 +13,7 @@ using JetBrains.Annotations;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Server.NPC.HTN;
 
@@ -33,6 +34,7 @@ public sealed class HTNSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<HTNComponent, MobStateChangedEvent>(_npc.OnMobStateChange);
         SubscribeLocalEvent<HTNComponent, MapInitEvent>(_npc.OnNPCMapInit);
+        SubscribeLocalEvent<HTNComponent, PostMapInitEvent>(_npc.OnNPCPostMapInit); // Eclipse
         SubscribeLocalEvent<HTNComponent, PlayerAttachedEvent>(_npc.OnPlayerNPCAttach);
         SubscribeLocalEvent<HTNComponent, PlayerDetachedEvent>(_npc.OnPlayerNPCDetach);
         SubscribeLocalEvent<HTNComponent, ComponentShutdown>(OnHTNShutdown);

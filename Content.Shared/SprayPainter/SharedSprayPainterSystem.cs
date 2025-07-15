@@ -5,6 +5,7 @@ using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.SprayPainter.Components;
 using Content.Shared.SprayPainter.Prototypes;
@@ -37,6 +38,7 @@ public abstract class SharedSprayPainterSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<SprayPainterComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SprayPainterComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
 
         SubscribeLocalEvent<SprayPainterComponent, SprayPainterDoAfterEvent>(OnPainterDoAfter);
         SubscribeLocalEvent<SprayPainterComponent, GetVerbsEvent<AlternativeVerb>>(OnPainterGetAltVerbs);
@@ -58,6 +60,17 @@ public abstract class SharedSprayPainterSystem : EntitySystem
 
     private void OnMapInit(Entity<SprayPainterComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<SprayPainterComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<SprayPainterComponent> ent)
+    {
         bool stylesByGroupPopulated = false;
         foreach (var groupProto in Proto.EnumeratePrototypes<PaintableGroupPrototype>())
         {
@@ -70,6 +83,7 @@ public abstract class SharedSprayPainterSystem : EntitySystem
         if (ent.Comp.ColorPalette.Count > 0)
             SetPipeColor(ent, ent.Comp.ColorPalette.First().Key);
     }
+    // Eclipse-End
 
     private void SetPipeColor(Entity<SprayPainterComponent> ent, string? paletteKey)
     {

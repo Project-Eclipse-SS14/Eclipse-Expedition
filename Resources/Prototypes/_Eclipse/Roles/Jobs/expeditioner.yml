@@ -1,0 +1,10 @@
+- type: job
+  id: Expeditioner
+  name: job-name-expeditioner
+  description: job-description-expeditioner
+  playTimeTracker: JobExpeditioner
+  icon: JobIconExpeditioner
+  access:
+  - Maintenance
+  extendedAccess:
+  - External

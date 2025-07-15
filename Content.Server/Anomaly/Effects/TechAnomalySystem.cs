@@ -4,6 +4,7 @@ using Content.Server.DeviceLinking.Systems;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Emag.Systems;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,7 @@ public sealed class TechAnomalySystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<TechAnomalyComponent, MapInitEvent>(OnTechMapInit);
+        SubscribeLocalEvent<TechAnomalyComponent, PostMapInitEvent>(OnTechPostMapInit); // Eclipse
         SubscribeLocalEvent<TechAnomalyComponent, AnomalyPulseEvent>(OnPulse);
         SubscribeLocalEvent<TechAnomalyComponent, AnomalySupercriticalEvent>(OnSupercritical);
         SubscribeLocalEvent<TechAnomalyComponent, AnomalyStabilityChangedEvent>(OnStabilityChanged);
@@ -29,8 +31,20 @@ public sealed class TechAnomalySystem : EntitySystem
 
     private void OnTechMapInit(Entity<TechAnomalyComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnTechPostMapInit(Entity<TechAnomalyComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<TechAnomalyComponent> ent)
+    {
         ent.Comp.NextTimer = _timing.CurTime;
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {
@@ -79,7 +93,7 @@ public sealed class TechAnomalySystem : EntitySystem
         var sourcePort = _random.Pick(source.Comp.Ports);
         var sinkPort = _random.Pick(target.Comp.Ports);
 
-        _signal.SaveLinks(null, source, target,new()
+        _signal.SaveLinks(null, source, target, new()
         {
             (sourcePort, sinkPort),
         });

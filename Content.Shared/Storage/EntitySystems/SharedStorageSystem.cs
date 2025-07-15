@@ -44,6 +44,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Rounding;
 using Robust.Shared.Collections;
 using Robust.Shared.Map.Enumerators;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Storage.EntitySystems;
 
@@ -139,6 +140,7 @@ public abstract class SharedStorageSystem : EntitySystem
 
         SubscribeLocalEvent<StorageComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<StorageComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StorageComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<StorageComponent, GetVerbsEvent<ActivationVerb>>(AddUiVerb);
         SubscribeLocalEvent<StorageComponent, ComponentGetState>(OnStorageGetState);
         SubscribeLocalEvent<StorageComponent, ComponentInit>(OnComponentInit, before: new[] { typeof(SharedContainerSystem) });
@@ -212,9 +214,21 @@ public abstract class SharedStorageSystem : EntitySystem
 
     private void OnMapInit(Entity<StorageComponent> entity, ref MapInitEvent args)
     {
+        Init(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<StorageComponent> entity, ref PostMapInitEvent args)
+    {
+        Init(entity);
+    }
+
+    private void Init(Entity<StorageComponent> entity)
+    {
         UseDelay.SetLength(entity.Owner, entity.Comp.QuickInsertCooldown, QuickInsertUseDelayID);
         UseDelay.SetLength(entity.Owner, entity.Comp.OpenUiCooldown, OpenUiUseDelayID);
     }
+    // Eclipse-End
 
     private void OnStorageGetState(EntityUid uid, StorageComponent component, ref ComponentGetState args)
     {

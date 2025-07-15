@@ -1,6 +1,7 @@
 using Content.Shared.Actions.Events;
 using Content.Shared.Charges.Components;
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 using JetBrains.Annotations;
 using Robust.Shared.Timing;
 
@@ -22,6 +23,7 @@ public abstract class SharedChargesSystem : EntitySystem
 
         SubscribeLocalEvent<LimitedChargesComponent, ActionAttemptEvent>(OnChargesAttempt);
         SubscribeLocalEvent<LimitedChargesComponent, MapInitEvent>(OnChargesMapInit);
+        SubscribeLocalEvent<LimitedChargesComponent, PostMapInitEvent>(OnChargesPostMapInit); // Eclipse
         SubscribeLocalEvent<LimitedChargesComponent, ActionPerformedEvent>(OnChargesPerformed);
     }
 
@@ -68,6 +70,17 @@ public abstract class SharedChargesSystem : EntitySystem
 
     private void OnChargesMapInit(Entity<LimitedChargesComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnChargesPostMapInit(Entity<LimitedChargesComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<LimitedChargesComponent> ent)
+    {
         // If nothing specified use max.
         if (ent.Comp.LastCharges == 0)
         {
@@ -82,6 +95,7 @@ public abstract class SharedChargesSystem : EntitySystem
         ent.Comp.LastUpdate = _timing.CurTime;
         Dirty(ent);
     }
+    // Eclipse-End
 
     [Pure]
     public bool HasCharges(Entity<LimitedChargesComponent?> action, int charges)

@@ -1,0 +1,1 @@
+round-end-save-map-failed-announcement = Failed to save station map for the next game, admins have been notified.

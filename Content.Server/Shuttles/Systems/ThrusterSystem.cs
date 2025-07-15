@@ -45,6 +45,7 @@ public sealed class ThrusterSystem : EntitySystem
         SubscribeLocalEvent<ThrusterComponent, ActivateInWorldEvent>(OnActivateThruster);
         SubscribeLocalEvent<ThrusterComponent, ComponentInit>(OnThrusterInit);
         SubscribeLocalEvent<ThrusterComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ThrusterComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ThrusterComponent, ComponentShutdown>(OnThrusterShutdown);
         SubscribeLocalEvent<ThrusterComponent, PowerChangedEvent>(OnPowerChange);
         SubscribeLocalEvent<ThrusterComponent, AnchorStateChangedEvent>(OnAnchorChange);
@@ -252,8 +253,20 @@ public sealed class ThrusterSystem : EntitySystem
 
     private void OnMapInit(Entity<ThrusterComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ThrusterComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<ThrusterComponent> ent)
+    {
         ent.Comp.NextFire = _timing.CurTime + ent.Comp.FireCooldown;
     }
+    // Eclipse-End
 
     private void OnThrusterShutdown(EntityUid uid, ThrusterComponent component, ComponentShutdown args)
     {

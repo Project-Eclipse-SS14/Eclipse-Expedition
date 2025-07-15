@@ -2,6 +2,7 @@ using Content.Server.Body.Components;
 using Content.Server.Temperature.Components;
 using Content.Server.Temperature.Systems;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Maps;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Body.Systems;
@@ -17,13 +18,26 @@ public sealed class ThermalRegulatorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ThermalRegulatorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ThermalRegulatorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ThermalRegulatorComponent, EntityUnpausedEvent>(OnUnpaused);
     }
 
     private void OnMapInit(Entity<ThermalRegulatorComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ThermalRegulatorComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<ThermalRegulatorComponent> ent)
+    {
         ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.UpdateInterval;
     }
+    // Eclipse-End
 
     private void OnUnpaused(Entity<ThermalRegulatorComponent> ent, ref EntityUnpausedEvent args)
     {

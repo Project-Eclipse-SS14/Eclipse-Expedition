@@ -8,6 +8,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.Research.Components;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Materials;
 
@@ -33,6 +34,7 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<MaterialStorageComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MaterialStorageComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<MaterialStorageComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<MaterialStorageComponent, TechnologyDatabaseModifiedEvent>(OnDatabaseModified);
     }
@@ -53,8 +55,20 @@ public abstract class SharedMaterialStorageSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, MaterialStorageComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, MaterialStorageComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, MaterialStorageComponent component)
+    {
         _appearance.SetData(uid, MaterialStorageVisuals.Inserting, false);
     }
+    // Eclipse-End
 
     /// <summary>
     /// Gets all the materials stored on this entity

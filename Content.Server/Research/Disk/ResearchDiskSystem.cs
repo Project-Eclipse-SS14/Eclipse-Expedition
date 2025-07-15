@@ -5,6 +5,7 @@ using Content.Shared.Research.Prototypes;
 using Content.Server.Research.Systems;
 using Content.Shared.Research.Components;
 using Robust.Shared.Prototypes;
+using Content.Shared.Maps;
 
 namespace Content.Server.Research.Disk
 {
@@ -18,6 +19,7 @@ namespace Content.Server.Research.Disk
             base.Initialize();
             SubscribeLocalEvent<ResearchDiskComponent, AfterInteractEvent>(OnAfterInteract);
             SubscribeLocalEvent<ResearchDiskComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<ResearchDiskComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         }
 
         private void OnAfterInteract(EntityUid uid, ResearchDiskComponent component, AfterInteractEvent args)
@@ -36,11 +38,23 @@ namespace Content.Server.Research.Disk
 
         private void OnMapInit(EntityUid uid, ResearchDiskComponent component, MapInitEvent args)
         {
+            Init(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, ResearchDiskComponent component, PostMapInitEvent args)
+        {
+            Init(uid, component);
+        }
+
+        private void Init(EntityUid uid, ResearchDiskComponent component)
+        {
             if (!component.UnlockAllTech)
                 return;
 
             component.Points = _prototype.EnumeratePrototypes<TechnologyPrototype>()
                 .Sum(tech => tech.Cost);
         }
+        // Eclipse-End
     }
 }

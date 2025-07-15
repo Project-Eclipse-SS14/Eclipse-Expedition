@@ -5,6 +5,7 @@ using Content.Shared.Sound;
 using Content.Shared.Sound.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Network;
+using Content.Shared.Maps;
 
 namespace Content.Server.Sound;
 
@@ -40,6 +41,7 @@ public sealed class EmitSoundSystem : SharedEmitSoundSystem
 
         SubscribeLocalEvent<EmitSoundOnTriggerComponent, TriggerEvent>(HandleEmitSoundOnTrigger);
         SubscribeLocalEvent<SpamEmitSoundComponent, MapInitEvent>(HandleSpamEmitSoundMapInit);
+        SubscribeLocalEvent<SpamEmitSoundComponent, PostMapInitEvent>(HandleSpamEmitSoundPostMapInit); // Eclipse
     }
 
     private void HandleEmitSoundOnTrigger(EntityUid uid, EmitSoundOnTriggerComponent component, TriggerEvent args)
@@ -50,12 +52,24 @@ public sealed class EmitSoundSystem : SharedEmitSoundSystem
 
     private void HandleSpamEmitSoundMapInit(Entity<SpamEmitSoundComponent> entity, ref MapInitEvent args)
     {
+        SpamEmitSoundInit(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void HandleSpamEmitSoundPostMapInit(Entity<SpamEmitSoundComponent> entity, ref PostMapInitEvent args)
+    {
+        SpamEmitSoundInit(entity); // Eclipse
+    }
+
+    private void SpamEmitSoundInit(Entity<SpamEmitSoundComponent> entity)
+    {
         SpamEmitSoundReset(entity);
 
         // Prewarm so multiple entities have more variation.
         entity.Comp.NextSound -= Random.Next(entity.Comp.MaxInterval);
         Dirty(entity);
     }
+    // Eclipse-End
 
     private void SpamEmitSoundReset(Entity<SpamEmitSoundComponent> entity)
     {

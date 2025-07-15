@@ -1,4 +1,5 @@
 using Content.Shared.CCVar;
+using Content.Shared.Maps;
 using Content.Shared.StatusEffectNew;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -26,6 +27,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
         SubscribeLocalEvent<SSDIndicatorComponent, PlayerAttachedEvent>(OnPlayerAttached);
         SubscribeLocalEvent<SSDIndicatorComponent, PlayerDetachedEvent>(OnPlayerDetached);
         SubscribeLocalEvent<SSDIndicatorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SSDIndicatorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
 
         _cfg.OnValueChanged(CCVars.ICSSDSleep, obj => _icSsdSleep = obj, true);
         _cfg.OnValueChanged(CCVars.ICSSDSleepTime, obj => _icSsdSleepTime = obj, true);
@@ -61,6 +63,17 @@ public sealed class SSDIndicatorSystem : EntitySystem
     // Prevents mapped mobs to go to sleep immediately
     private void OnMapInit(EntityUid uid, SSDIndicatorComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, SSDIndicatorComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, SSDIndicatorComponent component)
+    {
         if (_icSsdSleep &&
             component.IsSSD &&
             component.FallAsleepTime == TimeSpan.Zero)
@@ -68,6 +81,7 @@ public sealed class SSDIndicatorSystem : EntitySystem
             component.FallAsleepTime = _timing.CurTime + TimeSpan.FromSeconds(_icSsdSleepTime);
         }
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

@@ -26,6 +26,7 @@ using Content.Shared.Zombies;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Server.Zombies
 {
@@ -73,9 +74,11 @@ namespace Content.Server.Zombies
             SubscribeLocalEvent<ZombieComponent, MindRemovedMessage>(OnMindRemoved);
 
             SubscribeLocalEvent<PendingZombieComponent, MapInitEvent>(OnPendingMapInit);
+            SubscribeLocalEvent<PendingZombieComponent, PostMapInitEvent>(OnPendingPostMapInit); // Eclipse
             SubscribeLocalEvent<PendingZombieComponent, BeforeRemoveAnomalyOnDeathEvent>(OnBeforeRemoveAnomalyOnDeath);
 
             SubscribeLocalEvent<IncurableZombieComponent, MapInitEvent>(OnPendingMapInit);
+            SubscribeLocalEvent<IncurableZombieComponent, PostMapInitEvent>(OnPendingPostMapInit); // Eclipse
 
             SubscribeLocalEvent<ZombifyOnDeathComponent, MobStateChangedEvent>(OnDamageChanged);
         }
@@ -100,7 +103,30 @@ namespace Content.Server.Zombies
             pendingComp.GracePeriod = _random.Next(pendingComp.MinInitialInfectedGrace, pendingComp.MaxInitialInfectedGrace);
         }
 
+        // Eclipse-Start
+        private void OnPendingPostMapInit(EntityUid uid, IncurableZombieComponent component, PostMapInitEvent args)
+        {
+            if (HasComp<ZombieComponent>(uid) || HasComp<ZombieImmuneComponent>(uid))
+                return;
+
+            EnsureComp<PendingZombieComponent>(uid, out PendingZombieComponent pendingComp);
+
+            pendingComp.GracePeriod = _random.Next(pendingComp.MinInitialInfectedGrace, pendingComp.MaxInitialInfectedGrace);
+        }
+        // Eclipse-End
+
         private void OnPendingMapInit(EntityUid uid, PendingZombieComponent component, MapInitEvent args)
+        {
+            PendingInit(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPendingPostMapInit(EntityUid uid, PendingZombieComponent component, PostMapInitEvent args)
+        {
+            PendingInit(uid, component);
+        }
+
+        private void PendingInit(EntityUid uid, PendingZombieComponent component)
         {
             if (_mobState.IsDead(uid))
             {
@@ -110,6 +136,7 @@ namespace Content.Server.Zombies
 
             component.NextTick = _timing.CurTime + TimeSpan.FromSeconds(1f);
         }
+        // Eclipse-End
 
         public override void Update(float frameTime)
         {
@@ -321,7 +348,7 @@ namespace Content.Server.Zombies
         // Remove the role when getting cloned, getting gibbed and borged, or leaving the body via any other method.
         private void OnMindRemoved(Entity<ZombieComponent> ent, ref MindRemovedMessage args)
         {
-            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner,  args.Mind.Comp));
+            _role.MindRemoveRole<ZombieRoleComponent>((args.Mind.Owner, args.Mind.Comp));
         }
     }
 }

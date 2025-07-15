@@ -1,6 +1,7 @@
 using Content.Server.DeviceNetwork.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.Maps;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 
@@ -17,6 +18,7 @@ namespace Content.Server.DeviceNetwork.Systems
         {
             base.Initialize();
             SubscribeLocalEvent<StationLimitedNetworkComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<StationLimitedNetworkComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<StationLimitedNetworkComponent, BeforePacketSentEvent>(OnBeforePacketSent);
         }
 
@@ -48,8 +50,20 @@ namespace Content.Server.DeviceNetwork.Systems
         /// </summary>
         private void OnMapInit(EntityUid uid, StationLimitedNetworkComponent networkComponent, MapInitEvent args)
         {
+            Init(uid, networkComponent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, StationLimitedNetworkComponent networkComponent, PostMapInitEvent args)
+        {
+            Init(uid, networkComponent);
+        }
+
+        private void Init(EntityUid uid, StationLimitedNetworkComponent networkComponent)
+        {
             networkComponent.StationId = _stationSystem.GetOwningStation(uid);
         }
+        // Eclipse-End
 
         /// <summary>
         /// Checks if both devices are limited to the same station

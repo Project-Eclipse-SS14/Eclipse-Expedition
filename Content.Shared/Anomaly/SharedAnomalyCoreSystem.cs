@@ -2,6 +2,7 @@ using Content.Shared.Anomaly.Components;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 using Content.Shared.Weapons.Melee.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
@@ -21,15 +22,28 @@ public sealed class SharedAnomalyCoreSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AnomalyCoreComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AnomalyCoreComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<CorePoweredThrowerComponent, AttemptMeleeThrowOnHitEvent>(OnAttemptMeleeThrowOnHit);
         SubscribeLocalEvent<CorePoweredThrowerComponent, ExaminedEvent>(OnCorePoweredExamined);
     }
 
     private void OnMapInit(Entity<AnomalyCoreComponent> core, ref MapInitEvent args)
     {
+        Init(core); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<AnomalyCoreComponent> core, ref PostMapInitEvent args)
+    {
+        Init(core);
+    }
+
+    private void Init(Entity<AnomalyCoreComponent> core)
+    {
         core.Comp.DecayMoment = _gameTiming.CurTime + TimeSpan.FromSeconds(core.Comp.TimeToDecay);
         Dirty(core, core.Comp);
     }
+    // Eclipse-End
 
     private void OnAttemptMeleeThrowOnHit(Entity<CorePoweredThrowerComponent> ent, ref AttemptMeleeThrowOnHitEvent args)
     {

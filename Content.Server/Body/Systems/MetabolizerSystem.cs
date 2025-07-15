@@ -10,6 +10,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.Collections;
@@ -41,14 +42,27 @@ namespace Content.Server.Body.Systems
 
             SubscribeLocalEvent<MetabolizerComponent, ComponentInit>(OnMetabolizerInit);
             SubscribeLocalEvent<MetabolizerComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<MetabolizerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<MetabolizerComponent, EntityUnpausedEvent>(OnUnpaused);
             SubscribeLocalEvent<MetabolizerComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         }
 
         private void OnMapInit(Entity<MetabolizerComponent> ent, ref MapInitEvent args)
         {
+            Init(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(Entity<MetabolizerComponent> ent, ref PostMapInitEvent args)
+        {
+            Init(ent);
+        }
+
+        private void Init(Entity<MetabolizerComponent> ent)
+        {
             ent.Comp.NextUpdate = _gameTiming.CurTime + ent.Comp.AdjustedUpdateInterval;
         }
+        // Eclipse-End
 
         private void OnUnpaused(Entity<MetabolizerComponent> ent, ref EntityUnpausedEvent args)
         {

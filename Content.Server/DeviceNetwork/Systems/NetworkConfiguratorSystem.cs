@@ -10,6 +10,7 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
@@ -43,6 +44,7 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
         base.Initialize();
 
         SubscribeLocalEvent<NetworkConfiguratorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<NetworkConfiguratorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<NetworkConfiguratorComponent, ComponentShutdown>(OnShutdown);
 
         //Interaction
@@ -129,8 +131,20 @@ public sealed class NetworkConfiguratorSystem : SharedNetworkConfiguratorSystem
 
     private void OnMapInit(EntityUid uid, NetworkConfiguratorComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, NetworkConfiguratorComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, NetworkConfiguratorComponent component)
+    {
         UpdateListUiState(uid, component);
     }
+    // Eclipse-End
 
     private void TryAddNetworkDevice(EntityUid? targetUid, EntityUid configuratorUid, EntityUid userUid,
         NetworkConfiguratorComponent? configurator = null)

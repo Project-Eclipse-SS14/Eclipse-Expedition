@@ -12,6 +12,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Maps;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
@@ -45,11 +46,23 @@ public sealed class AtmosAlarmableSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<AtmosAlarmableComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AtmosAlarmableComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<AtmosAlarmableComponent, DeviceNetworkPacketEvent>(OnPacketRecv);
         SubscribeLocalEvent<AtmosAlarmableComponent, PowerChangedEvent>(OnPowerChange);
     }
 
     private void OnMapInit(EntityUid uid, AtmosAlarmableComponent component, MapInitEvent args)
+    {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, AtmosAlarmableComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, AtmosAlarmableComponent component)
     {
         TryUpdateAlert(
             uid,
@@ -57,6 +70,7 @@ public sealed class AtmosAlarmableSystem : EntitySystem
             component,
             false);
     }
+    // Eclipse-End
 
     private void OnPowerChange(EntityUid uid, AtmosAlarmableComponent component, ref PowerChangedEvent args)
     {

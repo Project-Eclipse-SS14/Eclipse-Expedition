@@ -30,12 +30,14 @@ public sealed class ContainerSpawnPointSystem : EntitySystem
         if (args.SpawnResult != null)
             return;
 
+        // Eclipse-Start : only cryo spawn is available
         // If it's just a spawn pref check if it's for cryo (silly).
-        if (args.HumanoidCharacterProfile?.SpawnPriority != SpawnPriorityPreference.Cryosleep &&
-            (!_proto.TryIndex(args.Job, out var jobProto) || jobProto.JobEntity == null))
-        {
-            return;
-        }
+        //if (args.HumanoidCharacterProfile?.SpawnPriority != SpawnPriorityPreference.Cryosleep &&
+        //    (!_proto.TryIndex(args.Job, out var jobProto) || jobProto.JobEntity == null))
+        //{
+        //    return;
+        //}
+        // Eclipse-End
 
         var query = EntityQueryEnumerator<ContainerSpawnPointComponent, ContainerManagerComponent, TransformComponent>();
         var possibleContainers = new List<Entity<ContainerSpawnPointComponent, ContainerManagerComponent, TransformComponent>>();

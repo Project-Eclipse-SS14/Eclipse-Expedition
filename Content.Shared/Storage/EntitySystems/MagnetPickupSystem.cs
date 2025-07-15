@@ -1,4 +1,5 @@
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Physics.Components;
@@ -28,12 +29,25 @@ public sealed class MagnetPickupSystem : EntitySystem
         base.Initialize();
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         SubscribeLocalEvent<MagnetPickupComponent, MapInitEvent>(OnMagnetMapInit);
+        SubscribeLocalEvent<MagnetPickupComponent, PostMapInitEvent>(OnMagnetPostMapInit); // Eclipse
     }
 
     private void OnMagnetMapInit(EntityUid uid, MagnetPickupComponent component, MapInitEvent args)
     {
+        MagnetInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnMagnetPostMapInit(EntityUid uid, MagnetPickupComponent component, PostMapInitEvent args)
+    {
+        MagnetInit(uid, component);
+    }
+
+    private void MagnetInit(EntityUid uid, MagnetPickupComponent component)
+    {
         component.NextScan = _timing.CurTime;
     }
+    // Eclipse-End
 
     public override void Update(float frameTime)
     {

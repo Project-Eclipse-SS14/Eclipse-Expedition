@@ -13,6 +13,7 @@ using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
@@ -70,6 +71,7 @@ public sealed partial class BorgSystem : SharedBorgSystem
         base.Initialize();
 
         SubscribeLocalEvent<BorgChassisComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BorgChassisComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<BorgChassisComponent, AfterInteractUsingEvent>(OnChassisInteractUsing);
         SubscribeLocalEvent<BorgChassisComponent, MindAddedMessage>(OnMindAdded);
         SubscribeLocalEvent<BorgChassisComponent, MindRemovedMessage>(OnMindRemoved);
@@ -92,9 +94,21 @@ public sealed partial class BorgSystem : SharedBorgSystem
 
     private void OnMapInit(EntityUid uid, BorgChassisComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, BorgChassisComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, BorgChassisComponent component)
+    {
         UpdateBatteryAlert((uid, component));
         _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
     }
+    // Eclipse-End
 
     private void OnChassisInteractUsing(EntityUid uid, BorgChassisComponent component, AfterInteractUsingEvent args)
     {

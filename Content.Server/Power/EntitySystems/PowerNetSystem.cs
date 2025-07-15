@@ -4,6 +4,7 @@ using Content.Server.Power.Components;
 using Content.Server.Power.NodeGroups;
 using Content.Server.Power.Pow3r;
 using Content.Shared.CCVar;
+using Content.Shared.Maps;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
@@ -46,6 +47,7 @@ namespace Content.Server.Power.EntitySystems
             _solver = new(_cfg.GetCVar(CCVars.DebugPow3rDisableParallel));
 
             SubscribeLocalEvent<ApcPowerReceiverComponent, MapInitEvent>(ApcPowerReceiverMapInit);
+            SubscribeLocalEvent<ApcPowerReceiverComponent, PostMapInitEvent>(ApcPowerReceiverPostMapInit); // Eclipse
             SubscribeLocalEvent<ApcPowerReceiverComponent, ComponentInit>(ApcPowerReceiverInit);
             SubscribeLocalEvent<ApcPowerReceiverComponent, ComponentShutdown>(ApcPowerReceiverShutdown);
             SubscribeLocalEvent<ApcPowerReceiverComponent, ComponentRemove>(ApcPowerReceiverRemove);
@@ -77,8 +79,20 @@ namespace Content.Server.Power.EntitySystems
 
         private void ApcPowerReceiverMapInit(Entity<ApcPowerReceiverComponent> ent, ref MapInitEvent args)
         {
+            ApcPowerReceiverInit(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void ApcPowerReceiverPostMapInit(Entity<ApcPowerReceiverComponent> ent, ref PostMapInitEvent args)
+        {
+            ApcPowerReceiverInit(ent);
+        }
+
+        private void ApcPowerReceiverInit(Entity<ApcPowerReceiverComponent> ent)
+        {
             _appearance.SetData(ent, PowerDeviceVisuals.Powered, ent.Comp.Powered);
         }
+        // Eclipse-End
 
         private void ApcPowerReceiverInit(EntityUid uid, ApcPowerReceiverComponent component, ComponentInit args)
         {

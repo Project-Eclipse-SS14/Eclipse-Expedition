@@ -1,9 +1,11 @@
 ﻿using Content.Server.Anomaly.Components;
+using Content.Server.Database.Migrations.Postgres;
 using Content.Server.Power.EntitySystems;
 using Content.Shared.Anomaly;
 using Content.Shared.Anomaly.Components;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Research.Components;
 
 namespace Content.Server.Anomaly;
@@ -19,6 +21,7 @@ public sealed partial class AnomalySystem
     {
         SubscribeLocalEvent<AnomalyVesselComponent, ComponentShutdown>(OnVesselShutdown);
         SubscribeLocalEvent<AnomalyVesselComponent, MapInitEvent>(OnVesselMapInit);
+        SubscribeLocalEvent<AnomalyVesselComponent, PostMapInitEvent>(OnVesselPostMapInit); // Eclipse
         SubscribeLocalEvent<AnomalyVesselComponent, InteractUsingEvent>(OnVesselInteractUsing);
         SubscribeLocalEvent<AnomalyVesselComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<AnomalyVesselComponent, ResearchServerGetPointsPerSecondEvent>(OnVesselGetPointsPerSecond);
@@ -61,8 +64,20 @@ public sealed partial class AnomalySystem
 
     private void OnVesselMapInit(EntityUid uid, AnomalyVesselComponent component, MapInitEvent args)
     {
-        UpdateVesselAppearance(uid,  component);
+        Init(uid, component); // Eclipse
     }
+
+    // Eclipse-Start
+    private void OnVesselPostMapInit(EntityUid uid, AnomalyVesselComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, AnomalyVesselComponent component)
+    {
+        UpdateVesselAppearance(uid, component);
+    }
+    // Eclipse-End
 
     private void OnVesselInteractUsing(EntityUid uid, AnomalyVesselComponent component, InteractUsingEvent args)
     {
@@ -79,16 +94,16 @@ public sealed partial class AnomalySystem
         component.Anomaly = scanner.ScannedAnomaly;
         anomalyComponent.ConnectedVessel = uid;
         _radiation.SetSourceEnabled(uid, true);
-        UpdateVesselAppearance(uid,  component);
+        UpdateVesselAppearance(uid, component);
         Popup.PopupEntity(Loc.GetString("anomaly-vessel-component-anomaly-assigned"), uid);
     }
 
     private void OnVesselGetPointsPerSecond(EntityUid uid, AnomalyVesselComponent component, ref ResearchServerGetPointsPerSecondEvent args)
     {
-        if (!this.IsPowered(uid, EntityManager) || component.Anomaly is not {} anomaly)
+        if (!this.IsPowered(uid, EntityManager) || component.Anomaly is not { } anomaly)
             return;
 
-        args.Points += (int) (GetAnomalyPointValue(anomaly) * component.PointMultiplier);
+        args.Points += (int)(GetAnomalyPointValue(anomaly) * component.PointMultiplier);
     }
 
     private void OnVesselAnomalyShutdown(ref AnomalyShutdownEvent args)
@@ -100,7 +115,7 @@ public sealed partial class AnomalySystem
                 continue;
 
             component.Anomaly = null;
-            UpdateVesselAppearance(ent,  component);
+            UpdateVesselAppearance(ent, component);
             _radiation.SetSourceEnabled(ent, false);
 
             if (!args.Supercritical)
@@ -117,7 +132,7 @@ public sealed partial class AnomalySystem
             if (args.Anomaly != component.Anomaly)
                 continue;
 
-            UpdateVesselAppearance(ent,  component);
+            UpdateVesselAppearance(ent, component);
         }
     }
 

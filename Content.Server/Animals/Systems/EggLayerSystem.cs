@@ -2,6 +2,7 @@ using Content.Server.Actions;
 using Content.Server.Animals.Components;
 using Content.Server.Popups;
 using Content.Shared.Actions.Events;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
@@ -32,6 +33,7 @@ public sealed class EggLayerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<EggLayerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<EggLayerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<EggLayerComponent, EggLayInstantActionEvent>(OnEggLayAction);
     }
 
@@ -63,9 +65,21 @@ public sealed class EggLayerSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, EggLayerComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, EggLayerComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, EggLayerComponent component)
+    {
         _actions.AddAction(uid, ref component.Action, component.EggLayAction);
         component.NextGrowth = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(component.EggLayCooldownMin, component.EggLayCooldownMax));
     }
+    // Eclipse-End
 
     private void OnEggLayAction(EntityUid uid, EggLayerComponent egglayer, EggLayInstantActionEvent args)
     {

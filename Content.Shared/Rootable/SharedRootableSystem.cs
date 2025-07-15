@@ -14,6 +14,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Rootable;
 
@@ -42,6 +43,7 @@ public abstract class SharedRootableSystem : EntitySystem
         PhysicsQuery = GetEntityQuery<PhysicsComponent>();
 
         SubscribeLocalEvent<RootableComponent, MapInitEvent>(OnRootableMapInit);
+        SubscribeLocalEvent<RootableComponent, PostMapInitEvent>(OnRootablePostMapInit); // Eclipse
         SubscribeLocalEvent<RootableComponent, ComponentShutdown>(OnRootableShutdown);
         SubscribeLocalEvent<RootableComponent, StartCollideEvent>(OnStartCollide);
         SubscribeLocalEvent<RootableComponent, EndCollideEvent>(OnEndCollide);
@@ -57,9 +59,24 @@ public abstract class SharedRootableSystem : EntitySystem
         if (!TryComp(entity, out ActionsComponent? comp))
             return;
 
-        entity.Comp.NextUpdate = _timing.CurTime;
+        RootableSharedInit(entity); // Eclipse
         _actions.AddAction(entity, ref entity.Comp.ActionEntity, entity.Comp.Action, component: comp);
     }
+
+    // Eclipse-Start
+    private void OnRootablePostMapInit(Entity<RootableComponent> entity, ref PostMapInitEvent args)
+    {
+        if (!TryComp(entity, out ActionsComponent? comp))
+            return;
+
+        RootableSharedInit(entity);
+    }
+
+    private void RootableSharedInit(Entity<RootableComponent> entity)
+    {
+        entity.Comp.NextUpdate = _timing.CurTime;
+    }
+    // Eclipse-End
 
     private void OnRootableShutdown(Entity<RootableComponent> entity, ref ComponentShutdown args)
     {

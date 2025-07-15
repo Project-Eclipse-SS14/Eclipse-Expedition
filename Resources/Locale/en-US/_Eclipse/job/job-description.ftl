@@ -1,0 +1,1 @@
+job-description-expeditioner = Work on a ship together with others and do researches in open space.

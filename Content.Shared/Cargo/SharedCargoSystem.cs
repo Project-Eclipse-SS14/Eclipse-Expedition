@@ -1,5 +1,6 @@
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Prototypes;
+using Content.Shared.Maps;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
@@ -16,13 +17,26 @@ public abstract class SharedCargoSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<StationBankAccountComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StationBankAccountComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<StationBankAccountComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<StationBankAccountComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<StationBankAccountComponent> ent)
+    {
         ent.Comp.NextIncomeTime = Timing.CurTime + ent.Comp.IncomeDelay;
         Dirty(ent);
     }
+    // Eclipse-End
 
     /// <summary>
     /// For a given station, retrieves the balance in a specific account.

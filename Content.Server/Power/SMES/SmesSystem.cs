@@ -1,5 +1,6 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.Power;
 using Content.Shared.Rounding;
 using Content.Shared.SMES;
@@ -21,13 +22,26 @@ internal sealed class SmesSystem : EntitySystem
         UpdatesAfter.Add(typeof(PowerNetSystem));
 
         SubscribeLocalEvent<SmesComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<SmesComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<SmesComponent, ChargeChangedEvent>(OnBatteryChargeChanged);
     }
 
     private void OnMapInit(EntityUid uid, SmesComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, SmesComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, SmesComponent component)
+    {
         UpdateSmesState(uid, component);
     }
+    // Eclipse-End
 
     private void OnBatteryChargeChanged(EntityUid uid, SmesComponent component, ref ChargeChangedEvent args)
     {

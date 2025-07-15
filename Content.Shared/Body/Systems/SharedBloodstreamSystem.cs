@@ -12,6 +12,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
 using Content.Shared.HealthExaminable;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
@@ -44,6 +45,7 @@ public abstract class SharedBloodstreamSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<BloodstreamComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<BloodstreamComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
         SubscribeLocalEvent<BloodstreamComponent, ReactionAttemptEvent>(OnReactionAttempt);
         SubscribeLocalEvent<BloodstreamComponent, SolutionRelayEvent<ReactionAttemptEvent>>(OnReactionAttempt);
@@ -130,9 +132,21 @@ public abstract class SharedBloodstreamSystem : EntitySystem
 
     private void OnMapInit(Entity<BloodstreamComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<BloodstreamComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<BloodstreamComponent> ent)
+    {
         ent.Comp.NextUpdate = _timing.CurTime + ent.Comp.AdjustedUpdateInterval;
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.NextUpdate));
     }
+    // Eclipse-End
 
     // prevent the infamous UdderSystem debug assert, see https://github.com/space-wizards/space-station-14/pull/35314
     // TODO: find a better solution than copy pasting this into every shared system that caches solution entities

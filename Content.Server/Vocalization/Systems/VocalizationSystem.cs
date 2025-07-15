@@ -2,6 +2,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Vocalization.Components;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -24,13 +25,26 @@ public sealed partial class VocalizationSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<VocalizerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<VocalizerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<VocalizerRequiresPowerComponent, TryVocalizeEvent>(OnRequiresPowerTryVocalize);
     }
 
     private void OnMapInit(Entity<VocalizerComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<VocalizerComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<VocalizerComponent> ent)
+    {
         ent.Comp.NextVocalizeInterval = _random.Next(ent.Comp.MinVocalizeInterval, ent.Comp.MaxVocalizeInterval);
     }
+    // Eclipse-End
 
     private void OnRequiresPowerTryVocalize(Entity<VocalizerRequiresPowerComponent> ent, ref TryVocalizeEvent args)
     {

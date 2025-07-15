@@ -16,6 +16,7 @@ using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
@@ -55,6 +56,7 @@ namespace Content.Server.Communications
 
             // On console init, set cooldown
             SubscribeLocalEvent<CommunicationsConsoleComponent, MapInitEvent>(OnCommunicationsConsoleMapInit);
+            SubscribeLocalEvent<CommunicationsConsoleComponent, PostMapInitEvent>(OnCommunicationsConsolePostMapInit); // Eclipse
         }
 
         public override void Update(float frameTime)
@@ -84,8 +86,20 @@ namespace Content.Server.Communications
 
         public void OnCommunicationsConsoleMapInit(EntityUid uid, CommunicationsConsoleComponent comp, MapInitEvent args)
         {
+            Init(uid, comp); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnCommunicationsConsolePostMapInit(EntityUid uid, CommunicationsConsoleComponent comp, PostMapInitEvent args)
+        {
+            Init(uid, comp);
+        }
+
+        private void Init(EntityUid uid, CommunicationsConsoleComponent comp)
+        {
             comp.AnnouncementCooldownRemaining = comp.InitialDelay;
         }
+        // Eclipse-End
 
         /// <summary>
         /// Update the UI of every comms console.

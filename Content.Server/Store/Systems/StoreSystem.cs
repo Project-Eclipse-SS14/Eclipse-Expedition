@@ -12,6 +12,7 @@ using Robust.Shared.Utility;
 using System.Linq;
 using Robust.Shared.Timing;
 using Content.Shared.Mind;
+using Content.Shared.Maps;
 
 namespace Content.Server.Store.Systems;
 
@@ -34,6 +35,7 @@ public sealed partial class StoreSystem : EntitySystem
         SubscribeLocalEvent<StoreComponent, BeforeActivatableUIOpenEvent>(BeforeActivatableUiOpen);
 
         SubscribeLocalEvent<StoreComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StoreComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<StoreComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<StoreComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<StoreComponent, OpenUplinkImplantEvent>(OnImplantActivate);
@@ -45,9 +47,21 @@ public sealed partial class StoreSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, StoreComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, StoreComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, StoreComponent component)
+    {
         RefreshAllListings(component);
         component.StartingMap = Transform(uid).MapUid;
     }
+    // Eclipse-End
 
     private void OnStartup(EntityUid uid, StoreComponent component, ComponentStartup args)
     {

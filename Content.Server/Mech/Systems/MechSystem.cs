@@ -9,6 +9,7 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Mech;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
@@ -52,6 +53,7 @@ public sealed partial class MechSystem : SharedMechSystem
         SubscribeLocalEvent<MechComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<MechComponent, EntInsertedIntoContainerMessage>(OnInsertBattery);
         SubscribeLocalEvent<MechComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MechComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<MechComponent, GetVerbsEvent<AlternativeVerb>>(OnAlternativeVerb);
         SubscribeLocalEvent<MechComponent, MechOpenUiEvent>(OnOpenUi);
         SubscribeLocalEvent<MechComponent, RemoveBatteryEvent>(OnRemoveBattery);
@@ -140,6 +142,17 @@ public sealed partial class MechSystem : SharedMechSystem
             InsertEquipment(uid, ent, component);
         }
 
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, MechComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, MechComponent component)
+    {
         // TODO: this should just be damage and battery
         component.Integrity = component.MaxIntegrity;
         component.Energy = component.MaxEnergy;
@@ -147,6 +160,7 @@ public sealed partial class MechSystem : SharedMechSystem
         _actionBlocker.UpdateCanMove(uid);
         Dirty(uid, component);
     }
+    // Eclipse-End
 
     private void OnRemoveEquipmentMessage(EntityUid uid, MechComponent component, MechEquipmentRemoveMessage args)
     {
@@ -424,7 +438,7 @@ public sealed partial class MechSystem : SharedMechSystem
             return;
         }
 
-        args.Gas =  _atmosphere.GetContainingMixture(component.Mech, excite: args.Excite);
+        args.Gas = _atmosphere.GetContainingMixture(component.Mech, excite: args.Excite);
         args.Handled = true;
     }
 

@@ -22,6 +22,7 @@ using Robust.Server.GameObjects;
 using System.Linq;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Components;
+using Content.Shared.Maps;
 
 namespace Content.Server.Atmos.Monitor.Systems;
 
@@ -176,6 +177,7 @@ public sealed class AirAlarmSystem : EntitySystem
         SubscribeLocalEvent<AirAlarmComponent, DeviceListUpdateEvent>(OnDeviceListUpdate);
         SubscribeLocalEvent<AirAlarmComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<AirAlarmComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AirAlarmComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<AirAlarmComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<AirAlarmComponent, ActivateInWorldEvent>(OnActivate);
 
@@ -242,10 +244,22 @@ public sealed class AirAlarmSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, AirAlarmComponent comp, MapInitEvent args)
     {
+        Init(uid, comp); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, AirAlarmComponent comp, PostMapInitEvent args)
+    {
+        Init(uid, comp);
+    }
+
+    private void Init(EntityUid uid, AirAlarmComponent comp)
+    {
         // for mapped linked air alarms, start with high so when it changes for the first time it goes from high to low
         // without this the output would suddenly get sent a low signal after nothing which is bad
         _deviceLink.SendSignal(uid, GetPort(comp), true);
     }
+    // Eclipse-End
 
     private void OnShutdown(EntityUid uid, AirAlarmComponent component, ComponentShutdown args)
     {
@@ -350,7 +364,7 @@ public sealed class AirAlarmSystem : EntitySystem
     {
         if (!AccessCheck(uid, args.Actor, component))
         {
-           UpdateUI(uid, component);
+            UpdateUI(uid, component);
             return;
         }
 

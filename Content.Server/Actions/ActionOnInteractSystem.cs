@@ -4,6 +4,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -26,9 +27,21 @@ public sealed class ActionOnInteractSystem : EntitySystem
         SubscribeLocalEvent<ActionOnInteractComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<ActionOnInteractComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<ActionOnInteractComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ActionOnInteractComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(EntityUid uid, ActionOnInteractComponent component, MapInitEvent args)
+    {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, ActionOnInteractComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, ActionOnInteractComponent component)
     {
         if (component.Actions == null)
             return;
@@ -39,15 +52,16 @@ public sealed class ActionOnInteractSystem : EntitySystem
             _actionContainer.AddAction(uid, id, comp);
         }
     }
+    // Eclipse-End
 
     private void OnActivate(EntityUid uid, ActionOnInteractComponent component, ActivateInWorldEvent args)
     {
         if (args.Handled || !args.Complex)
             return;
 
-        if (component.ActionEntities is not {} actionEnts)
+        if (component.ActionEntities is not { } actionEnts)
         {
-            if (!TryComp<ActionsContainerComponent>(uid,  out var actionsContainerComponent))
+            if (!TryComp<ActionsContainerComponent>(uid, out var actionsContainerComponent))
                 return;
 
             actionEnts = actionsContainerComponent.Container.ContainedEntities.ToList();
@@ -72,16 +86,16 @@ public sealed class ActionOnInteractSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (component.ActionEntities is not {} actionEnts)
+        if (component.ActionEntities is not { } actionEnts)
         {
-            if (!TryComp<ActionsContainerComponent>(uid,  out var actionsContainerComponent))
+            if (!TryComp<ActionsContainerComponent>(uid, out var actionsContainerComponent))
                 return;
 
             actionEnts = actionsContainerComponent.Container.ContainedEntities.ToList();
         }
 
         // First, try entity target actions
-        if (args.Target is {} target)
+        if (args.Target is { } target)
         {
             var entOptions = GetValidActions<EntityTargetActionComponent>(actionEnts, args.CanReach);
             for (var i = entOptions.Count - 1; i >= 0; i--)
@@ -119,7 +133,7 @@ public sealed class ActionOnInteractSystem : EntitySystem
             return;
 
         var (actId, comp, world) = _random.Pick(options);
-        if (world.Event is {} worldEv)
+        if (world.Event is { } worldEv)
         {
             worldEv.Target = args.ClickLocation;
             worldEv.Entity = HasComp<EntityTargetActionComponent>(actId) ? args.Target : null;
@@ -129,7 +143,7 @@ public sealed class ActionOnInteractSystem : EntitySystem
         args.Handled = true;
     }
 
-    private List<Entity<ActionComponent, T>> GetValidActions<T>(List<EntityUid>? actions, bool canReach = true) where T: Component
+    private List<Entity<ActionComponent, T>> GetValidActions<T>(List<EntityUid>? actions, bool canReach = true) where T : Component
     {
         var valid = new List<Entity<ActionComponent, T>>();
 
@@ -138,7 +152,7 @@ public sealed class ActionOnInteractSystem : EntitySystem
 
         foreach (var id in actions)
         {
-            if (_actions.GetAction(id) is not {} action ||
+            if (_actions.GetAction(id) is not { } action ||
                 !TryComp<T>(id, out var comp) ||
                 !_actions.ValidAction(action, canReach))
             {

@@ -348,6 +348,14 @@ namespace Content.Server.RoundEnd
             }, _cooldownTokenSource.Token);
         }
 
+        public void CancelAfterEndCountdown()
+        {
+            _countdownTokenSource?.Cancel();
+            _chatManager.DispatchServerAnnouncement(
+                Loc.GetString("round-end-system-round-restart-cancelled-announcement")
+            );
+        }
+
         public override void Update(float frameTime)
         {
             // Check if we should auto-call.

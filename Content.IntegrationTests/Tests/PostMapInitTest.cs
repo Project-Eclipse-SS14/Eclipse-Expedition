@@ -75,6 +75,7 @@ namespace Content.IntegrationTests.Tests
             "Relic",
             "dm01-entryway",
             "Exo",
+            "ExpeditionShip", // Eclipse
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";
@@ -333,7 +334,7 @@ namespace Content.IntegrationTests.Tests
                 MapId mapId;
                 try
                 {
-                    var opts = DeserializationOptions.Default with {InitializeMaps = true};
+                    var opts = DeserializationOptions.Default with { InitializeMaps = true };
                     ticker.LoadGameMap(protoManager.Index<GameMapPrototype>(mapProto), out mapId, opts);
                 }
                 catch (Exception ex)
@@ -393,6 +394,21 @@ namespace Content.IntegrationTests.Tests
                         lateSpawns += GetCountLateSpawn<SpawnPointComponent>(gridUids, entManager);
                         lateSpawns += GetCountLateSpawn<ContainerSpawnPointComponent>(gridUids, entManager);
 
+                        // Add lateSpawns from ContainerSpawnPoint when SpawnPointType == Unset
+                        var queryPoint = entManager.AllEntityQueryEnumerator<ContainerSpawnPointComponent, TransformComponent>();
+                        while (queryPoint.MoveNext(out var spawner, out var xform))
+                        {
+                            if (spawner.SpawnType is not SpawnPointType.Unset
+                                || xform.GridUid == null
+                                || !gridUids.Contains(xform.GridUid.Value))
+                            {
+                                continue;
+                            }
+
+                            lateSpawns++;
+                            break;
+                        }
+
                         Assert.That(lateSpawns, Is.GreaterThan(0), $"Found no latejoin spawn points on {mapProto}");
                     }
 
@@ -412,6 +428,13 @@ namespace Content.IntegrationTests.Tests
                         .Select(x => x.Job.Value);
 
                     jobs.ExceptWith(spawnPoints);
+
+                    // Skip spawnpoints check if there is a spawn point that allows for all jobs to spawn
+                    if (entManager.EntityQuery<ContainerSpawnPointComponent>()
+                        .Any((x) => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job == null))
+                    {
+                        jobs.Clear();
+                    }
 
                     Assert.That(jobs, Is.Empty, $"There is no spawnpoints for {string.Join(", ", jobs)} on {mapProto}.");
                 }
@@ -440,7 +463,7 @@ namespace Content.IntegrationTests.Tests
 #nullable enable
             while (queryPoint.MoveNext(out T? comp, out var xform))
             {
-                var spawner = (ISpawnPoint) comp;
+                var spawner = (ISpawnPoint)comp;
 
                 if (spawner.SpawnType is not SpawnPointType.LateJoin
                 || xform.GridUid == null

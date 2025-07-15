@@ -2,6 +2,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Fluids.Components;
+using Content.Shared.Maps;
 
 namespace Content.Server.Fluids.EntitySystems;
 
@@ -11,8 +12,20 @@ public sealed partial class PuddleSystem
 
     private void OnEvaporationMapInit(Entity<EvaporationComponent> entity, ref MapInitEvent args)
     {
+        EvaporationInit(entity); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnEvaporationPostMapInit(Entity<EvaporationComponent> entity, ref PostMapInitEvent args)
+    {
+        EvaporationInit(entity);
+    }
+
+    private void EvaporationInit(Entity<EvaporationComponent> entity)
+    {
         entity.Comp.NextTick = _timing.CurTime + EvaporationCooldown;
     }
+    // Eclipse-End
 
     private void UpdateEvaporation(EntityUid uid, Solution solution)
     {

@@ -1,0 +1,7 @@
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconExpeditioner
+  icon:
+    sprite: /Textures/Interface/Misc/job_icons.rsi
+    state: Visitor # TODO : custom icon
+  jobName: job-name-expeditioner

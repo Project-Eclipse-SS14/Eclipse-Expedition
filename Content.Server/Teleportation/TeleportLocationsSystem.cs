@@ -1,4 +1,5 @@
 ﻿using Content.Server.Chat.Systems;
+using Content.Shared.Maps;
 using Content.Shared.Teleportation;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
@@ -21,13 +22,26 @@ public sealed partial class TeleportLocationsSystem : SharedTeleportLocationsSys
         base.Initialize();
 
         SubscribeLocalEvent<TeleportLocationsComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TeleportLocationsComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<TeleportLocationsComponent, BeforeActivatableUIOpenEvent>(OnBeforeUiOpen);
     }
 
     private void OnMapInit(Entity<TeleportLocationsComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<TeleportLocationsComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<TeleportLocationsComponent> ent)
+    {
         UpdateTeleportPoints(ent);
     }
+    // Eclipse-End
 
     private void OnBeforeUiOpen(Entity<TeleportLocationsComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {

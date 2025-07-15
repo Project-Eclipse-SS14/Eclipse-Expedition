@@ -6,6 +6,7 @@ using Content.Shared.Database;
 using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
@@ -40,14 +41,27 @@ public abstract class SharedMaterialReclaimerSystem : EntitySystem
         SubscribeLocalEvent<MaterialReclaimerComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<MaterialReclaimerComponent, GotEmaggedEvent>(OnEmagged);
         SubscribeLocalEvent<MaterialReclaimerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<MaterialReclaimerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<CollideMaterialReclaimerComponent, StartCollideEvent>(OnCollide);
         SubscribeLocalEvent<ActiveMaterialReclaimerComponent, ComponentStartup>(OnActiveStartup);
     }
 
     private void OnMapInit(EntityUid uid, MaterialReclaimerComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, MaterialReclaimerComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, MaterialReclaimerComponent component)
+    {
         component.NextSound = Timing.CurTime;
     }
+    // Eclipse-End
 
     private void OnShutdown(EntityUid uid, MaterialReclaimerComponent component, ComponentShutdown args)
     {

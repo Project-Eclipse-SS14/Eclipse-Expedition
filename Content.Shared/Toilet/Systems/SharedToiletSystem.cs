@@ -6,6 +6,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Content.Shared.Toilet.Components;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Toilet.Systems
 {
@@ -24,6 +25,7 @@ namespace Content.Shared.Toilet.Systems
             base.Initialize();
 
             SubscribeLocalEvent<ToiletComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<ToiletComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<ToiletComponent, GetVerbsEvent<AlternativeVerb>>(OnToggleSeatVerb);
             SubscribeLocalEvent<ToiletComponent, ActivateInWorldEvent>(OnActivateInWorld);
         }
@@ -33,6 +35,18 @@ namespace Content.Shared.Toilet.Systems
             if (_random.Prob(0.5f))
                 component.ToggleSeat = true;
 
+            SharedInit(uid, component); // Eclipse
+            Dirty(uid, component);
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, ToiletComponent component, PostMapInitEvent args)
+        {
+            SharedInit(uid, component);
+        }
+
+        private void SharedInit(EntityUid uid, ToiletComponent component)
+        {
             if (_random.Prob(0.3f))
             {
                 TryComp<PlungerUseComponent>(uid, out var plunger);
@@ -44,8 +58,8 @@ namespace Content.Shared.Toilet.Systems
             }
 
             UpdateAppearance(uid);
-            Dirty(uid, component);
         }
+        // Eclipse-End
 
         public bool CanToggle(EntityUid uid)
         {

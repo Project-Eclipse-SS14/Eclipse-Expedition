@@ -16,6 +16,7 @@ using Content.Shared.Atmos.Piping.Components;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
+using Content.Shared.Maps;
 using Content.Shared.Power;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -50,6 +51,7 @@ public sealed class AtmosMonitorSystem : EntitySystem
     {
         SubscribeLocalEvent<AtmosMonitorComponent, ComponentStartup>(OnAtmosMonitorStartup);
         SubscribeLocalEvent<AtmosMonitorComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<AtmosMonitorComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<AtmosMonitorComponent, AtmosDeviceUpdateEvent>(OnAtmosUpdate);
         SubscribeLocalEvent<AtmosMonitorComponent, TileFireEvent>(OnFireEvent);
         SubscribeLocalEvent<AtmosMonitorComponent, PowerChangedEvent>(OnPowerChangedEvent);
@@ -77,6 +79,17 @@ public sealed class AtmosMonitorSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, AtmosMonitorComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, AtmosMonitorComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, AtmosMonitorComponent component)
+    {
         if (component.TemperatureThresholdId != null)
         {
             var proto = _prototypeManager.Index<AtmosAlarmThresholdPrototype>(component.TemperatureThresholdId);
@@ -99,6 +112,7 @@ public sealed class AtmosMonitorSystem : EntitySystem
             component.GasThresholds.TryAdd(gas, new(proto));
         }
     }
+    // Eclipse-End
 
     private void OnAtmosMonitorStartup(EntityUid uid, AtmosMonitorComponent component, ComponentStartup args)
     {

@@ -3,6 +3,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Damage;
 
@@ -16,12 +17,25 @@ public sealed class PassiveDamageSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PassiveDamageComponent, MapInitEvent>(OnPendingMapInit);
+        SubscribeLocalEvent<PassiveDamageComponent, PostMapInitEvent>(OnPendingPostMapInit); // Eclipse
     }
 
     private void OnPendingMapInit(EntityUid uid, PassiveDamageComponent component, MapInitEvent args)
     {
+        PendingInit(uid, component);
+    }
+
+    // Eclipse-Start
+    private void OnPendingPostMapInit(EntityUid uid, PassiveDamageComponent component, PostMapInitEvent args)
+    {
+        PendingInit(uid, component);
+    }
+
+    private void PendingInit(EntityUid uid, PassiveDamageComponent component)
+    {
         component.NextDamage = _timing.CurTime + TimeSpan.FromSeconds(1f);
     }
+    // Eclipse-End
 
     // Every tick, attempt to damage entities
     public override void Update(float frameTime)
@@ -46,7 +60,7 @@ public sealed class PassiveDamageSystem : EntitySystem
             // Damage them
             foreach (var allowedState in comp.AllowedStates)
             {
-                if(allowedState == mobState.CurrentState)
+                if (allowedState == mobState.CurrentState)
                     _damageable.TryChangeDamage(uid, comp.Damage, true, false, damage);
             }
         }

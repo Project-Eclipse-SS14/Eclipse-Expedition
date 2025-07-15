@@ -1,4 +1,5 @@
 using Content.Server.Spawners.Components;
+using Content.Shared.Maps;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -14,6 +15,7 @@ public sealed class SpawnerSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<TimedSpawnerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<TimedSpawnerComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     public override void Update(float frameTime)
@@ -35,8 +37,20 @@ public sealed class SpawnerSystem : EntitySystem
 
     private void OnMapInit(Entity<TimedSpawnerComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<TimedSpawnerComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<TimedSpawnerComponent> ent)
+    {
         ent.Comp.NextFire = _timing.CurTime + ent.Comp.IntervalSeconds;
     }
+    // Eclipse-End
 
     private void OnTimerFired(EntityUid uid, TimedSpawnerComponent component)
     {

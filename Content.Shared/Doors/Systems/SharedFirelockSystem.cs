@@ -1,6 +1,7 @@
 using Content.Shared.Access.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Examine;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Prying.Components;
 using Robust.Shared.Serialization;
@@ -28,6 +29,7 @@ public abstract class SharedFirelockSystem : EntitySystem
 
         // Visuals
         SubscribeLocalEvent<FirelockComponent, MapInitEvent>(UpdateVisuals);
+        SubscribeLocalEvent<FirelockComponent, PostMapInitEvent>(UpdateVisuals); // Eclipse
         SubscribeLocalEvent<FirelockComponent, ComponentStartup>(OnComponentStartup);
 
         SubscribeLocalEvent<FirelockComponent, ExaminedEvent>(OnExamined);

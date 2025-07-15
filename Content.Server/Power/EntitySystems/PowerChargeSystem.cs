@@ -2,6 +2,7 @@
 using Content.Server.Audio;
 using Content.Server.Power.Components;
 using Content.Shared.Database;
+using Content.Shared.Maps;
 using Content.Shared.Power;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
@@ -20,6 +21,7 @@ public sealed class PowerChargeSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<PowerChargeComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PowerChargeComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<PowerChargeComponent, ComponentShutdown>(OnComponentShutdown);
         SubscribeLocalEvent<PowerChargeComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<PowerChargeComponent, AfterActivatableUIOpenEvent>(OnAfterUiOpened);
@@ -71,6 +73,17 @@ public sealed class PowerChargeSystem : EntitySystem
 
     private void OnMapInit(Entity<PowerChargeComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<PowerChargeComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<PowerChargeComponent> ent)
+    {
         ApcPowerReceiverComponent? powerReceiver = null;
         if (!Resolve(ent, ref powerReceiver, false))
             return;
@@ -78,6 +91,7 @@ public sealed class PowerChargeSystem : EntitySystem
         UpdatePowerState(ent, powerReceiver);
         UpdateState((ent, ent.Comp, powerReceiver));
     }
+    // Eclipse-End
 
     private void SetSwitchedOn(EntityUid uid, PowerChargeComponent component, bool on,
         ApcPowerReceiverComponent? powerReceiver = null, EntityUid? user = null)
@@ -195,7 +209,7 @@ public sealed class PowerChargeSystem : EntitySystem
         else
         {
             var diff = chargeTarget - component.Charge;
-            chargeEta = (short) Math.Abs(diff / chargeRate);
+            chargeEta = (short)Math.Abs(diff / chargeRate);
         }
 
         var status = chargeRate switch
@@ -209,10 +223,10 @@ public sealed class PowerChargeSystem : EntitySystem
 
         var state = new PowerChargeState(
             component.SwitchedOn,
-            (byte) (component.Charge * 255),
+            (byte)(component.Charge * 255),
             status,
-            (short) Math.Round(powerReceiver.PowerReceived),
-            (short) Math.Round(powerReceiver.Load),
+            (short)Math.Round(powerReceiver.PowerReceived),
+            (short)Math.Round(powerReceiver.Load),
             chargeEta
         );
 

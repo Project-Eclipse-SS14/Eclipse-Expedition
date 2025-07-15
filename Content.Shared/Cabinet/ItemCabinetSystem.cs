@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Shared.Containers;
@@ -23,6 +24,7 @@ public sealed class ItemCabinetSystem : EntitySystem
 
         SubscribeLocalEvent<ItemCabinetComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<ItemCabinetComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ItemCabinetComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<ItemCabinetComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<ItemCabinetComponent, EntRemovedFromContainerMessage>(OnContainerModified);
         SubscribeLocalEvent<ItemCabinetComponent, OpenableOpenedEvent>(OnOpened);
@@ -36,9 +38,20 @@ public sealed class ItemCabinetSystem : EntitySystem
 
     private void OnMapInit(Entity<ItemCabinetComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ItemCabinetComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+    private void Init(Entity<ItemCabinetComponent> ent)
+    {
         // update at mapinit to avoid copy pasting locked: true and locked: false for each closed/open prototype
         SetSlotLock(ent, !_openable.IsOpen(ent));
     }
+    // Eclipse-End
 
     private void UpdateAppearance(Entity<ItemCabinetComponent> ent)
     {

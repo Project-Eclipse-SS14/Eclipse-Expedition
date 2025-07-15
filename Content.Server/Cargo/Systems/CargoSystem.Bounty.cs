@@ -9,6 +9,7 @@ using Content.Shared.Cargo.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Labels.EntitySystems;
+using Content.Shared.Maps;
 using Content.Shared.NameIdentifier;
 using Content.Shared.Paper;
 using Content.Shared.Stacks;
@@ -43,6 +44,7 @@ public sealed partial class CargoSystem
         SubscribeLocalEvent<CargoBountyLabelComponent, PriceCalculationEvent>(OnGetBountyPrice);
         SubscribeLocalEvent<EntitySoldEvent>(OnSold);
         SubscribeLocalEvent<StationCargoBountyDatabaseComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<StationCargoBountyDatabaseComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
 
         _stackQuery = GetEntityQuery<StackComponent>();
         _containerQuery = GetEntityQuery<ContainerManagerComponent>();
@@ -215,8 +217,20 @@ public sealed partial class CargoSystem
 
     private void OnMapInit(EntityUid uid, StationCargoBountyDatabaseComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, StationCargoBountyDatabaseComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, StationCargoBountyDatabaseComponent component)
+    {
         FillBountyDatabase(uid, component);
     }
+    // Eclipse-End
 
     /// <summary>
     /// Fills up the bounty database with random bounties.

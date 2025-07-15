@@ -1,4 +1,5 @@
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Maps;
 using Content.Shared.PowerCell.Components;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Containers;
@@ -17,6 +18,7 @@ public abstract class SharedPowerCellSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PowerCellDrawComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<PowerCellDrawComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
 
         SubscribeLocalEvent<PowerCellSlotComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<PowerCellSlotComponent, EntInsertedIntoContainerMessage>(OnCellInserted);
@@ -26,8 +28,20 @@ public abstract class SharedPowerCellSystem : EntitySystem
 
     private void OnMapInit(Entity<PowerCellDrawComponent> ent, ref MapInitEvent args)
     {
+        Init(ent); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<PowerCellDrawComponent> ent, ref PostMapInitEvent args)
+    {
+        Init(ent);
+    }
+
+    private void Init(Entity<PowerCellDrawComponent> ent)
+    {
         ent.Comp.NextUpdateTime = Timing.CurTime + ent.Comp.Delay;
     }
+    // Eclipse-End
 
     private void OnRejuvenate(EntityUid uid, PowerCellSlotComponent component, RejuvenateEvent args)
     {

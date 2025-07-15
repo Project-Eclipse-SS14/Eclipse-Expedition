@@ -6,6 +6,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Controllers;
+using Content.Shared.Maps;
 
 namespace Content.Server.Physics.Controllers;
 
@@ -27,13 +28,26 @@ public sealed class ChasingWalkSystem : VirtualController
         base.Initialize();
 
         SubscribeLocalEvent<ChasingWalkComponent, MapInitEvent>(OnChasingMapInit);
+        SubscribeLocalEvent<ChasingWalkComponent, PostMapInitEvent>(OnChasingPostMapInit); // Eclipse
     }
 
     private void OnChasingMapInit(EntityUid uid, ChasingWalkComponent component, MapInitEvent args)
     {
+        ChasingInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnChasingPostMapInit(EntityUid uid, ChasingWalkComponent component, PostMapInitEvent args)
+    {
+        ChasingInit(uid, component);
+    }
+
+    private void ChasingInit(EntityUid uid, ChasingWalkComponent component)
+    {
         component.NextImpulseTime = _gameTiming.CurTime;
         component.NextChangeVectorTime = _gameTiming.CurTime;
     }
+    // Eclipse-End
 
     public override void UpdateBeforeSolve(bool prediction, float frameTime)
     {

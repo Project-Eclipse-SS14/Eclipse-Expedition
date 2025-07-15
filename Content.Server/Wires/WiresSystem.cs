@@ -9,6 +9,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Tools;
@@ -52,6 +53,7 @@ public sealed class WiresSystem : SharedWiresSystem
         SubscribeLocalEvent<WiresComponent, WiresActionMessage>(OnWiresActionMessage);
         SubscribeLocalEvent<WiresComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<WiresComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<WiresComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
         SubscribeLocalEvent<WiresComponent, TimedWireEvent>(OnTimedWire);
         SubscribeLocalEvent<WiresComponent, PowerChangedEvent>(OnWiresPowered);
         SubscribeLocalEvent<WiresComponent, WireDoAfterEvent>(OnDoAfter);
@@ -187,10 +189,10 @@ public sealed class WiresSystem : SharedWiresSystem
             return null;
 
         List<WireColor> colors =
-            new((WireColor[]) Enum.GetValues(typeof(WireColor)));
+            new((WireColor[])Enum.GetValues(typeof(WireColor)));
 
         List<WireLetter> letters =
-            new((WireLetter[]) Enum.GetValues(typeof(WireLetter)));
+            new((WireLetter[])Enum.GetValues(typeof(WireLetter)));
 
 
         var wireSet = new List<Wire>();
@@ -464,6 +466,17 @@ public sealed class WiresSystem : SharedWiresSystem
 
     private void OnMapInit(EntityUid uid, WiresComponent component, MapInitEvent args)
     {
+        Init(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(EntityUid uid, WiresComponent component, PostMapInitEvent args)
+    {
+        Init(uid, component);
+    }
+
+    private void Init(EntityUid uid, WiresComponent component)
+    {
         if (!string.IsNullOrEmpty(component.LayoutId))
             SetOrCreateWireLayout(uid, component);
 
@@ -483,6 +496,7 @@ public sealed class WiresSystem : SharedWiresSystem
 
         UpdateUserInterface(uid);
     }
+    // Eclipse-End
     #endregion
 
     #region Entity API
@@ -499,7 +513,7 @@ public sealed class WiresSystem : SharedWiresSystem
             for (var i = 0; i < 4; i++)
             {
                 // Cyrillic Letters
-                data[i] = (char) _random.Next(0x0410, 0x0430);
+                data[i] = (char)_random.Next(0x0410, 0x0430);
             }
         }
         else
@@ -507,14 +521,14 @@ public sealed class WiresSystem : SharedWiresSystem
             for (var i = 0; i < 4; i++)
             {
                 // Letters
-                data[i] = (char) _random.Next(0x41, 0x5B);
+                data[i] = (char)_random.Next(0x41, 0x5B);
             }
         }
 
         for (var i = 5; i < 9; i++)
         {
             // Digits
-            data[i] = (char) _random.Next(0x30, 0x3A);
+            data[i] = (char)_random.Next(0x30, 0x3A);
         }
 
         wires.SerialNumber = new string(data);
@@ -542,7 +556,7 @@ public sealed class WiresSystem : SharedWiresSystem
         var statuses = new List<(int position, object key, object value)>();
         foreach (var (key, value) in wires.Statuses)
         {
-            var valueCast = ((int position, StatusLightData? value)) value;
+            var valueCast = ((int position, StatusLightData? value))value;
             statuses.Add((valueCast.position, key, valueCast.value!));
         }
 
@@ -579,7 +593,7 @@ public sealed class WiresSystem : SharedWiresSystem
     ///     Tries to get all the wires on this entity by the wire action type.
     /// </summary>
     /// <returns>Enumerator of all wires in this entity according to the given type.</returns>
-    public IEnumerable<Wire> TryGetWires<T>(EntityUid uid, WiresComponent? wires = null) where T: IWireAction
+    public IEnumerable<Wire> TryGetWires<T>(EntityUid uid, WiresComponent? wires = null) where T : IWireAction
     {
         if (!Resolve(uid, ref wires))
             yield break;
@@ -792,7 +806,7 @@ public sealed class WiresSystem : SharedWiresSystem
             return false;
         }
 
-        data = (T) result;
+        data = (T)result;
 
         return true;
     }

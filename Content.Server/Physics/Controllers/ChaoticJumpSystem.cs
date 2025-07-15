@@ -6,6 +6,7 @@ using Robust.Shared.Physics;
 using System.Numerics;
 using Robust.Shared.Physics.Controllers;
 using Robust.Shared.Utility;
+using Content.Shared.Maps;
 
 namespace Content.Server.Physics.Controllers;
 
@@ -24,13 +25,26 @@ public sealed class ChaoticJumpSystem : VirtualController
         base.Initialize();
 
         SubscribeLocalEvent<ChaoticJumpComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<ChaoticJumpComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
     }
 
     private void OnMapInit(Entity<ChaoticJumpComponent> chaotic, ref MapInitEvent args)
     {
+        Init(chaotic); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnPostMapInit(Entity<ChaoticJumpComponent> chaotic, ref PostMapInitEvent args)
+    {
+        Init(chaotic);
+    }
+
+    private void Init(Entity<ChaoticJumpComponent> chaotic)
+    {
         //So the entity doesn't teleport instantly. For tesla, for example, it's important for it to eat tesla's generator.
         chaotic.Comp.NextJumpTime = _gameTiming.CurTime + TimeSpan.FromSeconds(_random.NextFloat(chaotic.Comp.JumpMinInterval, chaotic.Comp.JumpMaxInterval));
     }
+    // Eclipse-End
 
     public override void UpdateBeforeSolve(bool prediction, float frameTime)
     {
@@ -63,11 +77,11 @@ public sealed class ChaoticJumpSystem : VirtualController
         if (rayCastResults != null)
         {
             targetPos = rayCastResults.Value.HitPos;
-            targetPos = new Vector2(targetPos.X - (float) Math.Cos(direction), targetPos.Y - (float) Math.Sin(direction)); //offset so that the teleport does not take place directly inside the target
+            targetPos = new Vector2(targetPos.X - (float)Math.Cos(direction), targetPos.Y - (float)Math.Sin(direction)); //offset so that the teleport does not take place directly inside the target
         }
         else
         {
-            targetPos = new Vector2(startPos.X + range * (float) Math.Cos(direction), startPos.Y + range * (float) Math.Sin(direction));
+            targetPos = new Vector2(startPos.X + range * (float)Math.Cos(direction), startPos.Y + range * (float)Math.Sin(direction));
         }
 
         Spawn(component.Effect, transform.Coordinates);

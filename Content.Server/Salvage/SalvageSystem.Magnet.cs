@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Content.Server.Salvage.Magnet;
+using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Procedural;
 using Content.Shared.Radio;
@@ -29,6 +30,7 @@ public sealed partial class SalvageSystem
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
 
         SubscribeLocalEvent<SalvageMagnetDataComponent, MapInitEvent>(OnMagnetDataMapInit);
+        SubscribeLocalEvent<SalvageMagnetDataComponent, PostMapInitEvent>(OnMagnetDataPostMapInit); // Eclipse
 
         SubscribeLocalEvent<SalvageMagnetTargetComponent, GridSplitEvent>(OnMagnetTargetSplit);
 
@@ -77,8 +79,20 @@ public sealed partial class SalvageSystem
 
     private void OnMagnetDataMapInit(EntityUid uid, SalvageMagnetDataComponent component, ref MapInitEvent args)
     {
+        MagnetDataInit(uid, component); // Eclipse
+    }
+
+    // Eclipse-Start
+    private void OnMagnetDataPostMapInit(EntityUid uid, SalvageMagnetDataComponent component, ref PostMapInitEvent args)
+    {
+        MagnetDataInit(uid, component);
+    }
+
+    private void MagnetDataInit(EntityUid uid, SalvageMagnetDataComponent component)
+    {
         CreateMagnetOffers((uid, component));
     }
+    // Eclipse-End
 
     private void OnMagnetTargetSplit(EntityUid uid, SalvageMagnetTargetComponent component, ref GridSplitEvent args)
     {
@@ -203,7 +217,7 @@ public sealed partial class SalvageSystem
             var seed = _random.Next();
 
             // Fuck with the seed to mix wrecks and asteroids.
-            seed = (int) (seed / 10f) * 10;
+            seed = (int)(seed / 10f) * 10;
 
 
             if (i >= data.Comp.OfferCount / 2)

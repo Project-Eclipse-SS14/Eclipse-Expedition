@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization.Metadata;
 using Content.Shared.CCVar;
 using Content.Shared.Inventory;
+using Content.Shared.Maps;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Robust.Shared.Configuration;
@@ -21,6 +22,7 @@ namespace Content.Shared.Movement.Systems
         {
             base.Initialize();
             SubscribeLocalEvent<MovementSpeedModifierComponent, MapInitEvent>(OnModMapInit);
+            SubscribeLocalEvent<MovementSpeedModifierComponent, PostMapInitEvent>(OnModPostMapInit); // Eclipse
 
             Subs.CVar(_configManager, CCVars.TileFrictionModifier, value => _frictionModifier = value, true);
             Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);
@@ -28,6 +30,17 @@ namespace Content.Shared.Movement.Systems
         }
 
         private void OnModMapInit(Entity<MovementSpeedModifierComponent> ent, ref MapInitEvent args)
+        {
+            ModInit(ent); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnModPostMapInit(Entity<MovementSpeedModifierComponent> ent, ref PostMapInitEvent args)
+        {
+            ModInit(ent);
+        }
+
+        private void ModInit(Entity<MovementSpeedModifierComponent> ent)
         {
             // TODO: Dirty these smarter.
             ent.Comp.WeightlessAcceleration = ent.Comp.BaseWeightlessAcceleration;
@@ -40,6 +53,7 @@ namespace Content.Shared.Movement.Systems
             ent.Comp.FrictionNoInput = _frictionModifier * ent.Comp.BaseFriction;
             Dirty(ent);
         }
+        // Eclipse-End
 
         public void RefreshWeightlessModifiers(EntityUid uid, MovementSpeedModifierComponent? move = null)
         {

@@ -10,6 +10,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
+using Content.Shared.Maps;
 
 namespace Content.Shared.Throwing
 {
@@ -32,6 +33,7 @@ namespace Content.Shared.Throwing
         {
             base.Initialize();
             SubscribeLocalEvent<ThrownItemComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<ThrownItemComponent, PostMapInitEvent>(OnPostMapInit); // Eclipse
             SubscribeLocalEvent<ThrownItemComponent, PhysicsSleepEvent>(OnSleep);
             SubscribeLocalEvent<ThrownItemComponent, StartCollideEvent>(HandleCollision);
             SubscribeLocalEvent<ThrownItemComponent, PreventCollideEvent>(PreventCollision);
@@ -42,8 +44,20 @@ namespace Content.Shared.Throwing
 
         private void OnMapInit(EntityUid uid, ThrownItemComponent component, MapInitEvent args)
         {
+            Init(uid, component); // Eclipse
+        }
+
+        // Eclipse-Start
+        private void OnPostMapInit(EntityUid uid, ThrownItemComponent component, PostMapInitEvent args)
+        {
+            Init(uid, component);
+        }
+
+        private void Init(EntityUid uid, ThrownItemComponent component)
+        {
             component.ThrownTime ??= _gameTiming.CurTime;
         }
+        // Eclipse-End
 
         private void ThrowItem(EntityUid uid, ThrownItemComponent component, ref ThrownEvent @event)
         {
@@ -56,7 +70,7 @@ namespace Content.Shared.Throwing
 
             var fixture = fixturesComponent.Fixtures.Values.First();
             var shape = fixture.Shape;
-            _fixtures.TryCreateFixture(uid, shape, ThrowingFixture, hard: false, collisionMask: (int) CollisionGroup.ThrownItem, manager: fixturesComponent, body: body);
+            _fixtures.TryCreateFixture(uid, shape, ThrowingFixture, hard: false, collisionMask: (int)CollisionGroup.ThrownItem, manager: fixturesComponent, body: body);
         }
 
         private void HandleCollision(EntityUid uid, ThrownItemComponent component, ref StartCollideEvent args)
