@@ -394,6 +394,21 @@ namespace Content.IntegrationTests.Tests
                         lateSpawns += GetCountLateSpawn<SpawnPointComponent>(gridUids, entManager);
                         lateSpawns += GetCountLateSpawn<ContainerSpawnPointComponent>(gridUids, entManager);
 
+                        // Add lateSpawns from ContainerSpawnPoint when SpawnPointType == Unset
+                        var queryPoint = entManager.AllEntityQueryEnumerator<ContainerSpawnPointComponent, TransformComponent>();
+                        while (queryPoint.MoveNext(out var spawner, out var xform))
+                        {
+                            if (spawner.SpawnType is not SpawnPointType.Unset
+                                || xform.GridUid == null
+                                || !gridUids.Contains(xform.GridUid.Value))
+                            {
+                                continue;
+                            }
+
+                            lateSpawns++;
+                            break;
+                        }
+
                         Assert.That(lateSpawns, Is.GreaterThan(0), $"Found no latejoin spawn points on {mapProto}");
                     }
 
@@ -413,6 +428,13 @@ namespace Content.IntegrationTests.Tests
                         .Select(x => x.Job.Value);
 
                     jobs.ExceptWith(spawnPoints);
+
+                    // Skip spawnpoints check if there is a spawn point that allows for all jobs to spawn
+                    if (entManager.EntityQuery<ContainerSpawnPointComponent>()
+                        .Any((x) => x.SpawnType is SpawnPointType.Job or SpawnPointType.Unset && x.Job == null))
+                    {
+                        jobs.Clear();
+                    }
 
                     Assert.That(jobs, Is.Empty, $"There is no spawnpoints for {string.Join(", ", jobs)} on {mapProto}.");
                 }
