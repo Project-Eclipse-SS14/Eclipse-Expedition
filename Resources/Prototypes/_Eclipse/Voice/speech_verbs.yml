@@ -1,0 +1,5 @@
+- type: speechVerb
+  id: Supermatter
+  name: chat-speech-verb-name-robotic
+  speechVerbStrings:
+  - chat-speech-verb-robotic-1
