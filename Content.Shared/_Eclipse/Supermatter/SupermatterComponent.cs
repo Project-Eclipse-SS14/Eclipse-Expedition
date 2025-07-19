@@ -18,6 +18,12 @@ public sealed partial class SupermatterComponent : Component
     public float DamageArchived = 0;
 
     [DataField]
+    public float DamageAccumulator = 0;
+
+    [DataField]
+    public float DamageFrequency = 1;
+
+    [DataField]
     public float ExplosionPoint = 1000;
 
     [DataField]
@@ -69,7 +75,7 @@ public sealed partial class SupermatterComponent : Component
     public float ThermalReleaseModifier = 15000;
 
     [DataField]
-    public float RadiationReleaseModifier = 1;
+    public float RadiationReleaseModifier = 0.4f;
 
     [DataField]
     public float ChargingFactor = 0.05f;

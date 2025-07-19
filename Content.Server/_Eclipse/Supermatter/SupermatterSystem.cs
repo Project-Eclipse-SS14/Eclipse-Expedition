@@ -280,19 +280,28 @@ public sealed class SupermatterSystem : EntitySystem
             if (mixture is not null)
                 removed = mixture.Remove(supermatter.GasEffeciency * mixture.TotalMoles);
 
+            supermatter.DamageAccumulator += frameTime;
+
             if (mixture is null || removed is null || removed.TotalMoles == 0)
             {
-                supermatter.DamageArchived = supermatter.Damage;
-                supermatter.Damage = Math.Max((supermatter.Power - 15 * supermatter.PowerFactor) / 10, 0);
+                if (supermatter.DamageAccumulator >= supermatter.DamageFrequency)
+                {
+                    supermatter.DamageArchived = supermatter.Damage;
+                    supermatter.Damage = Math.Max((supermatter.Power - 15 * supermatter.PowerFactor) / 10, 0);
+                    supermatter.DamageAccumulator -= supermatter.DamageFrequency;
+                }
             }
             // TODO: grav_pulling
             else
             {
                 var damageIncreaseLimit = (supermatter.Power / 300) * (supermatter.ExplosionPoint / 1000) * supermatter.DamageRateLimit;
 
-                supermatter.DamageArchived = supermatter.Damage;
-                // TODO: fix damage increase limit not working due to frameTime not being used
-                supermatter.Damage = Math.Max(0, supermatter.Damage + Math.Clamp((removed.Temperature - supermatter.CriticalTemperature) / 150, -supermatter.DamageRateLimit, damageIncreaseLimit));
+                if (supermatter.DamageAccumulator >= supermatter.DamageFrequency)
+                {
+                    supermatter.DamageArchived = supermatter.Damage;
+                    supermatter.Damage = Math.Max(0, supermatter.Damage + Math.Clamp((removed.Temperature - supermatter.CriticalTemperature) / 150, -supermatter.DamageRateLimit, damageIncreaseLimit));
+                    supermatter.DamageAccumulator -= supermatter.DamageFrequency;
+                }
 
                 var oxygen = Math.Clamp((removed.GetMoles(Gas.Oxygen) - (removed.GetMoles(Gas.Nitrogen) * supermatter.NitrogenRetardationFactor)) / removed.TotalMoles, 0, 1);
                 float equilibriumPower;
