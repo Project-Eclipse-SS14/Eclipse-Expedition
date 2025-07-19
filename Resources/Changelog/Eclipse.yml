@@ -25,3 +25,10 @@ Entries:
     id: 3
     time: "2025-07-15T08:25:33.000000+00:00"
     url: "https://github.com/Project-Eclipse-SS14/Eclipse-Expedition/pull/4"
+  - author: FoLZer
+    changes:
+      - message: Добавлена суперматерия
+        type: Add
+    id: 4
+    time: "2025-07-19T03:37:22.000000+00:00"
+    url: "https://github.com/Project-Eclipse-SS14/Eclipse-Expedition/pull/5"
